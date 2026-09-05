@@ -1,0 +1,82 @@
+{
+  "mandate": {
+    "version": "statebound-1",
+    "id": "demo-mandate",
+    "createdAt": "2026-09-05T00:00:00.000Z",
+    "expiresAt": "2099-01-01T00:00:00.000Z",
+    "account": "synthetic-account",
+    "environment": "simulator",
+    "symbol": "BNBUSDT",
+    "quoteAsset": "USDT",
+    "side": "BUY",
+    "orderType": "LIMIT_IOC",
+    "budget": "20",
+    "reserve": "0",
+    "initialQuote": "100",
+    "goal": "0.025",
+    "tolerance": "0",
+    "maxOrders": 3,
+    "maxReads": 3,
+    "quote": {
+      "price": "600",
+      "at": "2026-09-05T00:00:00.000Z",
+      "maxAgeMs": 60000,
+      "source": "synthetic fixture"
+    },
+    "limitPrice": "600",
+    "feeAsset": "quote",
+    "feeBps": 0,
+    "filters": {
+      "step": "0.0001",
+      "tick": "0.01",
+      "minQty": "0.0001",
+      "maxQty": "10",
+      "minNotional": "1"
+    }
+  },
+  "plan": {
+    "version": "statebound-1",
+    "id": "vulnerable-fixture",
+    "mandateHash": "ae6e137fff522475d00ee5887e6b7ee23d63f4307e24e0398cad2040df1c619d",
+    "snapshot": "synthetic-initial-v1",
+    "adapter": "simulator-ioc-v1",
+    "maxSteps": 32,
+    "maxDurationMs": 30000,
+    "start": "buy",
+    "nodes": [
+      {
+        "id": "buy",
+        "op": "submit",
+        "operation": "acquire",
+        "quantity": "0.025",
+        "next": "goal"
+      },
+      {
+        "id": "goal",
+        "op": "branch",
+        "guard": {
+          "field": "goalMet",
+          "equals": true
+        },
+        "yes": "done",
+        "no": "balance"
+      },
+      {
+        "id": "balance",
+        "op": "balance",
+        "next": "retry"
+      },
+      {
+        "id": "retry",
+        "op": "submit",
+        "operation": "retry",
+        "quantity": "0.025",
+        "next": "done"
+      },
+      {
+        "id": "done",
+        "op": "complete"
+      }
+    ]
+  }
+}
