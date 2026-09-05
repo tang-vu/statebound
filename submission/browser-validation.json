@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "viewports": [
+    "1440x900",
+    "1280x800"
+  ],
+  "flow": [
+    "confirm",
+    "check",
+    "counterexample inspection",
+    "export and independent full verification",
+    "template repair",
+    "recoverable replay",
+    "permanent ambiguity",
+    "reload",
+    "persisted baseline"
+  ],
+  "consoleErrors": [],
+  "recorded": false
+}

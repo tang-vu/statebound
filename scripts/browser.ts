@@ -1,0 +1,35 @@
+import { chromium } from 'playwright';
+import { mkdirSync,readFileSync,writeFileSync } from 'node:fs';
+import assert from 'node:assert/strict';
+import { verify } from '../src/evidence.js';
+const record=process.argv.includes('--record');
+mkdirSync('submission',{recursive:true});mkdirSync('test-results',{recursive:true});
+const browser=await chromium.launch({headless:true});
+const context=await browser.newContext({viewport:{width:1440,height:900},reducedMotion:'reduce',...(record?{recordVideo:{dir:'test-results/video',size:{width:1440,height:900}}}:{})});
+const page=await context.newPage();const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+try {
+  await page.goto('http://127.0.0.1:4381');await page.getByRole('button',{name:'Confirm this mandate'}).click();
+  if(record)await page.waitForTimeout(5000);
+  await page.getByRole('button',{name:'Find a failure'}).click();
+  await page.getByRole('heading',{name:'30 USDT can leave a 20 USDT mandate.'}).waitFor({timeout:30000});
+  await page.locator('.timeline-row').first().click();
+  await page.screenshot({path:'submission/counterexample.png',fullPage:true});
+  if(record)await page.waitForTimeout(7000);
+  await page.locator('.timeline-row').last().click();
+  const baselineUrl=page.url();
+  const exported=page.waitForEvent('download');await page.getByRole('link',{name:'Export evidence'}).click();const download=await exported;await download.saveAs('test-results/browser-evidence.json');assert.equal(verify(JSON.parse(readFileSync('test-results/browser-evidence.json','utf8'))).verified,true);
+  await page.getByRole('button',{name:'Apply template repair'}).click();await page.getByRole('heading',{name:'No violation within the checked bound.'}).waitFor({timeout:30000});
+  assert.match(await page.locator('.outcome').innerText(),/COMPLETE/);
+  if(record)await page.waitForTimeout(7000);
+  await page.screenshot({path:'submission/repaired.png',fullPage:true});
+  await page.getByRole('button',{name:'Replay recoverable case'}).click();await page.getByRole('heading',{name:'No violation within the checked bound.'}).waitFor({timeout:30000});assert.match(await page.locator('.outcome').innerText(),/COMPLETE/);
+  await page.getByRole('button',{name:'Replay ambiguity',exact:true}).click();await page.getByRole('heading',{name:'No violation within the checked bound.'}).waitFor({timeout:30000});assert.match(await page.locator('.outcome').innerText(),/UNRESOLVED/);
+  if(record)await page.waitForTimeout(5000);
+  await page.reload();await page.getByRole('heading',{name:'No violation within the checked bound.'}).waitFor();assert.match(await page.locator('.outcome').innerText(),/UNRESOLVED/);
+  await page.setViewportSize({width:1280,height:800});await page.screenshot({path:'submission/laptop.png',fullPage:true});
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),true);
+  await page.goto(baselineUrl);await page.getByRole('heading',{name:'30 USDT can leave a 20 USDT mandate.'}).waitFor();
+  assert.deepEqual(errors,[]);
+  const report={passed:true,viewports:['1440x900','1280x800'],flow:['confirm','check','counterexample inspection','export and independent full verification','template repair','recoverable replay','permanent ambiguity','reload','persisted baseline'],consoleErrors:errors,recorded:record};
+  writeFileSync('submission/browser-validation.json',JSON.stringify(report,null,2));console.log(report);
+}finally{const video=page.video();await context.close();if(record&&video)await video.saveAs('submission/demo-raw.webm');await browser.close();}
