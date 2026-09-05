@@ -17,4 +17,8 @@ const exported=await fetch(`${base}/api/runs/${requests[0].id}/export`,{headers:
 const job=await fetch(`${base}/api/runs`,{method:'POST',headers:{...headers,'Idempotency-Key':randomUUID()},body:JSON.stringify({...input,plan:templateRepair(plan),mode:'guarded'})}).then(r=>r.json());
 await fetch(`${base}/api/runs/${job.id}/stop`,{method:'POST',headers});const stopped=await fetch(`${base}/api/runs/${job.id}`,{headers:{Cookie:cookie}}).then(r=>r.json());assert.equal(stopped.status,'CANCELLED');
 const malformed=await fetch(`${base}/api/runs`,{method:'POST',headers:{...headers,'Idempotency-Key':randomUUID()},body:JSON.stringify({...input,mandate:{...mandate,environment:'mainnet'}})});assert.equal(malformed.status,400);
+// Existing idempotency identities are returned even while the worker pool is full.
+const pool=await Promise.all([1,2].map(()=>fetch(`${base}/api/runs`,{method:'POST',headers:{...headers,'Idempotency-Key':randomUUID()},body:JSON.stringify({...input,plan:templateRepair(plan),mode:'guarded'})}).then(r=>r.json())));
+const retryAtCapacity=await fetch(`${base}/api/runs`,{method:'POST',headers,body:JSON.stringify(input)}).then(r=>r.json());assert.equal(retryAtCapacity.id,requests[0].id);
+for(const job of pool)if(job.id)await fetch(`${base}/api/runs/${job.id}/stop`,{method:'POST',headers});
 console.log('HTTP gates passed: session, origin, operator action, concurrent idempotency, key mismatch, export, cancellation, mainnet rejection.');

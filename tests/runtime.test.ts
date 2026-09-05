@@ -14,8 +14,9 @@ test('durable runtime trace is identical to checker semantics and independently 
       const runtime=await durableSimulation(m,p,join(dir,`${ambiguity}.db`),ambiguity);
       assert.equal(runtime.state.status,ambiguity?'UNRESOLVED':'COMPLETE');assert.equal(runtime.ledgerExposure,'15');
       const evidence=bundle(m,p,'guarded','template repair',original);
-      evidence.payload.executions.push({scenario:runtime.events.map(e=>e.choice),events:runtime.events,status:runtime.state.status,approvalMode:runtime.approvalMode});evidence.manifest=hash(evidence.payload);
+      evidence.payload.executions.push({scenario:runtime.events.map(e=>e.choice),events:runtime.events,status:runtime.state.status,approvalMode:runtime.approvalMode,approvals:runtime.approvals});evidence.manifest=hash(evidence.payload);
       assert.equal(verify(evidence).verified,true);
+      const altered=structuredClone(evidence);altered.payload.executions[0].approvals=[];altered.manifest=hash(altered.payload);assert.throws(()=>verify(altered));
       const second=await durableSimulation(m,p,join(dir,`${ambiguity}.db`),ambiguity);assert.equal(second.events.length,0);assert.equal(second.ledgerExposure,'15');
     }
   }finally{rmSync(dir,{recursive:true});}

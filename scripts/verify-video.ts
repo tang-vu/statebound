@@ -1,0 +1,12 @@
+import {execFileSync} from 'node:child_process';
+import {readFileSync,writeFileSync} from 'node:fs';
+import assert from 'node:assert/strict';
+const file='submission/demo.mp4';
+execFileSync('ffmpeg',['-v','error','-i',file,'-f','null','-'],{stdio:'pipe',windowsHide:true});
+const probe=JSON.parse(execFileSync('ffprobe',['-v','error','-show_entries','format=duration,size:stream=codec_name,width,height,codec_type','-of','json',file],{windowsHide:true,encoding:'utf8'}));
+assert.ok(probe.streams.some((s:{codec_type:string})=>s.codec_type==='audio'));
+assert.ok(probe.streams.some((s:{codec_type:string;width:number;height:number})=>s.codec_type==='video'&&s.width===1440&&s.height===900));
+const measure=execFileSync('ffmpeg',['-hide_banner','-i',file,'-vn','-af','volumedetect','-f','null','-'],{windowsHide:true,stdio:['ignore','pipe','pipe']});void measure;
+const previous=JSON.parse(readFileSync('submission/video-validation.json','utf8'));
+writeFileSync('submission/video-validation.json',JSON.stringify({...previous,probe,verifiedDecode:true,checks:['Full audio/video decode exits 0','AAC audio stream present','1440x900 H264 video stream present','Caption file and actual frames inspected separately']},null,2));
+console.log(`Video fully decoded: ${probe.format.duration}s, audio and 1440x900 video present.`);

@@ -2,6 +2,7 @@ import { readFileSync,writeFileSync,mkdirSync } from 'node:fs';
 import { fixture,templateRepair,validate } from './core.js';
 import { check,runScenario } from './checker.js';
 import { bundle,verify,InputSchema,acceptRepair } from './evidence.js';
+import {compileRequest} from './mandate-compiler.js';
 const [command,file,candidateFile]=process.argv.slice(2);
 const read=(path:string)=>JSON.parse(readFileSync(path,'utf8')) as unknown;
 try {
@@ -14,7 +15,8 @@ try {
     writeFileSync('examples/template-repaired.json',JSON.stringify({mandate,plan:repaired},null,2));
     const evidence=bundle(mandate,plan,'baseline','fixture');writeFileSync('examples/counterexample.json',JSON.stringify(evidence,null,2));
     console.log(JSON.stringify({baseline,guarded,repaired:fixed,recoverable:runScenario(mandate,repaired,'guarded',{fill:'full',reply:'lost'}).world.agent.status,permanent:runScenario(mandate,repaired,'guarded',{fill:'full',reply:'lost'},'notFound').world.agent.status,verification:verify(evidence)},null,2));
-  } else if(command==='check') {const {mandate,plan}=InputSchema.parse(read(file));validate(mandate,plan);console.log(JSON.stringify(check(mandate,plan),null,2));}
+  } else if(command==='compile')console.log(JSON.stringify(compileRequest(file),null,2));
+  else if(command==='check') {const {mandate,plan}=InputSchema.parse(read(file));validate(mandate,plan);console.log(JSON.stringify(check(mandate,plan),null,2));}
   else if(command==='verify'||command==='replay') console.log(JSON.stringify(verify(read(file),command==='verify'),null,2));
   else if(command==='repair') {
     const original=InputSchema.parse(read(file));const candidate=InputSchema.parse(read(candidateFile));

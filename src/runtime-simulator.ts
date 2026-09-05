@@ -15,6 +15,6 @@ export async function durableSimulation(m:Mandate,p:Plan,path:string,ambiguity=f
     const state=await execute(m,p,ledger,run,adapter,async effect=>approveAction(m,p,effect),()=>false,(state,effect,observation)=>{
       events.push({step:state.step,node:last.node,effect,choice,observation,hiddenEvents,before:last.k,after:state.k,actualDebit:concreteDebit(exchange),possibleDebit:exposure(state.k),status:state.status,reason:state.reason});last=state;
     });
-    return {state,events,ledgerExposure:ledger.reserved(m.account),approvalMode:'operator-requested simulator rehearsal; automatic exact-action approvals only for fake effects'};
+    return {state,events,approvals:ledger.approvals(m.account),ledgerExposure:ledger.reserved(m.account),approvalMode:'operator-requested simulator rehearsal; automatic exact-action approvals only for fake effects'};
   }finally{ledger.close();}
 }

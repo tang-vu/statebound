@@ -5,7 +5,7 @@ import { randomBytes } from 'node:crypto';
 import { mkdirSync,existsSync,readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { z } from 'zod';
-import { fixture,MandateSchema,PlanSchema,validate } from './core.js';
+import { fixture,MandateSchema,PlanSchema,validate,hash } from './core.js';
 import { Ledger } from './ledger.js';
 import { verify } from './evidence.js';
 
@@ -32,11 +32,17 @@ app.post('/api/runs',(req,res)=>{
   try {
     const data=RequestSchema.parse(req.body);validate(data.mandate,data.plan);
     const key=z.string().uuid().parse(req.headers['idempotency-key']);
+    if(ledger.db.prepare('SELECT run FROM requests WHERE key=?').get(key)) {
+      // Retries must return their existing identity even when worker capacity is full.
+      const existing=ledger.request(key,data);return void res.json({id:existing.id});
+    }
     if(jobs.size>=2)return void res.status(429).json({error:'Two checks already running. Wait or cancel a check.'});
     const request=ledger.request(key,data);
     if(request.existing)return void res.json({id:request.id});
     const id=request.id;ledger.save(id,{id,status:'RUNNING',input:data,startedAt:Date.now()});ledger.event(id,{kind:'started'});
-    const worker=new Worker(new URL('./worker.mjs',import.meta.url),{workerData:{...data,id,provenance:data.plan.id==='vulnerable-fixture'?'fixture':'manual'}});
+    const expected=fixture(data.mandate.budget,data.mandate.goal,data.mandate.feeBps);
+    const provenance=hash(expected.mandate)===hash(data.mandate)&&hash(expected.plan)===hash(data.plan)?'fixture':'manual';
+    const worker=new Worker(new URL('./worker.mjs',import.meta.url),{workerData:{...data,id,provenance}});
     jobs.set(id,worker);
     const finish=(message:unknown)=>{const old=ledger.get(id) as object;ledger.save(id,{...old,status:'FINISHED',...message as object});jobs.delete(id);};
     worker.on('message',(message:{kind:string})=>{ledger.event(id,message);if(message.kind==='complete'||message.kind==='error')finish(message);});
@@ -63,9 +69,9 @@ app.post('/api/runs/:id/verify',(req,res)=>{
   const run=ledger.get(id.data) as {evidence?:unknown}|undefined;if(!run?.evidence)return void res.status(409).json({error:'Evidence incomplete'});
   if(jobs.size>=2)return void res.status(429).json({error:'Wait for active checks to finish'});
   const worker=new Worker(new URL('./verify-worker.mjs',import.meta.url),{workerData:run.evidence});
-  jobs.set(`verify-${id.data}`,worker);
-  worker.once('message',message=>{jobs.delete(`verify-${id.data}`);res.json(message);});
-  worker.once('error',()=>{jobs.delete(`verify-${id.data}`);res.status(409).json({error:'Independent recomputation failed'});});
+  const jobKey=`verify-${randomBytes(16).toString('hex')}`;jobs.set(jobKey,worker);
+  worker.once('message',message=>{jobs.delete(jobKey);res.json(message);});
+  worker.once('error',()=>{jobs.delete(jobKey);res.status(409).json({error:'Independent recomputation failed'});});
 });
 if(existsSync('dist/index.html')) {app.use(express.static(resolve('dist')));app.get('/{*path}',(_req,res)=>res.sendFile(resolve('dist/index.html')));}
 else {const vite=await createViteServer({server:{middlewareMode:true},appType:'spa'});app.use(vite.middlewares);}

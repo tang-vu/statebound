@@ -18,6 +18,6 @@ try {
   const events=runtime?.events??(result.counterexample.length?result.counterexample:simulation.events);
   for(const event of events) parentPort!.postMessage({kind:'trace',event});
   const evidence=bundle(data.mandate,plan,mode,provenance,data.plan);
-  if(runtime) {evidence.payload.executions.push({scenario:events.map(e=>e.choice),events,status:runtime.state.status,approvalMode:runtime.approvalMode});evidence.manifest=hash(evidence.payload);}
+  if(runtime) {evidence.payload.executions.push({scenario:events.map(e=>e.choice),events,status:runtime.state.status,approvalMode:runtime.approvalMode,approvals:runtime.approvals});evidence.manifest=hash(evidence.payload);}
   parentPort!.postMessage({kind:'complete',result,plan,provenance,events,outcome:runtime?.state.status??simulation.world.agent.status,evidence,runtime:runtime?{ledgerExposure:runtime.ledgerExposure,approvalMode:runtime.approvalMode}:null});
 }catch(e){parentPort!.postMessage({kind:'error',message:e instanceof Error?e.message:'Job failed'});}

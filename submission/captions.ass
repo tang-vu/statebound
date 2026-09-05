@@ -1,0 +1,39 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1440
+PlayResY: 900
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Caption,Arial,24,&H00FFFFFF,&H00FFFFFF,&H00101010,&H99000000,0,0,0,0,100,100,0,0,3,2,0,2,80,80,26,1
+Style: Disclosure,Arial,14,&H00E8E8E8,&H00FFFFFF,&H00101010,&H99000000,0,0,0,0,100,100,0,0,3,1,0,8,20,20,48,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:01:37.31,Disclosure,,0,0,0,,AI narration | Actual app | Recorded Codex repair | 1.35x playback
+Dialogue: 0,0:00:00.51,0:00:03.49,Caption,,0,0,0,,Statebound checks trading workflows before execution.
+Dialogue: 0,0:00:03.49,0:00:07.97,Caption,,0,0,0,,This is a synthetic fixture, with a twenty USDT spending mandate and zero fees.
+Dialogue: 0,0:00:07.97,0:00:10.50,Caption,,0,0,0,,The example plan is deliberately vulnerable.
+Dialogue: 0,0:00:10.50,0:00:12.01,Caption,,0,0,0,,No real orders are placed.
+Dialogue: 0,0:00:15.03,0:00:17.31,Caption,,0,0,0,,Find a failure runs a fresh bounded search.
+Dialogue: 0,0:00:17.31,0:00:21.67,Caption,,0,0,0,,The checker finds a path that spends thirty USDT against the twenty USDT mandate.
+Dialogue: 0,0:00:21.67,0:00:24.27,Caption,,0,0,0,,These events come from the plan and fault model.
+Dialogue: 0,0:00:24.77,0:00:27.61,Caption,,0,0,0,,The first order filled, but its reply was lost.
+Dialogue: 0,0:00:27.61,0:00:29.18,Caption,,0,0,0,,The agent sees a timeout.
+Dialogue: 0,0:00:29.18,0:00:31.48,Caption,,0,0,0,,A stale balance cannot prove failure.
+Dialogue: 0,0:00:31.48,0:00:35.71,Caption,,0,0,0,,Fifteen USDT remains exposed, so a fresh purchase is not free budget.
+Dialogue: 0,0:00:39.22,0:00:42.57,Caption,,0,0,0,,This is a recorded repair authored by the development Codex session.
+Dialogue: 0,0:00:42.57,0:00:45.82,Caption,,0,0,0,,It queries the original attempt before buying the remaining goal.
+Dialogue: 0,0:00:45.82,0:00:48.14,Caption,,0,0,0,,We validate that candidate and recheck it now.
+Dialogue: 0,0:00:48.14,0:00:49.57,Caption,,0,0,0,,The mandate stays unchanged.
+Dialogue: 0,0:00:54.52,0:00:58.93,Caption,,0,0,0,,The recoverable replay runs through the shared interpreter and a persistent SQLite ledger.
+Dialogue: 0,0:00:58.93,0:01:02.47,Caption,,0,0,0,,When the order query confirms the fill, the acquisition goal completes.
+Dialogue: 0,0:01:02.47,0:01:05.02,Caption,,0,0,0,,The original ambiguous attempt is never sent again.
+Dialogue: 0,0:01:11.10,0:01:12.82,Caption,,0,0,0,,Now the lookup stays inconclusive.
+Dialogue: 0,0:01:12.82,0:01:15.95,Caption,,0,0,0,,Statebound finishes unresolved and preserves the reservation.
+Dialogue: 0,0:01:15.95,0:01:20.76,Caption,,0,0,0,,No violation within a finite bound does not mean the environment must let every task complete.
+Dialogue: 0,0:01:23.02,0:01:28.29,Caption,,0,0,0,,The integration panel shows a genuine recorded public testnet read through the official Binance CLI.
+Dialogue: 0,0:01:28.29,0:01:29.82,Caption,,0,0,0,,Trading remains unavailable.
+Dialogue: 0,0:01:29.82,0:01:33.51,Caption,,0,0,0,,Exported evidence includes the plan, bounds, observations and replay.
+Dialogue: 0,0:01:33.51,0:01:36.57,Caption,,0,0,0,,A separate verifier recomputes the result without an LLM.

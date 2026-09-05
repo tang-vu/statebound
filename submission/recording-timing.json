@@ -1,0 +1,51 @@
+[
+  {
+    "id": "intro",
+    "start": 0.6993164,
+    "end": 16.2211754,
+    "text": "Statebound checks trading workflows before execution. This is a synthetic fixture, with a twenty USDT spending mandate and zero fees. The example plan is deliberately vulnerable. No real orders are placed.",
+    "audio": ".runtime/narration/intro.wav"
+  },
+  {
+    "id": "failure",
+    "start": 20.299492499999996,
+    "end": 32.7667035,
+    "text": "Find a failure runs a fresh bounded search. The checker finds a path that spends thirty USDT against the twenty USDT mandate. These events come from the plan and fault model.",
+    "audio": ".runtime/narration/failure.wav"
+  },
+  {
+    "id": "knowledge",
+    "start": 33.4501348,
+    "end": 48.2121298,
+    "text": "The first order filled, but its reply was lost. The agent sees a timeout. A stale balance cannot prove failure. Fifteen USDT remains exposed, so a fresh purchase is not free budget.",
+    "audio": ".runtime/narration/knowledge.wav"
+  },
+  {
+    "id": "repair",
+    "start": 52.9495122,
+    "end": 66.9211672,
+    "text": "This is a recorded repair authored by the development Codex session. It queries the original attempt before buying the remaining goal. We validate that candidate and recheck it now. The mandate stays unchanged.",
+    "audio": ".runtime/narration/repair.wav"
+  },
+  {
+    "id": "recover",
+    "start": 73.6052719,
+    "end": 87.7817799,
+    "text": "The recoverable replay runs through the shared interpreter and a persistent SQLite ledger. When the order query confirms the fill, the acquisition goal completes. The original ambiguous attempt is never sent again.",
+    "audio": ".runtime/narration/recover.wav"
+  },
+  {
+    "id": "ambiguity",
+    "start": 95.98651210000001,
+    "end": 109.03367810000002,
+    "text": "Now the lookup stays inconclusive. Statebound finishes unresolved and preserves the reservation. No violation within a finite bound does not mean the environment must let every task complete.",
+    "audio": ".runtime/narration/ambiguity.wav"
+  },
+  {
+    "id": "evidence",
+    "start": 112.0785065,
+    "end": 130.3794585,
+    "text": "The integration panel shows a genuine recorded public testnet read through the official Binance CLI. Trading remains unavailable. Exported evidence includes the plan, bounds, observations and replay. A separate verifier recomputes the result without an LLM.",
+    "audio": ".runtime/narration/evidence.wav"
+  }
+]

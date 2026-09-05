@@ -1,0 +1,9 @@
+[
+  {"id":"intro","text":"Statebound checks trading workflows before execution. This is a synthetic fixture, with a twenty USDT spending mandate and zero fees. The example plan is deliberately vulnerable. No real orders are placed."},
+  {"id":"failure","text":"Find a failure runs a fresh bounded search. The checker finds a path that spends thirty USDT against the twenty USDT mandate. These events come from the plan and fault model."},
+  {"id":"knowledge","text":"The first order filled, but its reply was lost. The agent sees a timeout. A stale balance cannot prove failure. Fifteen USDT remains exposed, so a fresh purchase is not free budget."},
+  {"id":"repair","text":"This is a recorded repair authored by the development Codex session. It queries the original attempt before buying the remaining goal. We validate that candidate and recheck it now. The mandate stays unchanged."},
+  {"id":"recover","text":"The recoverable replay runs through the shared interpreter and a persistent SQLite ledger. When the order query confirms the fill, the acquisition goal completes. The original ambiguous attempt is never sent again."},
+  {"id":"ambiguity","text":"Now the lookup stays inconclusive. Statebound finishes unresolved and preserves the reservation. No violation within a finite bound does not mean the environment must let every task complete."},
+  {"id":"evidence","text":"The integration panel shows a genuine recorded public testnet read through the official Binance CLI. Trading remains unavailable. Exported evidence includes the plan, bounds, observations and replay. A separate verifier recomputes the result without an LLM."}
+]

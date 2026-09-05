@@ -4,7 +4,13 @@ import fc from 'fast-check';
 import { D,F,fixture,templateRepair,observe,hash,cost,validate,transition,initial,exposure,remaining } from '../src/core.js';
 import { check,runScenario } from '../src/checker.js';
 import { bundle,verify,acceptRepair } from '../src/evidence.js';
-import { replay,sound } from '../src/simulator.js';
+import { replay,sound,deliver } from '../src/simulator.js';
+import {compileRequest} from '../src/mandate-compiler.js';
+test('narrow natural request derives a reviewable goal and never widens infeasible budget',()=>{
+  const r=compileRequest('buy around 15 USDT of BNB, maximum total debit 20 USDT');assert.equal(r.mandate.goal,'0.025');assert.equal(r.mandate.budget,'20');assert.equal(r.review.maximumOrderDebit,'15');assert.equal(r.review.requiresUserConfirmation,true);
+  assert.throws(()=>compileRequest('buy around 15 USDT of BNB, maximum total debit 10 USDT'));
+  assert.throws(()=>compileRequest('buy around 0.1 USDT of BNB, maximum total debit 20 USDT'));
+});
 test('parameterized baseline violates independent concrete fill sum; guards refuse retry',()=>{
   for(const goal of ['0.02','0.025','0.03']) {
     const {mandate:m,plan:p}=fixture('20',goal);const r=check(m,p,'baseline');assert.equal(r.status,'COUNTEREXAMPLE_FOUND');
@@ -39,6 +45,14 @@ test('fixed point and rounded fees property corpus',()=>{
   }),{seed:223,numRuns:200});
   assert.throws(()=>D('1e3'));assert.throws(()=>D('-1'));assert.throws(()=>D('0.123456789'));
 });
+test('historical partial observations respect lot steps and independently computed prefix fees',()=>{
+  const {mandate:m}=fixture('20','0.025',10);
+  const sent=deliver(m,{orders:[]},{kind:'submit',id:'a',quantity:'0.025',max:'15.015'},{fill:'full',reply:'lost'});
+  const prefix=deliver(m,sent.exchange,{kind:'query',id:'a'},{read:'partial'}).observation!;
+  assert.equal(prefix.net,'0.0125');assert.equal(prefix.debit,'7.5075');assert.equal(D(prefix.net!)%D(m.filters.step),0n);
+  const odd=deliver(m,{orders:[]},{kind:'submit',id:'b',quantity:'0.0125',max:'7.5075'},{fill:'full',reply:'lost'});
+  const rounded=deliver(m,odd.exchange,{kind:'query',id:'b'},{read:'partial'}).observation!;assert.equal(rounded.net,'0.0062');assert.equal(rounded.debit,'3.72372');
+});
 test('knowledge overapproximates generated observations, executor inputs have no hidden state',()=>{
   fc.assert(fc.property(fc.constantFrom('full','half','none','absent'),fc.constantFrom('delivered','lost'),fc.constantFrom('fresh','stale','notFound','partial'),(fill,reply,read)=>{
     const {mandate:m,plan:p}=fixture();const x=runScenario(m,templateRepair(p),'guarded',{fill,reply},read);assert.ok(sound(x.world));
@@ -59,4 +73,6 @@ test('limits, tampering, malicious plan and defective guard never pass',()=>{
 test('evidence requires exact deterministic trace and recomputed search',()=>{
   const {mandate:m,plan:p}=fixture();const b=bundle(m,p,'baseline','fixture');assert.equal(verify(b).verified,true);
   const modified=structuredClone(b);modified.payload.result.counterexample.pop();assert.throws(()=>verify(modified));modified.manifest=hash(modified.payload);assert.throws(()=>verify(modified));
+  const claimedLive={...b,payload:{...b.payload,dataSource:'live Binance'}};claimedLive.manifest=hash(claimedLive.payload);assert.throws(()=>verify(claimedLive));
+  const missing=structuredClone(b);missing.payload.result.durationMs=-1;missing.manifest=hash(missing.payload);assert.throws(()=>verify(missing));
 });

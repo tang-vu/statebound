@@ -1,0 +1,31 @@
+{
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1440,
+        "height": 900
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio"
+      }
+    ],
+    "format": {
+      "duration": "97.320000",
+      "size": "3740416"
+    }
+  },
+  "speed": 1.35,
+  "disclosure": "1.35x playback, standard Windows synthetic voice, actual browser recording, recorded Codex candidate. Final frame extended briefly for narration tail.",
+  "verifiedDecode": true,
+  "checks": [
+    "Full audio/video decode exits 0",
+    "AAC audio stream present",
+    "1440x900 H264 video stream present",
+    "Caption file and actual frames inspected separately"
+  ]
+}

@@ -43,7 +43,10 @@ export function deliver(m:Mandate,exchange0:ExchangeState,effect:Effect,choice:C
     const o=exchange.orders.find(x=>x.id===effect.id);
     if(!o)return {exchange,observation:{kind:'notFound',id:effect.id,definitive:true,seq:2,account:m.account,symbol:m.symbol,environment:m.environment} as Observation,hiddenEvents};
     if(choice.read==='fresh') observation=orderObservation(o);
-    else if(choice.read==='partial'&&D(o.debit)>0n) observation={kind:'order',id:o.id,debit:F(D(o.debit)/2n),net:F(D(o.net)/2n),terminal:false,seq:0,status:'PARTIALLY_FILLED'};
+    else if(choice.read==='partial'&&D(o.debit)>0n) {
+      const prefix=F((D(o.quantity)/2n/D(m.filters.step))*D(m.filters.step));const amounts=cost(m,prefix);
+      observation={kind:'order',id:o.id,debit:amounts.debit,net:amounts.net,terminal:false,seq:0,status:D(prefix)>0n?'PARTIALLY_FILLED':'NEW'};
+    }
     else observation=choice.read==='notFound'?{kind:'notFound',id:o.id,definitive:false}:{kind:'order',id:o.id,debit:'0',net:'0',terminal:false,seq:-1,status:'NEW'};
   } else if(effect.kind==='balance') observation={kind:'balance',snapshot:'synthetic-initial-v1'}; // Deliberately stale initial account snapshot, no order evidence.
   if(observation)observation={...observation,account:m.account,symbol:m.symbol,environment:m.environment};

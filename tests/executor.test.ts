@@ -21,7 +21,7 @@ test('SQLite reservations survive reconnect; concurrent lease, duplicate keys an
 test('approval binds exact action, account, plan and expiry',()=>{
   const db=new Ledger(':memory:');try {
     const {mandate:m,plan:p}=fixture();const s=initial(p);const e=transition(m,p,s,'guarded').effect;if(e.kind!=='submit') throw Error('fixture');db.lease(m.account,'r');const a=approveAction(m,p,e);
-    for(const bad of [{...a,account:'other'},{...a,binding:'bad'},{...a,expiresAt:'2000-01-01T00:00:00Z'},{...a,actionHash:'bad'}]) assert.throws(()=>db.prepare(m,p,'r',e,bad,s));
+    for(const bad of [{...a,account:'other'},{...a,binding:'bad'},{...a,expiresAt:'not-a-date'},{...a,expiresAt:'2000-01-01T00:00:00Z'},{...a,actionHash:'bad'}]) assert.throws(()=>db.prepare(m,p,'r',e,bad,s));
     assert.throws(()=>db.prepare(m,{...p,id:'changed'},'r',e,a,s));assert.throws(()=>db.prepare(m,p,'r',{...e,quantity:'0.02'},a,s));
   } finally {db.close();}
 });
@@ -43,4 +43,15 @@ test('stop before dispatch makes no writes and unresolved crash does not replay 
     const state=await execute(m,p,db,'stopped',{id:'simulator-ioc-v1',async effect(e){if(e.kind==='submit')writes++;return null;}},async e=>approveAction(m,p,e),()=>true);
     assert.equal(state.status,'UNRESOLVED');assert.equal(writes,0);
   }finally{db.close();}
+});
+test('late approval and contradictory scope/amount observations fail closed',async()=>{
+  const {mandate:m,plan:original}=fixture();const p=templateRepair(original);
+  for(const invalid of ['scope','amount']) {
+    const db=new Ledger(':memory:');try {
+      let sends=0;
+      const result=await execute(m,p,db,invalid,{id:'simulator-ioc-v1',async effect(e){if(e.kind==='submit'){sends++;return {kind:'order',id:e.id,account:invalid==='scope'?'different':m.account,symbol:m.symbol,environment:m.environment,debit:invalid==='amount'?'0':'15',net:'0.025',terminal:true,seq:2};}return null;}},async e=>approveAction(m,p,e));
+      assert.equal(result.status,'UNRESOLVED');assert.equal(sends,1);assert.equal(db.reserved(m.account),'15');
+    }finally{db.close();}
+  }
+  const db=new Ledger(':memory:');try{let sends=0;const short={...p,maxDurationMs:5};const result=await execute(m,short,db,'late',{id:'simulator-ioc-v1',async effect(e){if(e.kind==='submit')sends++;return null;}},async e=>{await new Promise(r=>setTimeout(r,15));return approveAction(m,short,e);});assert.equal(sends,0);assert.equal(result.status,'UNRESOLVED');}finally{db.close();}
 });
