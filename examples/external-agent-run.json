@@ -1,0 +1,474 @@
+{
+  "agent": "external Codex session",
+  "generation": "Development-session candidate, stored for replay. No live model API in web app.",
+  "input": {
+    "mandate": {
+      "version": "statebound-1",
+      "id": "demo-mandate",
+      "createdAt": "2026-09-05T00:00:00.000Z",
+      "expiresAt": "2099-01-01T00:00:00.000Z",
+      "account": "synthetic-account",
+      "environment": "simulator",
+      "symbol": "BNBUSDT",
+      "quoteAsset": "USDT",
+      "side": "BUY",
+      "orderType": "LIMIT_IOC",
+      "budget": "20",
+      "reserve": "0",
+      "initialQuote": "100",
+      "goal": "0.025",
+      "tolerance": "0",
+      "maxOrders": 3,
+      "maxReads": 3,
+      "quote": {
+        "price": "600",
+        "at": "2026-09-05T00:00:00.000Z",
+        "maxAgeMs": 60000,
+        "source": "synthetic fixture"
+      },
+      "limitPrice": "600",
+      "feeAsset": "quote",
+      "feeBps": 0,
+      "filters": {
+        "step": "0.0001",
+        "tick": "0.01",
+        "minQty": "0.0001",
+        "maxQty": "10",
+        "minNotional": "1"
+      }
+    },
+    "plan": {
+      "version": "statebound-1",
+      "id": "vulnerable-fixture",
+      "mandateHash": "ae6e137fff522475d00ee5887e6b7ee23d63f4307e24e0398cad2040df1c619d",
+      "snapshot": "synthetic-initial-v1",
+      "adapter": "simulator-ioc-v1",
+      "maxSteps": 32,
+      "maxDurationMs": 30000,
+      "start": "buy",
+      "nodes": [
+        {
+          "id": "buy",
+          "op": "submit",
+          "operation": "acquire",
+          "quantity": "0.025",
+          "next": "goal"
+        },
+        {
+          "id": "goal",
+          "op": "branch",
+          "guard": {
+            "field": "goalMet",
+            "equals": true
+          },
+          "yes": "done",
+          "no": "balance"
+        },
+        {
+          "id": "balance",
+          "op": "balance",
+          "next": "retry"
+        },
+        {
+          "id": "retry",
+          "op": "submit",
+          "operation": "retry",
+          "quantity": "0.025",
+          "next": "done"
+        },
+        {
+          "id": "done",
+          "op": "complete"
+        }
+      ]
+    },
+    "deliveredTrace": [
+      {
+        "effect": {
+          "kind": "submit",
+          "id": "acquire-1",
+          "quantity": "0.025",
+          "max": "15"
+        },
+        "observation": {
+          "kind": "timeout",
+          "id": "acquire-1",
+          "account": "synthetic-account",
+          "symbol": "BNBUSDT",
+          "environment": "simulator"
+        },
+        "knowledge": {
+          "orders": [
+            {
+              "id": "acquire-1",
+              "max": "15",
+              "debit": "0",
+              "net": "0",
+              "terminal": false,
+              "seq": -1,
+              "states": [
+                "NOT_ACCEPTED",
+                "NEW",
+                "PARTIALLY_FILLED",
+                "FILLED",
+                "EXPIRED"
+              ]
+            }
+          ],
+          "invalid": false
+        }
+      },
+      {
+        "effect": {
+          "kind": "none"
+        },
+        "observation": null,
+        "knowledge": {
+          "orders": [
+            {
+              "id": "acquire-1",
+              "max": "15",
+              "debit": "0",
+              "net": "0",
+              "terminal": false,
+              "seq": -1,
+              "states": [
+                "NOT_ACCEPTED",
+                "NEW",
+                "PARTIALLY_FILLED",
+                "FILLED",
+                "EXPIRED"
+              ]
+            }
+          ],
+          "invalid": false
+        }
+      },
+      {
+        "effect": {
+          "kind": "balance"
+        },
+        "observation": {
+          "kind": "balance",
+          "snapshot": "synthetic-initial-v1",
+          "account": "synthetic-account",
+          "symbol": "BNBUSDT",
+          "environment": "simulator"
+        },
+        "knowledge": {
+          "orders": [
+            {
+              "id": "acquire-1",
+              "max": "15",
+              "debit": "0",
+              "net": "0",
+              "terminal": false,
+              "seq": -1,
+              "states": [
+                "NOT_ACCEPTED",
+                "NEW",
+                "PARTIALLY_FILLED",
+                "FILLED",
+                "EXPIRED"
+              ]
+            }
+          ],
+          "invalid": false
+        }
+      },
+      {
+        "effect": {
+          "kind": "submit",
+          "id": "retry-2",
+          "quantity": "0.025",
+          "max": "15"
+        },
+        "observation": {
+          "kind": "order",
+          "id": "retry-2",
+          "debit": "15",
+          "net": "0.025",
+          "terminal": true,
+          "seq": 2,
+          "status": "FILLED",
+          "account": "synthetic-account",
+          "symbol": "BNBUSDT",
+          "environment": "simulator"
+        },
+        "knowledge": {
+          "orders": [
+            {
+              "id": "acquire-1",
+              "max": "15",
+              "debit": "0",
+              "net": "0",
+              "terminal": false,
+              "seq": -1,
+              "states": [
+                "NOT_ACCEPTED",
+                "NEW",
+                "PARTIALLY_FILLED",
+                "FILLED",
+                "EXPIRED"
+              ]
+            },
+            {
+              "id": "retry-2",
+              "max": "15",
+              "debit": "15",
+              "net": "0.025",
+              "terminal": true,
+              "seq": 2,
+              "states": [
+                "FILLED"
+              ]
+            }
+          ],
+          "invalid": false
+        }
+      }
+    ]
+  },
+  "output": {
+    "version": "statebound-1",
+    "id": "codex-reconcile-v1",
+    "mandateHash": "ae6e137fff522475d00ee5887e6b7ee23d63f4307e24e0398cad2040df1c619d",
+    "snapshot": "synthetic-initial-v1",
+    "adapter": "simulator-ioc-v1",
+    "maxSteps": 32,
+    "maxDurationMs": 30000,
+    "start": "acquire",
+    "nodes": [
+      {
+        "id": "acquire",
+        "op": "submit",
+        "operation": "acquire",
+        "quantity": "remaining",
+        "next": "terminal"
+      },
+      {
+        "id": "terminal",
+        "op": "branch",
+        "guard": {
+          "field": "lastTerminal",
+          "equals": true
+        },
+        "yes": "goal",
+        "no": "reconcile"
+      },
+      {
+        "id": "reconcile",
+        "op": "query",
+        "next": "terminal"
+      },
+      {
+        "id": "goal",
+        "op": "branch",
+        "guard": {
+          "field": "goalMet",
+          "equals": true
+        },
+        "yes": "complete",
+        "no": "acquire"
+      },
+      {
+        "id": "complete",
+        "op": "complete"
+      }
+    ]
+  },
+  "rationale": "Query the original ambiguous attempt until terminal evidence. Retain exposure on stale or missing evidence. Only acquire remaining quantity after reconciliation. Preserve mandate and all check bounds.",
+  "candidateHash": "8f2a0b7ad3cc90390207efe2ed14156c469819a30a3d7853508f2ceaf763e7a0",
+  "validation": {
+    "status": "NO_VIOLATION_WITHIN_BOUND",
+    "reason": "Exhaustive finite discrete IOC model only",
+    "states": 1799,
+    "transitions": 2788,
+    "durationMs": 552.65,
+    "bounds": {
+      "maxStates": 30000,
+      "timeoutMs": 10000
+    },
+    "inputHash": "bcd5c0ae3fbba170eea74d96ceccf18b1f9f82b140b18567f2e07e833143178d",
+    "complete": true,
+    "outcomes": {
+      "COMPLETE": 52,
+      "UNRESOLVED": 130,
+      "REFUSED": 108
+    },
+    "counterexample": [],
+    "scenario": [],
+    "maxDepth": 16
+  },
+  "evidence": {
+    "payload": {
+      "version": "statebound-1",
+      "model": "ioc-discrete-v1",
+      "capabilities": {
+        "id": "simulator-ioc-v1",
+        "version": "statebound-1",
+        "boundedPrice": true,
+        "lookup": true,
+        "completeAbsence": true,
+        "feeBound": true,
+        "retry": "none",
+        "environment": "simulator"
+      },
+      "mandate": {
+        "version": "statebound-1",
+        "id": "demo-mandate",
+        "createdAt": "2026-09-05T00:00:00.000Z",
+        "expiresAt": "2099-01-01T00:00:00.000Z",
+        "account": "synthetic-account",
+        "environment": "simulator",
+        "symbol": "BNBUSDT",
+        "quoteAsset": "USDT",
+        "side": "BUY",
+        "orderType": "LIMIT_IOC",
+        "budget": "20",
+        "reserve": "0",
+        "initialQuote": "100",
+        "goal": "0.025",
+        "tolerance": "0",
+        "maxOrders": 3,
+        "maxReads": 3,
+        "quote": {
+          "price": "600",
+          "at": "2026-09-05T00:00:00.000Z",
+          "maxAgeMs": 60000,
+          "source": "synthetic fixture"
+        },
+        "limitPrice": "600",
+        "feeAsset": "quote",
+        "feeBps": 0,
+        "filters": {
+          "step": "0.0001",
+          "tick": "0.01",
+          "minQty": "0.0001",
+          "maxQty": "10",
+          "minNotional": "1"
+        }
+      },
+      "plan": {
+        "version": "statebound-1",
+        "id": "codex-reconcile-v1",
+        "mandateHash": "ae6e137fff522475d00ee5887e6b7ee23d63f4307e24e0398cad2040df1c619d",
+        "snapshot": "synthetic-initial-v1",
+        "adapter": "simulator-ioc-v1",
+        "maxSteps": 32,
+        "maxDurationMs": 30000,
+        "start": "acquire",
+        "nodes": [
+          {
+            "id": "acquire",
+            "op": "submit",
+            "operation": "acquire",
+            "quantity": "remaining",
+            "next": "terminal"
+          },
+          {
+            "id": "terminal",
+            "op": "branch",
+            "guard": {
+              "field": "lastTerminal",
+              "equals": true
+            },
+            "yes": "goal",
+            "no": "reconcile"
+          },
+          {
+            "id": "reconcile",
+            "op": "query",
+            "next": "terminal"
+          },
+          {
+            "id": "goal",
+            "op": "branch",
+            "guard": {
+              "field": "goalMet",
+              "equals": true
+            },
+            "yes": "complete",
+            "no": "acquire"
+          },
+          {
+            "id": "complete",
+            "op": "complete"
+          }
+        ]
+      },
+      "original": {
+        "version": "statebound-1",
+        "id": "vulnerable-fixture",
+        "mandateHash": "ae6e137fff522475d00ee5887e6b7ee23d63f4307e24e0398cad2040df1c619d",
+        "snapshot": "synthetic-initial-v1",
+        "adapter": "simulator-ioc-v1",
+        "maxSteps": 32,
+        "maxDurationMs": 30000,
+        "start": "buy",
+        "nodes": [
+          {
+            "id": "buy",
+            "op": "submit",
+            "operation": "acquire",
+            "quantity": "0.025",
+            "next": "goal"
+          },
+          {
+            "id": "goal",
+            "op": "branch",
+            "guard": {
+              "field": "goalMet",
+              "equals": true
+            },
+            "yes": "done",
+            "no": "balance"
+          },
+          {
+            "id": "balance",
+            "op": "balance",
+            "next": "retry"
+          },
+          {
+            "id": "retry",
+            "op": "submit",
+            "operation": "retry",
+            "quantity": "0.025",
+            "next": "done"
+          },
+          {
+            "id": "done",
+            "op": "complete"
+          }
+        ]
+      },
+      "mode": "guarded",
+      "provenance": "external_agent",
+      "dataSource": "synthetic fixture",
+      "execution": "simulator",
+      "result": {
+        "status": "NO_VIOLATION_WITHIN_BOUND",
+        "reason": "Exhaustive finite discrete IOC model only",
+        "states": 1799,
+        "transitions": 2788,
+        "durationMs": 526.76,
+        "bounds": {
+          "maxStates": 30000,
+          "timeoutMs": 10000
+        },
+        "inputHash": "bcd5c0ae3fbba170eea74d96ceccf18b1f9f82b140b18567f2e07e833143178d",
+        "complete": true,
+        "outcomes": {
+          "COMPLETE": 52,
+          "UNRESOLVED": 130,
+          "REFUSED": 108
+        },
+        "counterexample": [],
+        "scenario": [],
+        "maxDepth": 16
+      },
+      "executions": []
+    },
+    "manifest": "555c7656f50274d98ea86d8b77e5d979b34a04586ea71525e25c5e43604600ab"
+  }
+}

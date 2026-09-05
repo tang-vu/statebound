@@ -1,0 +1,73 @@
+binance-cli 2.1.1
+
+Latest price for a symbol or symbols.
+
+
+Usage: binance-cli spot ticker-price [OPTIONS]
+
+Options:
+      --symbol <SYMBOL>                Parameter symbol and symbols cannot be used in combination.
+                                       If neither parameter is sent, prices for all symbols will be returned in an array.
+      --symbols <SYMBOLS>              Parameter symbol and symbols cannot be used in combination.
+                                       If neither parameter is sent, prices for all symbols will be returned in an array.
+                                       Examples of accepted format for the symbols parameter: ["BTCUSDT","BNBUSDT"] or %5B%22BTCUSDT%22,%22BNBUSDT%22%5D
+      --symbol-status <SYMBOL_STATUS>  Filters for symbols that have this `tradingStatus`.
+                                       For a single symbol, a status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`.
+                                       For multiple or all symbols, non-matching ones are simply excluded from the response.
+  -i, --interactive                    
+      --json <JSON>                    Send all fields as JSON
+      --profile <PROFILE>              Select a profile
+  -h, --help                           Print help
+
+Send in a new order.
+
+
+Usage: binance-cli spot new-order [OPTIONS]
+
+Options:
+      --symbol <SYMBOL>
+          
+      --side <SIDE>
+          Please see [Enums](/products/spot/enums#side) for supported values.
+      --type <TYPE>
+          Please see [Enums](/products/spot/enums#ordertypes) for supported values.
+      --time-in-force <TIME_IN_FORCE>
+          Please see [Enums](/products/spot/enums#timeinforce) for supported values.
+      --quantity <QUANTITY>
+          
+      --quote-order-qty <QUOTE_ORDER_QTY>
+          
+      --price <PRICE>
+          
+      --new-client-order-id <NEW_CLIENT_ORDER_ID>
+          A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
+      --strategy-id <STRATEGY_ID>
+          
+      --strategy-type <STRATEGY_TYPE>
+          The value cannot be less than `1000000`.
+      --stop-price <STOP_PRICE>
+          Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
+      --trailing-delta <TRAILING_DELTA>
+          See Trailing Stop order FAQ
+      --iceberg-qty <ICEBERG_QTY>
+          Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
+      --new-order-resp-type <NEW_ORDER_RESP_TYPE>
+          `MARKET` and `LIMIT` order types default to `FULL`, all other orders default to `ACK`.
+      --self-trade-prevention-mode <SELF_TRADE_PREVENTION_MODE>
+          The allowed enums is dependent on what is configured on the symbol.
+      --peg-price-type <PEG_PRICE_TYPE>
+          See Pegged Orders Info
+      --peg-offset-value <PEG_OFFSET_VALUE>
+          Price level to peg the price to (max: 100). See Pegged Orders Info
+      --peg-offset-type <PEG_OFFSET_TYPE>
+          Only `PRICE_LEVEL` is supported. See Pegged Orders Info
+      --recv-window <RECV_WINDOW>
+          Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+  -i, --interactive
+          
+      --json <JSON>
+          Send all fields as JSON
+      --profile <PROFILE>
+          Select a profile
+  -h, --help
+          Print help

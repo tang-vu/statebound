@@ -146,7 +146,7 @@
       "reason": "Cumulative quote-equivalent debit exceeds mandate or reserve floor",
       "states": 26,
       "transitions": 80,
-      "durationMs": 14.1,
+      "durationMs": 13.96,
       "bounds": {
         "maxStates": 30000,
         "timeoutMs": 10000
@@ -172,7 +172,10 @@
           },
           "observation": {
             "kind": "timeout",
-            "id": "acquire-1"
+            "id": "acquire-1",
+            "account": "synthetic-account",
+            "symbol": "BNBUSDT",
+            "environment": "simulator"
           },
           "hiddenEvents": [
             {
@@ -282,7 +285,11 @@
             "tick": true
           },
           "observation": {
-            "kind": "balance"
+            "kind": "balance",
+            "snapshot": "synthetic-initial-v1",
+            "account": "synthetic-account",
+            "symbol": "BNBUSDT",
+            "environment": "simulator"
           },
           "hiddenEvents": [],
           "before": {
@@ -350,7 +357,10 @@
             "net": "0.025",
             "terminal": true,
             "seq": 2,
-            "status": "FILLED"
+            "status": "FILLED",
+            "account": "synthetic-account",
+            "symbol": "BNBUSDT",
+            "environment": "simulator"
           },
           "hiddenEvents": [
             {
@@ -439,7 +449,8 @@
         }
       ],
       "maxDepth": 4
-    }
+    },
+    "executions": []
   },
-  "manifest": "f0e0120dda241c472f0eb2bb75844e1c662f823e741d062165eb374dcc4403bc"
+  "manifest": "e8389d877352cf37af7cad952aaf1c3370399b2d79229b4f9334ec7a65b182c6"
 }

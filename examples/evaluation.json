@@ -1,0 +1,159 @@
+{
+  "candidateHash": "8f2a0b7ad3cc90390207efe2ed14156c469819a30a3d7853508f2ceaf763e7a0",
+  "denominator": "16 deterministic scenarios per variant per mandate; 3 mandates. Safety and progress counted separately.",
+  "rows": [
+    {
+      "goal": "0.017",
+      "budget": "16",
+      "feeBps": 10,
+      "variant": "baseline",
+      "cases": 16,
+      "violations": 2,
+      "complete": 8,
+      "unresolved": 8,
+      "refused": 0,
+      "incomplete": 0,
+      "checker": {
+        "status": "COUNTEREXAMPLE_FOUND",
+        "states": 26,
+        "transitions": 80
+      }
+    },
+    {
+      "goal": "0.017",
+      "budget": "16",
+      "feeBps": 10,
+      "variant": "guarded-original",
+      "cases": 16,
+      "violations": 0,
+      "complete": 8,
+      "unresolved": 0,
+      "refused": 8,
+      "incomplete": 0,
+      "checker": {
+        "status": "NO_VIOLATION_WITHIN_BOUND",
+        "states": 77,
+        "transitions": 76
+      }
+    },
+    {
+      "goal": "0.017",
+      "budget": "16",
+      "feeBps": 10,
+      "variant": "repaired",
+      "cases": 16,
+      "violations": 0,
+      "complete": 12,
+      "unresolved": 4,
+      "refused": 0,
+      "incomplete": 0,
+      "checker": {
+        "status": "NO_VIOLATION_WITHIN_BOUND",
+        "states": 1799,
+        "transitions": 2788
+      }
+    },
+    {
+      "goal": "0.031",
+      "budget": "25",
+      "feeBps": 25,
+      "variant": "baseline",
+      "cases": 16,
+      "violations": 6,
+      "complete": 8,
+      "unresolved": 8,
+      "refused": 0,
+      "incomplete": 0,
+      "checker": {
+        "status": "COUNTEREXAMPLE_FOUND",
+        "states": 26,
+        "transitions": 80
+      }
+    },
+    {
+      "goal": "0.031",
+      "budget": "25",
+      "feeBps": 25,
+      "variant": "guarded-original",
+      "cases": 16,
+      "violations": 0,
+      "complete": 6,
+      "unresolved": 0,
+      "refused": 10,
+      "incomplete": 0,
+      "checker": {
+        "status": "NO_VIOLATION_WITHIN_BOUND",
+        "states": 62,
+        "transitions": 61
+      }
+    },
+    {
+      "goal": "0.031",
+      "budget": "25",
+      "feeBps": 25,
+      "variant": "repaired",
+      "cases": 16,
+      "violations": 0,
+      "complete": 12,
+      "unresolved": 4,
+      "refused": 0,
+      "incomplete": 0,
+      "checker": {
+        "status": "NO_VIOLATION_WITHIN_BOUND",
+        "states": 1799,
+        "transitions": 2788
+      }
+    },
+    {
+      "goal": "0.047",
+      "budget": "38",
+      "feeBps": 5,
+      "variant": "baseline",
+      "cases": 16,
+      "violations": 6,
+      "complete": 8,
+      "unresolved": 8,
+      "refused": 0,
+      "incomplete": 0,
+      "checker": {
+        "status": "COUNTEREXAMPLE_FOUND",
+        "states": 26,
+        "transitions": 80
+      }
+    },
+    {
+      "goal": "0.047",
+      "budget": "38",
+      "feeBps": 5,
+      "variant": "guarded-original",
+      "cases": 16,
+      "violations": 0,
+      "complete": 6,
+      "unresolved": 0,
+      "refused": 10,
+      "incomplete": 0,
+      "checker": {
+        "status": "NO_VIOLATION_WITHIN_BOUND",
+        "states": 62,
+        "transitions": 61
+      }
+    },
+    {
+      "goal": "0.047",
+      "budget": "38",
+      "feeBps": 5,
+      "variant": "repaired",
+      "cases": 16,
+      "violations": 0,
+      "complete": 12,
+      "unresolved": 4,
+      "refused": 0,
+      "incomplete": 0,
+      "checker": {
+        "status": "NO_VIOLATION_WITHIN_BOUND",
+        "states": 1799,
+        "transitions": 2788
+      }
+    }
+  ]
+}

@@ -70,7 +70,7 @@ export function validateOrder(m:Mandate,q:string) {
   if(D(q)<D(m.filters.minQty)||D(q)>D(m.filters.maxQty)||D(q)%D(m.filters.step)!==0n||D(mul(q,m.limitPrice))<D(m.filters.minNotional)) throw Error('Order violates fixture filters');
 }
 export type Belief={id:string;max:string;debit:string;net:string;terminal:boolean;seq:number;states:string[]};
-export type Observation={kind:'timeout'|'balance'|'notFound'|'order';id?:string;debit?:string;net?:string;terminal?:boolean;seq?:number;definitive?:boolean;status?:string};
+export type Observation={kind:'timeout'|'balance'|'notFound'|'order';id?:string;debit?:string;net?:string;terminal?:boolean;seq?:number;definitive?:boolean;status?:string;account?:string;symbol?:string;environment?:string;snapshot?:string};
 export type Knowledge={orders:Belief[];invalid:boolean};
 export function observe(k0:Knowledge,o:Observation):Knowledge {
   const k=structuredClone(k0);

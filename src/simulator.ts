@@ -20,26 +20,34 @@ export function step(m:Mandate,p:Plan,w0:World,mode:'baseline'|'guarded',choice:
   const w=structuredClone(w0);
   // Only the public agent state enters the interpreter. Exchange state is adapter-owned.
   const t=transition(m,p,w.agent,mode);w.agent=t.state;
-  const effect=t.effect;let observation:Observation|null=null;const hiddenEvents:Order[]=[];
+  const effect=t.effect;
+  const delivery=deliver(m,w.exchange,effect,choice);w.exchange=delivery.exchange;
+  const {observation,hiddenEvents}=delivery;
+  if(observation) w.agent.k=observe(w.agent.k,observation);
+  const event:Event={step:w.agent.step,node:w0.agent.node,effect,choice,observation,hiddenEvents,before:w0.agent.k,after:w.agent.k,actualDebit:concreteDebit(w.exchange),possibleDebit:exposure(w.agent.k),status:w.agent.status,reason:w.agent.reason};
+  return {world:w,event};
+}
+export function deliver(m:Mandate,exchange0:ExchangeState,effect:Effect,choice:Choice) {
+  const exchange=structuredClone(exchange0);let observation:Observation|null=null;const hiddenEvents:Order[]=[];
   if(effect.kind==='submit') {
     if(!('fill' in choice)) throw Error('Invalid submit choice');
     let quantity=choice.fill==='full'?effect.quantity:choice.fill==='half'?F((D(effect.quantity)/2n/D(m.filters.step))*D(m.filters.step)):'0';
     let accepted=choice.fill!=='absent';
-    if(D(cost(m,quantity).debit)+D(concreteDebit(w.exchange))>D(m.initialQuote)) {quantity='0';accepted=false;}
+    if(D(cost(m,quantity).debit)+D(concreteDebit(exchange))>D(m.initialQuote)) {quantity='0';accepted=false;}
     const c=cost(m,quantity);
     const order:Order={id:effect.id,quantity,...c,accepted,status:!accepted?'ABSENT':quantity===effect.quantity?'FILLED':'EXPIRED'};
-    w.exchange.orders.push(order);hiddenEvents.push(order);
+    exchange.orders.push(order);hiddenEvents.push(order);
     observation=choice.reply==='lost'?{kind:'timeout',id:effect.id}:orderObservation(order);
   } else if(effect.kind==='query') {
     if(!('read' in choice)) throw Error('Invalid read choice');
-    const o=w.exchange.orders.find(x=>x.id===effect.id)!;
+    const o=exchange.orders.find(x=>x.id===effect.id);
+    if(!o)return {exchange,observation:{kind:'notFound',id:effect.id,definitive:true,seq:2,account:m.account,symbol:m.symbol,environment:m.environment} as Observation,hiddenEvents};
     if(choice.read==='fresh') observation=orderObservation(o);
     else if(choice.read==='partial'&&D(o.debit)>0n) observation={kind:'order',id:o.id,debit:F(D(o.debit)/2n),net:F(D(o.net)/2n),terminal:false,seq:0,status:'PARTIALLY_FILLED'};
     else observation=choice.read==='notFound'?{kind:'notFound',id:o.id,definitive:false}:{kind:'order',id:o.id,debit:'0',net:'0',terminal:false,seq:-1,status:'NEW'};
-  } else if(effect.kind==='balance') observation={kind:'balance'}; // Deliberately stale initial account snapshot, no order evidence.
-  if(observation) w.agent.k=observe(w.agent.k,observation);
-  const event:Event={step:w.agent.step,node:w0.agent.node,effect,choice,observation,hiddenEvents,before:w0.agent.k,after:w.agent.k,actualDebit:concreteDebit(w.exchange),possibleDebit:exposure(w.agent.k),status:w.agent.status,reason:w.agent.reason};
-  return {world:w,event};
+  } else if(effect.kind==='balance') observation={kind:'balance',snapshot:'synthetic-initial-v1'}; // Deliberately stale initial account snapshot, no order evidence.
+  if(observation)observation={...observation,account:m.account,symbol:m.symbol,environment:m.environment};
+  return {exchange,observation,hiddenEvents};
 }
 function orderObservation(o:Order):Observation {return o.accepted?{kind:'order',id:o.id,debit:o.debit,net:o.net,terminal:true,seq:2,status:o.status}:{kind:'notFound',id:o.id,definitive:true,seq:2};}
 export function replay(m:Mandate,p:Plan,mode:'baseline'|'guarded',scenario:Choice[]) {
