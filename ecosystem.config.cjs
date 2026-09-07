@@ -1,0 +1,9 @@
+module.exports={apps:['workbench','preview'].map(mode=>({
+  name:`statebound-${mode}`,namespace:'statebound',cwd:__dirname,
+  script:'scripts/service.mjs',args:mode,instances:1,exec_mode:'fork',
+  autorestart:true,restart_delay:2000,min_uptime:'10s',max_restarts:10,
+  max_memory_restart:'600M',wait_ready:true,listen_timeout:20000,
+  shutdown_with_message:true,kill_timeout:6000,
+  out_file:`.runtime/${mode}-out.log`,error_file:`.runtime/${mode}-error.log`,
+  merge_logs:true,time:true
+}))};

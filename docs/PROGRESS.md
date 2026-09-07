@@ -1,5 +1,14 @@
 # Progress
 
+## 2026-09-07 — PM2 operation and prepared shareable preview
+
+- Running: `statebound-workbench` on loopback 4381 and `statebound-preview` on loopback 4382, under a separate Statebound PM2 namespace. Replaced only the previously identified Statebound manual server. Scoped restart succeeded and the process list was saved. Existing applications/tunnels were not restarted or reconfigured.
+- Added readiness and graceful shutdown. Launchers pass an explicit minimal environment to the application children. PM2 persistence is configured; machine reboot recovery is not tested.
+- Added a responsive recorded demo with actual 97-second video, evidence tabs, evaluation data and downloads. It explicitly labels recorded evidence/AI provenance and unavailable live trading. Its separate server has a strict file/host allowlist, security headers, GET/HEAD only, and no jobs or operator API.
+- Verified: lint, TypeScript + production build, all 16 tests, operator HTTP gates, preview file/API/method/host gates, MP4 byte ranges and actual browser playback, evidence tabs, mobile 390px and desktop 1440px without overflow. HTTP/browser checks passed again after PM2 restart. Evidence: `submission/preview-validation.json` and preview screenshots.
+- Prepared: dedicated `statebound-demo` tunnel script for `statebound.tangvu.dev`, repository-scoped credentials/config, port 4382 only, no DNS overwrite. PowerShell parsing and Cloudflare ingress validation passed. Existing configured Cloudflare authentication successfully listed tunnels read-only.
+- Pending authorization: public tunnel creation, DNS routing and external HTTPS/video verification. The original brief says not to deploy publicly. No Statebound public deployment is claimed. Hosted Binance MCP, testnet writes and live hosted model remain unavailable as previously documented.
+
 Repository inspected: empty application, branch main, existing origin preserved. Node 24.14.1, npm 11.11.0. Full build brief read on 2026-09-05.
 
 Milestone 1 verified: exact accounting, strict language, shared interpreter, breadth-first finite checker, replay and standalone evidence verification. `npm run typecheck` and `npm test` passed (7 tests with reproducible property corpora). `npm run demo:verify` found 30 USDT debit under a 20 USDT zero-fee synthetic mandate. Template repair checked 2,191 states and 3,180 transitions with no violation within the discrete bound. Recoverable lost reply completes; persistent not-found remains unresolved with 15 USDT exposure. This is a template, not yet an external AI repair.

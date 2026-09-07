@@ -11,6 +11,8 @@ Repository: `https://github.com/tang-vu/statebound`, branch `main`. Existing rem
 
 ## Start or resume
 
+Update 2026-09-07: the local servers now run under PM2 as `statebound-workbench` (4381) and `statebound-preview` (4382). A scoped restart and post-restart HTTP/browser checks passed; `pm2 save` completed. Windows reboot recovery has not been tested. See `docs/OPERATIONS.md` for commands. The preview is a separate recorded, read-only site, not the interactive operator workbench. Cloudflare ingress and the publication script are prepared; no Statebound tunnel or DNS record has been created and public deployment is still pending explicit authorization.
+
 Read `docs/PROGRESS.md` and Git history first. Run `npm ci`, `npm run build`, `npm run dev`; open `http://127.0.0.1:4381`. Do not kill an unrelated process occupying a port. Set `PORT` explicitly if needed and adjust test URLs for a custom port. On the build machine, an actual local preview was started, but no autonomous work is promised after the session ends.
 
 Run `npm run demo:verify`, `npm test`, `npm run test:holdout`, `npm run lint`, `npm run typecheck` and `npm run build`. With the app running, use `npm run test:http` and `npm run test:browser`. Never run live orders from tests. `npm run evidence:verify -- submission/demo-evidence.json` checks the recorded demo without the UI, model or credentials.

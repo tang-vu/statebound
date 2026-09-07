@@ -1,0 +1,8 @@
+# Template only. The publication script writes actual paths and ID into .runtime/.
+tunnel: 00000000-0000-0000-0000-000000000000
+credentials-file: .runtime/statebound-tunnel.json
+metrics: 127.0.0.1:0
+ingress:
+  - hostname: statebound.tangvu.dev
+    service: http://127.0.0.1:4382
+  - service: http_status:404

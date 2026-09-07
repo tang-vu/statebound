@@ -76,4 +76,13 @@ app.post('/api/runs/:id/verify',(req,res)=>{
 if(existsSync('dist/index.html')) {app.use(express.static(resolve('dist')));app.get('/{*path}',(_req,res)=>res.sendFile(resolve('dist/index.html')));}
 else {const vite=await createViteServer({server:{middlewareMode:true},appType:'spa'});app.use(vite.middlewares);}
 app.use((err:unknown,_req:express.Request,res:express.Response,_next:express.NextFunction)=>{void err;void _next;res.status(400).json({error:'Request could not be processed'});});
-app.listen(port,'127.0.0.1',()=>console.log(`Statebound: ${origin} | simulator only`));
+const server=app.listen(port,'127.0.0.1',()=>{console.log(`Statebound: ${origin} | simulator only`);process.send?.('ready');});
+let stopping=false;
+const shutdown=async()=>{
+  if(stopping)return;stopping=true;
+  server.close();server.closeIdleConnections();
+  await Promise.allSettled([...jobs.values()].map(worker=>worker.terminate()));
+  ledger.close();process.exit(0);
+};
+process.on('SIGINT',()=>void shutdown());process.on('SIGTERM',()=>void shutdown());
+process.on('message',message=>{if(message==='shutdown')void shutdown();});

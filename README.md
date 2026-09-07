@@ -19,6 +19,8 @@ npm run dev
 
 Open **http://127.0.0.1:4381**. The server binds only to the local interface. Runtime databases live in ignored `.runtime/`. `npm run dev` serves a built UI when `dist/` exists, or Vite middleware when it does not. Rebuild after changing the UI if serving `dist/`.
 
+For PM2, run `npm run ops:start` after building. It starts the full workbench on port 4381 and a separate recorded demo on **http://127.0.0.1:4382**. The latter includes playable video, evidence views and downloads, with no operator API. See [operations and prepared Cloudflare publication](docs/OPERATIONS.md). `statebound.tangvu.dev` is a prepared target, not a live URL yet.
+
 1. Review and confirm the budget, net quantity and synthetic fee assumption.
 2. Click **Find a failure**. Select the first trace event to compare agent knowledge with reviewer-only exchange reality.
 3. **Check with guard** demonstrates a refused retry. The guard preserves exposure after a timeout.
