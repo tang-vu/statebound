@@ -11,14 +11,14 @@ const begin=performance.now();
 try {
   await page.goto('http://127.0.0.1:4381');await page.getByRole('button',{name:'Confirm this mandate'}).waitFor();
   for(const scene of scenes) {
-    if(scene.id==='intro')await page.getByRole('button',{name:'Confirm this mandate'}).click();
+    if(scene.id==='intro'){await page.getByRole('button',{name:'Confirm this mandate'}).click();await page.locator('#workspace').scrollIntoViewIfNeeded();}
     if(scene.id==='failure'){await page.getByRole('button',{name:'Find a failure'}).click();await page.getByRole('heading',{name:'30 USDT can leave a 20 USDT mandate.'}).waitFor({timeout:30000});}
     if(scene.id==='knowledge'){await page.locator('.timeline-row').first().click();await page.locator('.knowledge').scrollIntoViewIfNeeded();}
     if(scene.id==='repair'){
-      await page.getByText('External AI repair · recorded Codex run & new candidates',{exact:true}).click();await page.getByRole('button',{name:'Load recorded Codex candidate'}).click();await page.getByRole('button',{name:'Validate candidate & recheck'}).click();await page.getByRole('heading',{name:'No violation within the checked bound.'}).waitFor({timeout:30000});await page.locator('.repair').scrollIntoViewIfNeeded();
+      const disclosure=page.getByText('External AI repair · recorded Codex run & new candidates',{exact:true});await disclosure.click();await page.getByRole('button',{name:'Load recorded Codex candidate'}).click();await page.getByRole('button',{name:'Validate candidate & recheck'}).click();await page.getByRole('heading',{name:'No violation within the checked bound.'}).waitFor({timeout:30000});await disclosure.click();await page.locator('.investigation').scrollIntoViewIfNeeded();
     }
     if(scene.id==='recover'){await page.getByRole('button',{name:'Replay recoverable case'}).click();await page.getByRole('heading',{name:'No violation within the checked bound.'}).waitFor({timeout:30000});await page.locator('.timeline-title').scrollIntoViewIfNeeded();}
-    if(scene.id==='ambiguity'){await page.getByRole('button',{name:'Replay ambiguity',exact:true}).click();await page.getByRole('heading',{name:'No violation within the checked bound.'}).waitFor({timeout:30000});await page.locator('.outcome').scrollIntoViewIfNeeded();}
+    if(scene.id==='ambiguity'){await page.getByRole('button',{name:'Replay ambiguity',exact:true}).click();await page.getByRole('heading',{name:'No violation within the checked bound.'}).waitFor({timeout:30000});await page.locator('.outcome').scrollIntoViewIfNeeded();await page.screenshot({path:'submission/ambiguity.png',fullPage:true});}
     if(scene.id==='evidence'){
       await page.locator('.integration').scrollIntoViewIfNeeded();const pending=page.waitForEvent('download');await page.getByRole('link',{name:'Export evidence'}).click();const download=await pending;await download.saveAs('submission/demo-evidence.json');const result=verify(JSON.parse(readFileSync('submission/demo-evidence.json','utf8')));writeFileSync('submission/verifier-output.json',JSON.stringify(result,null,2));await page.getByRole('button',{name:'Verify this export'}).click();await page.getByText('Verified: replay and bounded search recomputed.',{exact:true}).waitFor({timeout:30000});
     }

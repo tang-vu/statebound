@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "viewports": [
+    360,
+    390,
+    768,
+    1440
+  ],
+  "checks": [
+    "desktop action above fold",
+    "malformed and incomplete JSON recovery",
+    "invalid mandate blocked",
+    "Back and Forward restore runs",
+    "mobile define/check/inspect/repair",
+    "no overflow",
+    "connection failure and retry",
+    "keyboard entry"
+  ],
+  "consoleErrors": []
+}

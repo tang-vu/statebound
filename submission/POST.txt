@@ -1,0 +1,4 @@
+Built Statebound for @Binance Agent OS Mini Hackathon: find a budget-breaking retry, check the repair, replay the evidence. Binance CLI testnet reads; simulated orders.
+
+Demo: https://statebound.tangvu.dev
+Code: https://github.com/tang-vu/statebound

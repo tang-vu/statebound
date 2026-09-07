@@ -26,7 +26,8 @@
     "preview": "node scripts/preview.mjs",
     "test:preview": "node scripts/preview-test.mjs",
     "ops:start": "pm2 start ecosystem.config.cjs",
-    "ops:restart": "pm2 restart statebound-workbench statebound-preview"
+    "ops:restart": "pm2 restart statebound-workbench statebound-preview",
+    "test:ui": "tsx scripts/ui.ts"
   },
   "dependencies": {
     "express": "5.2.1",

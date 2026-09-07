@@ -1,5 +1,7 @@
 # Statebound submission draft
 
+Ready-to-use links, form copy and account steps: [READY_TO_SUBMIT.md](READY_TO_SUBMIT.md). Short post: [POST.txt](POST.txt).
+
 Statebound finds execution paths that can break an AI trading mandate, validates a structural repair, and replays the checked plan through a constrained executor. Its deliberately vulnerable synthetic fixture shows why a lost order reply must not be treated as a failed purchase.
 
 The core keeps confirmed spend separate from possible exposure. A finite checker produces a counterexample. The development Codex session supplied a typed reconciliation repair that preserves the mandate, and the checker revalidated it. The executor shares the interpreter and persists attempts/reservations in SQLite before effects.
@@ -27,6 +29,6 @@ Code: https://github.com/tang-vu/statebound
 
 ## Recording reproduction
 
-Start the app with `npm run dev`. On the build Windows machine, run `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/narrate.ps1`, then `npm run demo:record`. This requires Playwright Chromium, ffmpeg/ffprobe and the installed Microsoft Zira Desktop synthetic voice. Narration uses that standard system voice, with no voice cloning or paid service. The recorder drives actual app actions, then muxes narration at measured scene timestamps and burns timed subtitles. Source/execution labels remain sticky. No model generation delay is edited out: the video explicitly loads a recorded Codex candidate and rechecks it.
+Start the app with `npm run dev`. On the build Windows machine, run `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/narrate.ps1`, then `npm run demo:record`. This requires Playwright Chromium, ffmpeg/ffprobe and the installed Microsoft Zira Desktop synthetic voice. Narration uses that standard system voice, with no voice cloning or paid service. The recorder drives actual app actions, then muxes narration at measured scene timestamps and burns timed subtitles. Source and execution scope are shown in the workbench; the recording carries a persistent disclosure overlay. No model generation delay is edited out: the video explicitly loads a recorded Codex candidate and rechecks it.
 
 The raw recording, narration source, scene timings, captions, evidence and verifier output make the edit inspectable. Playback is sped up uniformly to 1.35x, disclosed throughout the video. No actions or model-generation intervals are spliced out. A brief final-frame hold covers the narration tail. An exported evidence bundle is verified both by the CLI library in the recorder and a separate server worker shown in the app. Run `npx tsx scripts/mux-demo.ts` to regenerate the final MP4 from the existing raw recording and narration without repeating browser actions, and `npx tsx scripts/verify-video.ts` to decode-check the output.

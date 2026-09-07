@@ -1,9 +1,11 @@
 import {readFileSync,writeFileSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
-const timings=JSON.parse(readFileSync('submission/recording-timing.json','utf8')) as {start:number;end:number;text:string;audio:string}[];
+const timings=JSON.parse(readFileSync('submission/recording-timing.json','utf8')) as {id:string;start:number;end:number;text:string;audio:string}[];
 const speed=1.35;
 const stamp=(n:number)=>{const ms=Math.round(n*1000);return `${String(Math.floor(ms/3600000)).padStart(2,'0')}:${String(Math.floor(ms/60000)%60).padStart(2,'0')}:${String(Math.floor(ms/1000)%60).padStart(2,'0')},${String(ms%1000).padStart(3,'0')}`;};
 const duration=(timings.at(-1)!.end+1)/speed;
+const labels:Record<string,string>={intro:'The mandate',failure:'Find the failure',knowledge:'Inspect exposure',repair:'Check the repair',recover:'Recoverable replay',ambiguity:'Unresolved exposure',evidence:'Verify the evidence'};
+writeFileSync('preview/chapters.json',JSON.stringify({duration,chapters:timings.map(t=>({time:t.start/speed,label:labels[t.id]??t.id}))},null,2)+'\n');
 const captions=[`1\n00:00:00,000 --> ${stamp(duration)}\n{\\an8}AI narration | Actual app | Recorded Codex repair | 1.35x playback\n`];
 const assStamp=(n:number)=>stamp(n).replace(/^0/,'').replace(',', '.').slice(0,-1);
 const dialogues=[`Dialogue: 0,0:00:00.00,${assStamp(duration)},Disclosure,,0,0,0,,AI narration | Actual app | Recorded Codex repair | 1.35x playback`];

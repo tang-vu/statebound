@@ -1,5 +1,13 @@
 # Progress
 
+## 2026-09-07 - Submission build prepared
+
+- Completed the responsive workbench and preview redesign, shared schema validation, history/connection recovery, mobile task navigation, content-versioned assets, video chapters and full-size evidence access.
+- Regenerated the actual 101.4-second recording, captions, screenshots and independently verified exported evidence. Public browser checks include media seeking, versioned resources, active chapter state and full-size evidence links.
+- Final build, lint and all 16 core tests passed. Previously completed HTTP, responsive/recovery, holdout and independent verification reports remain in submission/.
+- Prepared submission/READY_TO_SUBMIT.md and the short submission/POST.txt with honest integration scope. Opened the actual survey: it requires Binance login before questions are shown. No account credentials, social posting session or submission receipt is available in this session; account steps remain outstanding.
+
+
 ## 2026-09-07 — Authorized public deployment completed
 
 - Explicit follow-up authorization received. Published the recorded preview at https://statebound.tangvu.dev through dedicated `statebound-demo` Cloudflare Tunnel. Created the hostname route without overwrite; no existing tunnel/application reconfiguration.

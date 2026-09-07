@@ -1,0 +1,33 @@
+{
+  "duration": 101.39971414814815,
+  "chapters": [
+    {
+      "time": 0.38835562962962955,
+      "label": "The mandate"
+    },
+    {
+      "time": 13.788460740740739,
+      "label": "Find the failure"
+    },
+    {
+      "time": 23.57494548148148,
+      "label": "Inspect exposure"
+    },
+    {
+      "time": 37.62992296296296,
+      "label": "Check the repair"
+    },
+    {
+      "time": 58.23629362962963,
+      "label": "Recoverable replay"
+    },
+    {
+      "time": 74.98327444444443,
+      "label": "Unresolved exposure"
+    },
+    {
+      "time": 87.10271266666666,
+      "label": "Verify the evidence"
+    }
+  ]
+}

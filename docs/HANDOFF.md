@@ -15,7 +15,7 @@ Update 2026-09-07: the local servers run under PM2 as `statebound-workbench` (43
 
 Read `docs/PROGRESS.md` and Git history first. Run `npm ci`, `npm run build`, `npm run dev`; open `http://127.0.0.1:4381`. Do not kill an unrelated process occupying a port. Set `PORT` explicitly if needed and adjust test URLs for a custom port. On the build machine, an actual local preview was started, but no autonomous work is promised after the session ends.
 
-Run `npm run demo:verify`, `npm test`, `npm run test:holdout`, `npm run lint`, `npm run typecheck` and `npm run build`. With the app running, use `npm run test:http` and `npm run test:browser`. Never run live orders from tests. `npm run evidence:verify -- submission/demo-evidence.json` checks the recorded demo without the UI, model or credentials.
+Run `npm run demo:verify`, `npm test`, `npm run test:holdout`, `npm run lint`, `npm run typecheck` and `npm run build`. With the app running, use `npm run test:http`, `npm run test:browser` and `npm run test:ui`. Never run live orders from tests. `npm run evidence:verify -- submission/demo-evidence.json` checks the recorded demo without the UI, model or credentials.
 
 The generated demo evidence includes an unresolved durable replay and its pending exposure. The separate flagship bundle contains the baseline counterexample. `examples/external-agent-run.json` preserves actual development-session Codex input/output and recheck evidence. Re-running its generation script reproduces a stored candidate; it is not a fresh model invocation. A new external agent submits new typed output through `npm run plan:repair -- original.json candidate.json`.
 
@@ -37,8 +37,14 @@ The native Windows Binance CLI build is blocked by unavailable MinGW OpenSSL dev
 
 ## Recording
 
-`submission/demo.mp4` is 97.32 seconds and contains actual app actions with Microsoft Zira Desktop synthetic narration and timed captions. `submission/demo-raw.webm` preserves the source recording. Speedup and recorded AI provenance are disclosed. Reproduction is in `submission/SUBMISSION_DRAFT.md`. No paid voice service or cloned voice is involved. Review `submission/video-validation.json` for actual probe/decode evidence.
+`submission/demo.mp4` contains actual app actions with Microsoft Zira Desktop synthetic narration and timed captions. `submission/demo-raw.webm` preserves the source recording. Speedup and recorded AI provenance are disclosed. Reproduction is in `submission/SUBMISSION_DRAFT.md`. No paid voice service or cloned voice is involved. Review `submission/video-validation.json` for actual probe/decode evidence.
 
 ## Operational cautions from actual implementation
 
 SQLite is Node 24's built-in experimental API and is intentionally single-process/local. Different UI experiments have separate fake account ledgers. A stopped or crashed run does not cancel exchange effects; ambiguity remains reserved. There is no generic ability to clear tombstones. The local session is a loopback policy boundary, not hosted multi-user authentication. Do not expose this server publicly with credentials.
+
+## Interface completion
+
+The workbench and recorded preview share an ivory, charcoal and signal-orange design. The workbench introduction is compact enough to expose the mandate action on desktop. Phones use Define / Check & repair / Inspect navigation, with selected trace state preserved across views. Shared browser/server schemas reject incomplete plan JSON before rendering; connection retry and history navigation are covered by `scripts/ui.ts`.
+
+The refreshed recording, screenshots, ambiguity evidence view and seekable chapter metadata come from actual simulator runs. Re-record with `npm run demo:record`, decode-check with `npx tsx scripts/verify-video.ts`, and validate the preview with `npm run test:preview`. The preview server allowlist includes `chapters.json` and `ambiguity.png`; restart its scoped PM2 process after changing routes. No live exchange execution is enabled.

@@ -1,103 +1,103 @@
 1
-00:00:00,000 --> 00:01:37,318
+00:00:00,000 --> 00:01:41,400
 {\an8}AI narration | Actual app | Recorded Codex repair | 1.35x playback
 
 2
-00:00:00,518 --> 00:00:03,491
+00:00:00,388 --> 00:00:03,361
 Statebound checks trading workflows before execution.
 
 3
-00:00:03,491 --> 00:00:07,977
+00:00:03,361 --> 00:00:07,848
 This is a synthetic fixture, with a twenty USDT spending mandate and zero fees.
 
 4
-00:00:07,977 --> 00:00:10,501
+00:00:07,848 --> 00:00:10,372
 The example plan is deliberately vulnerable.
 
 5
-00:00:10,501 --> 00:00:12,016
+00:00:10,372 --> 00:00:11,886
 No real orders are placed.
 
 6
-00:00:15,037 --> 00:00:17,319
+00:00:13,788 --> 00:00:16,071
 Find a failure runs a fresh bounded search.
 
 7
-00:00:17,319 --> 00:00:21,671
+00:00:16,071 --> 00:00:20,423
 The checker finds a path that spends thirty USDT against the twenty USDT mandate.
 
 8
-00:00:21,671 --> 00:00:24,272
+00:00:20,423 --> 00:00:23,023
 These events come from the plan and fault model.
 
 9
-00:00:24,778 --> 00:00:27,617
+00:00:23,575 --> 00:00:26,414
 The first order filled, but its reply was lost.
 
 10
-00:00:27,617 --> 00:00:29,188
+00:00:26,414 --> 00:00:27,985
 The agent sees a timeout.
 
 11
-00:00:29,188 --> 00:00:31,484
+00:00:27,985 --> 00:00:30,281
 A stale balance cannot prove failure.
 
 12
-00:00:31,484 --> 00:00:35,713
+00:00:30,281 --> 00:00:34,510
 Fifteen USDT remains exposed, so a fresh purchase is not free budget.
 
 13
-00:00:39,222 --> 00:00:42,573
+00:00:37,630 --> 00:00:40,981
 This is a recorded repair authored by the development Codex session.
 
 14
-00:00:42,573 --> 00:00:45,826
+00:00:40,981 --> 00:00:44,234
 It queries the original attempt before buying the remaining goal.
 
 15
-00:00:45,826 --> 00:00:48,142
+00:00:44,234 --> 00:00:46,550
 We validate that candidate and recheck it now.
 
 16
-00:00:48,142 --> 00:00:49,571
+00:00:46,550 --> 00:00:47,979
 The mandate stays unchanged.
 
 17
-00:00:54,522 --> 00:00:58,939
+00:00:58,236 --> 00:01:02,653
 The recoverable replay runs through the shared interpreter and a persistent SQLite ledger.
 
 18
-00:00:58,939 --> 00:01:02,472
+00:01:02,653 --> 00:01:06,186
 When the order query confirms the fill, the acquisition goal completes.
 
 19
-00:01:02,472 --> 00:01:05,024
+00:01:06,186 --> 00:01:08,737
 The original ambiguous attempt is never sent again.
 
 20
-00:01:11,101 --> 00:01:12,822
+00:01:14,983 --> 00:01:16,704
 Now the lookup stays inconclusive.
 
 21
-00:01:12,822 --> 00:01:15,959
+00:01:16,704 --> 00:01:19,841
 Statebound finishes unresolved and preserves the reservation.
 
 22
-00:01:15,959 --> 00:01:20,766
+00:01:19,841 --> 00:01:24,648
 No violation within a finite bound does not mean the environment must let every task complete.
 
 23
-00:01:23,021 --> 00:01:28,296
+00:01:27,103 --> 00:01:32,378
 The integration panel shows a genuine recorded public testnet read through the official Binance CLI.
 
 24
-00:01:28,296 --> 00:01:29,826
+00:01:32,378 --> 00:01:33,907
 Trading remains unavailable.
 
 25
-00:01:29,826 --> 00:01:33,518
+00:01:33,907 --> 00:01:37,600
 Exported evidence includes the plan, bounds, observations and replay.
 
 26
-00:01:33,518 --> 00:01:36,577
+00:01:37,600 --> 00:01:40,659
 A separate verifier recomputes the result without an LLM.

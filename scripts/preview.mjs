@@ -1,5 +1,7 @@
 import express from 'express';
 import { fileURLToPath } from 'node:url';
+import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 const app=express();app.disable('x-powered-by');
 const port=Number(process.env.PORT??4382);
 if(!Number.isInteger(port)||port<1024||port>65535)throw Error('Invalid port');
@@ -14,14 +16,24 @@ app.use((req,res,next)=>{
 });
 // Explicit allowlist: never mount the repository, runtime directory, or operator API.
 const files={
-  '/':'preview/index.html','/style.css':'preview/style.css','/demo.js':'preview/demo.js',
+  '/':'preview/index.html','/style.css':'preview/style.css','/demo.js':'preview/demo.js','/chapters.json':'preview/chapters.json',
   '/demo.mp4':'submission/demo.mp4','/counterexample.png':'submission/counterexample.png',
-  '/repaired.png':'submission/repaired.png','/evidence.json':'submission/demo-evidence.json',
+  '/repaired.png':'submission/repaired.png','/ambiguity.png':'submission/ambiguity.png','/evidence.json':'submission/demo-evidence.json',
   '/counterexample.json':'examples/counterexample.json','/evaluation.json':'examples/evaluation.json',
   '/verifier.json':'submission/verifier-output.json'
 };
 app.get('/healthz',(_req,res)=>res.json({status:'ok',mode:'recorded-simulator-preview',writes:false}));
-for(const [route,file] of Object.entries(files))app.get(route,(_req,res)=>res.sendFile(fileURLToPath(new URL(`../${file}`,import.meta.url))));
+// Version all public assets together so a reload cannot reuse an earlier design.
+// Recompute at service startup; restart the preview after updating its assets.
+const absolute=file=>fileURLToPath(new URL(`../${file}`,import.meta.url));
+const digest=createHash('sha256');
+for(const file of Object.values(files))digest.update(file).update(readFileSync(absolute(file)));
+const revision=digest.digest('hex').slice(0,16);
+const html=readFileSync(absolute(files['/']),'utf8')
+  .replace('<html ',`<html data-asset-version="${revision}" `)
+  .replace(/(href|src|poster)="(\/[^"?#]+)"/g,(match,attribute,path)=>files[path]?`${attribute}="${path}?v=${revision}"`:match);
+app.get('/',(_req,res)=>res.set('Cache-Control','no-store, no-transform').type('html').send(html));
+for(const [route,file] of Object.entries(files))if(route!=='/')app.get(route,(_req,res)=>res.sendFile(absolute(file)));
 app.use((_req,res)=>res.sendStatus(404));
 const server=app.listen(port,'127.0.0.1',()=>{console.log(`Statebound recorded preview: http://127.0.0.1:${port}`);process.send?.('ready');});
 server.requestTimeout=15000;server.headersTimeout=10000;

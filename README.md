@@ -6,6 +6,8 @@ An execution workbench that computes how an uncertain order can break a trading 
 
 The flagship is deliberately vulnerable: a synthetic 15 USDT IOC order fills, its reply is lost, a stale balance arrives, and a blind retry spends another 15 USDT against a 20 USDT mandate. The checker finds that path from the input graph. A repaired graph queries the original attempt before buying the remaining goal.
 
+Submission materials: [ready-to-submit packet](submission/READY_TO_SUBMIT.md), [short post](submission/POST.txt). Entry submission has not been performed.
+
 ## Run locally
 
 Requires Node **24.14 or newer** and npm. No financial or model credentials are needed for the offline workflow.
@@ -19,9 +21,11 @@ npm run dev
 
 Open **http://127.0.0.1:4381**. The server binds only to the local interface. Runtime databases live in ignored `.runtime/`. `npm run dev` serves a built UI when `dist/` exists, or Vite middleware when it does not. Rebuild after changing the UI if serving `dist/`.
 
-**Public recorded demo: [statebound.tangvu.dev](https://statebound.tangvu.dev)** · [97-second video](https://statebound.tangvu.dev/demo.mp4) · [replay evidence](https://statebound.tangvu.dev/evidence.json).
+**Public recorded demo: [statebound.tangvu.dev](https://statebound.tangvu.dev)** · [narrated walkthrough](https://statebound.tangvu.dev/demo.mp4) · [replay evidence](https://statebound.tangvu.dev/evidence.json).
 
 For PM2, run `npm run ops:start` after building. It starts the full workbench on port 4381 and a separate recorded demo on **http://127.0.0.1:4382**. The latter includes playable video, evidence views and downloads, with no operator API. The public Cloudflare tunnel targets only this recorded preview. See [operations](docs/OPERATIONS.md).
+
+On phones, use **Define**, **Check & repair**, and **Inspect** to move between the mandate, experiment, and evidence. Confirming a mandate opens the check; select a trace event and choose **Inspect step** to compare knowledge with exchange reality.
 
 1. Review and confirm the budget, net quantity and synthetic fee assumption.
 2. Click **Find a failure**. Select the first trace event to compare agent knowledge with reviewer-only exchange reality.
@@ -47,6 +51,7 @@ For PM2, run `npm run ops:start` after building. It starts the full workbench on
 | `npm run integration:inspect` | Read official CLI version, quote and symbol filters; needs local CLI setup |
 | `npm run test:http` | Auth, origin, idempotency, cancellation and export gates; server must be running |
 | `npm run test:browser` | Browser workflow and screenshots; server and Playwright Chromium required |
+| `npm run test:ui` | Responsive workflows, input recovery, history navigation and connection recovery |
 | `npm run demo:record` | Record the actual browser flow |
 | `npm run build` | Type check and production Vite build |
 
@@ -58,7 +63,7 @@ Install the optional test browser with `npx playwright install chromium`. The ap
 - **AI repair:** the active development Codex session authored and submitted a structured repair through the local CLI. [Input, output, rationale and recheck evidence](examples/external-agent-run.json) are preserved as `external_agent`. Loading this recorded candidate in the UI is not live generation. There is no configured hosted model provider or live AI web button.
 - **Official integration:** genuine public testnet quote and exchange-info reads through Binance Skills Hub's documented official CLI route, version 2.1.1. [Integration evidence and setup](docs/BINANCE_INTEGRATION.md). The app shows a recorded read with timestamp, separately from its synthetic order fixture. No Binance MCP connection or authenticated account read is claimed.
 - **Execution:** simulated orders only. No certified testnet write adapter and no mainnet execution. Adding a key does not enable trading.
-- **Browser:** actual checks, repair, replay, reload and exported evidence tested at 1440x900 and 1280x800. Screenshots above are from the running app.
+- **Browser:** actual checks, repair, replay, reload and exported evidence tested at 1440x900 and 1280x800. Responsive and recovery checks also cover 360, 390, 768 and 1440 pixel widths. Screenshots above are from the running app.
 - **Demo:** [actual recorded application video with synthetic narration](submission/demo.mp4), timed captions and a recorded Codex candidate. Playback speed is explicitly labeled 1.35x. [Exported evidence](submission/demo-evidence.json) can be verified with the CLI.
 
 The separate evaluation corpus has 48 scenarios per variant. The repaired graph had **0 budget violations, 36 completions and 12 unresolved outcomes**. See [full denominators](docs/EVALUATION.md). It is a regression corpus, not an independent blinded model benchmark.
