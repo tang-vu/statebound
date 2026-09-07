@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "base": "https://statebound.tangvu.dev",
+  "manifest": "d143ae8ee5a9be0305f7be36506f2f7ae3b409e5bc1af8966ccc3d28d04b2e11",
+  "viewports": [
+    390,
+    1440
+  ],
+  "checks": [
+    "public artifact matches locally regenerated traces",
+    "all steps and monetary values match four cases",
+    "guard/refused versus repair/complete versus unresolved",
+    "keyboard stepping",
+    "deep-link reload",
+    "clipboard fallback",
+    "no overflow",
+    "load failure preserves recording"
+  ],
+  "consoleErrors": []
+}

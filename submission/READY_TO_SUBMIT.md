@@ -20,12 +20,13 @@ Form đã được mở kiểm tra: Binance yêu cầu đăng nhập trước kh
 | Track dự kiến | Track A — Build an AI agent with Agent OS |
 | Tên dự án | Statebound |
 | Demo | https://statebound.tangvu.dev |
+| Evidence Lab | https://statebound.tangvu.dev/#lab |
 | Video | https://statebound.tangvu.dev/demo.mp4 |
 | GitHub | https://github.com/tang-vu/statebound |
 | Bằng chứng replay | https://statebound.tangvu.dev/evidence.json |
 | Chi tiết tích hợp | https://github.com/tang-vu/statebound/blob/main/docs/BINANCE_INTEGRATION.md |
 
-Video dài 101.4 giây, có thuyết minh tổng hợp, phụ đề và nhãn tốc độ 1.35×. Trang demo chỉ phục vụ nội dung đã ghi; workbench tương tác chạy từ repository. Không cần nạp tiền hoặc giao dịch thật cho phần demo này. Không đăng ký Track B chỉ để nộp dự án Track A.
+Video dài 101.4 giây, có thuyết minh tổng hợp, phụ đề và nhãn tốc độ 1.35×. Trang public có video và Evidence Lab tương tác để xem từng bước trong bốn trace mô phỏng đã tính sẵn; chạy thí nghiệm mới bằng workbench từ repository. Không cần nạp tiền hoặc giao dịch thật cho phần demo này. Không đăng ký Track B chỉ để nộp dự án Track A.
 
 ## Nội dung tiếng Anh dùng trong form
 
@@ -35,7 +36,7 @@ Statebound finds how uncertain order execution can break an AI trading budget, c
 
 **Project description**
 
-An order fills, but its reply is lost. A blind retry spends 30 USDT against a 20 USDT mandate. Statebound computes this counterexample from a typed execution plan and a finite fault model, validates a reconciliation repair authored in a development Codex session, and replays it through an executor with durable budget reservations. The checker and executor share transition semantics. Recoverable ambiguity can complete; inconclusive lookup stays unresolved without releasing the pending exposure. Exported evidence can be independently replayed and rechecked without an LLM. The responsive workbench exposes agent knowledge separately from hidden exchange reality, with a recorded walkthrough and downloadable evidence.
+An order fills, but its reply is lost. A blind retry spends 30 USDT against a 20 USDT mandate. Statebound computes this counterexample from a typed execution plan and a finite fault model, validates a reconciliation repair authored in a development Codex session, and replays it through an executor with durable budget reservations. The checker and executor share transition semantics. Recoverable ambiguity can complete; inconclusive lookup stays unresolved without releasing the pending exposure. Exported evidence can be independently replayed and rechecked without an LLM. The responsive workbench exposes agent knowledge separately from hidden exchange reality, with an interactive four-case trace viewer, a recorded walkthrough and downloadable evidence.
 
 **How it uses Binance Agent OS**
 

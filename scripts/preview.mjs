@@ -17,6 +17,7 @@ app.use((req,res,next)=>{
 // Explicit allowlist: never mount the repository, runtime directory, or operator API.
 const files={
   '/':'preview/index.html','/style.css':'preview/style.css','/demo.js':'preview/demo.js','/chapters.json':'preview/chapters.json',
+  '/lab.js':'preview/lab.js','/replay-gallery.json':'preview/replay-gallery.json',
   '/demo.mp4':'submission/demo.mp4','/counterexample.png':'submission/counterexample.png',
   '/repaired.png':'submission/repaired.png','/ambiguity.png':'submission/ambiguity.png','/evidence.json':'submission/demo-evidence.json',
   '/counterexample.json':'examples/counterexample.json','/evaluation.json':'examples/evaluation.json',
@@ -28,8 +29,10 @@ app.get('/healthz',(_req,res)=>res.json({status:'ok',mode:'recorded-simulator-pr
 const absolute=file=>fileURLToPath(new URL(`../${file}`,import.meta.url));
 const digest=createHash('sha256');
 for(const file of Object.values(files))digest.update(file).update(readFileSync(absolute(file)));
+const lab=readFileSync(absolute('preview/lab.html'),'utf8');digest.update(lab);
 const revision=digest.digest('hex').slice(0,16);
 const html=readFileSync(absolute(files['/']),'utf8')
+  .replace('<!-- EVIDENCE_LAB -->',lab)
   .replace('<html ',`<html data-asset-version="${revision}" `)
   .replace(/(href|src|poster)="(\/[^"?#]+)"/g,(match,attribute,path)=>files[path]?`${attribute}="${path}?v=${revision}"`:match);
 app.get('/',(_req,res)=>res.set('Cache-Control','no-store, no-transform').type('html').send(html));

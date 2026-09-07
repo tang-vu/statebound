@@ -27,7 +27,11 @@
     "test:preview": "node scripts/preview-test.mjs",
     "ops:start": "pm2 start ecosystem.config.cjs",
     "ops:restart": "pm2 restart statebound-workbench statebound-preview",
-    "test:ui": "tsx scripts/ui.ts"
+    "test:ui": "tsx scripts/ui.ts",
+    "gallery:generate": "tsx scripts/replay-gallery.ts",
+    "gallery:check": "tsx scripts/replay-gallery.ts --check",
+    "test:gallery": "node scripts/gallery-browser.mjs",
+    "research:pdf": "node scripts/research-report.mjs"
   },
   "dependencies": {
     "express": "5.2.1",

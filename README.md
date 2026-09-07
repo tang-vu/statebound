@@ -8,6 +8,10 @@ The flagship is deliberately vulnerable: a synthetic 15 USDT IOC order fills, it
 
 Submission materials: [ready-to-submit packet](submission/READY_TO_SUBMIT.md), [short post](submission/POST.txt). Entry submission has not been performed.
 
+**[Explore the Evidence Lab](https://statebound.tangvu.dev/#lab)**: step through four precomputed simulator traces and compare agent knowledge with actual debit. Blind retry, guard refusal, reconciled completion and unresolved ambiguity each have inspectable conditions, downloadable traces and shareable step links. Regenerate with `npm run gallery:generate`; check exact replay with `npm run gallery:check`; test the viewer with `npm run test:gallery` while the preview is running. No orders or new searches run on the public site.
+
+The [research brief](docs/RESEARCH_BRIEF.md) explains the design and technical positioning against primary sources; [download the PDF](submission/research-brief.pdf). Rebuild it with `npm run research:pdf`.
+
 ## Run locally
 
 Requires Node **24.14 or newer** and npm. No financial or model credentials are needed for the offline workflow.

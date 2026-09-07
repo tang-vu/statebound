@@ -1,0 +1,1745 @@
+{
+  "version": 1,
+  "model": "ioc-discrete-v1",
+  "source": "Precomputed simulator traces; replayed through the shared interpreter",
+  "mandate": {
+    "version": "statebound-1",
+    "id": "demo-mandate",
+    "createdAt": "2026-09-05T00:00:00.000Z",
+    "expiresAt": "2099-01-01T00:00:00.000Z",
+    "account": "synthetic-account",
+    "environment": "simulator",
+    "symbol": "BNBUSDT",
+    "quoteAsset": "USDT",
+    "side": "BUY",
+    "orderType": "LIMIT_IOC",
+    "budget": "20",
+    "reserve": "0",
+    "initialQuote": "100",
+    "goal": "0.025",
+    "tolerance": "0",
+    "maxOrders": 3,
+    "maxReads": 3,
+    "quote": {
+      "price": "600",
+      "at": "2026-09-05T00:00:00.000Z",
+      "maxAgeMs": 60000,
+      "source": "synthetic fixture"
+    },
+    "limitPrice": "600",
+    "feeAsset": "quote",
+    "feeBps": 0,
+    "filters": {
+      "step": "0.0001",
+      "tick": "0.01",
+      "minQty": "0.0001",
+      "maxQty": "10",
+      "minNotional": "1"
+    }
+  },
+  "cases": [
+    {
+      "id": "blind",
+      "label": "Blind retry",
+      "summary": "A stale balance triggers another purchase. Two fills exceed the mandate.",
+      "conditions": "First order fills; reply is lost; the original plan reads a stale balance.",
+      "plan": {
+        "version": "statebound-1",
+        "id": "vulnerable-fixture",
+        "mandateHash": "ae6e137fff522475d00ee5887e6b7ee23d63f4307e24e0398cad2040df1c619d",
+        "snapshot": "synthetic-initial-v1",
+        "adapter": "simulator-ioc-v1",
+        "maxSteps": 32,
+        "maxDurationMs": 30000,
+        "start": "buy",
+        "nodes": [
+          {
+            "id": "buy",
+            "op": "submit",
+            "operation": "acquire",
+            "quantity": "0.025",
+            "next": "goal"
+          },
+          {
+            "id": "goal",
+            "op": "branch",
+            "guard": {
+              "field": "goalMet",
+              "equals": true
+            },
+            "yes": "done",
+            "no": "balance"
+          },
+          {
+            "id": "balance",
+            "op": "balance",
+            "next": "retry"
+          },
+          {
+            "id": "retry",
+            "op": "submit",
+            "operation": "retry",
+            "quantity": "0.025",
+            "next": "done"
+          },
+          {
+            "id": "done",
+            "op": "complete"
+          }
+        ]
+      },
+      "mode": "baseline",
+      "terminal": "UNRESOLVED",
+      "traceHash": "005cc7fa32baa68d83ce5917012dfeaf3459527a398959f56988c22589eb666e",
+      "events": [
+        {
+          "step": 1,
+          "node": "buy",
+          "effect": {
+            "kind": "submit",
+            "id": "acquire-1",
+            "quantity": "0.025",
+            "max": "15"
+          },
+          "choice": {
+            "fill": "full",
+            "reply": "lost"
+          },
+          "observation": {
+            "kind": "timeout",
+            "id": "acquire-1",
+            "account": "synthetic-account",
+            "symbol": "BNBUSDT",
+            "environment": "simulator"
+          },
+          "hiddenEvents": [
+            {
+              "id": "acquire-1",
+              "quantity": "0.025",
+              "principal": "15",
+              "fee": "0",
+              "feeAsset": "USDT",
+              "debit": "15",
+              "net": "0.025",
+              "accepted": true,
+              "status": "FILLED"
+            }
+          ],
+          "before": {
+            "orders": [],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "15",
+          "possibleDebit": "15",
+          "status": "RUNNING",
+          "reason": "",
+          "confirmedDebit": "0"
+        },
+        {
+          "step": 2,
+          "node": "goal",
+          "effect": {
+            "kind": "none"
+          },
+          "choice": {
+            "tick": true
+          },
+          "observation": null,
+          "hiddenEvents": [],
+          "before": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "15",
+          "possibleDebit": "15",
+          "status": "RUNNING",
+          "reason": "",
+          "confirmedDebit": "0"
+        },
+        {
+          "step": 3,
+          "node": "balance",
+          "effect": {
+            "kind": "balance"
+          },
+          "choice": {
+            "tick": true
+          },
+          "observation": {
+            "kind": "balance",
+            "snapshot": "synthetic-initial-v1",
+            "account": "synthetic-account",
+            "symbol": "BNBUSDT",
+            "environment": "simulator"
+          },
+          "hiddenEvents": [],
+          "before": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "15",
+          "possibleDebit": "15",
+          "status": "RUNNING",
+          "reason": "",
+          "confirmedDebit": "0"
+        },
+        {
+          "step": 4,
+          "node": "retry",
+          "effect": {
+            "kind": "submit",
+            "id": "retry-2",
+            "quantity": "0.025",
+            "max": "15"
+          },
+          "choice": {
+            "fill": "full",
+            "reply": "delivered"
+          },
+          "observation": {
+            "kind": "order",
+            "id": "retry-2",
+            "debit": "15",
+            "net": "0.025",
+            "terminal": true,
+            "seq": 2,
+            "status": "FILLED",
+            "account": "synthetic-account",
+            "symbol": "BNBUSDT",
+            "environment": "simulator"
+          },
+          "hiddenEvents": [
+            {
+              "id": "retry-2",
+              "quantity": "0.025",
+              "principal": "15",
+              "fee": "0",
+              "feeAsset": "USDT",
+              "debit": "15",
+              "net": "0.025",
+              "accepted": true,
+              "status": "FILLED"
+            }
+          ],
+          "before": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              },
+              {
+                "id": "retry-2",
+                "max": "15",
+                "debit": "15",
+                "net": "0.025",
+                "terminal": true,
+                "seq": 2,
+                "states": [
+                  "FILLED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "30",
+          "possibleDebit": "30",
+          "status": "RUNNING",
+          "reason": "",
+          "confirmedDebit": "15"
+        },
+        {
+          "step": 5,
+          "node": "done",
+          "effect": {
+            "kind": "none"
+          },
+          "choice": {
+            "tick": true
+          },
+          "observation": null,
+          "hiddenEvents": [],
+          "before": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              },
+              {
+                "id": "retry-2",
+                "max": "15",
+                "debit": "15",
+                "net": "0.025",
+                "terminal": true,
+                "seq": 2,
+                "states": [
+                  "FILLED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              },
+              {
+                "id": "retry-2",
+                "max": "15",
+                "debit": "15",
+                "net": "0.025",
+                "terminal": true,
+                "seq": 2,
+                "states": [
+                  "FILLED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "30",
+          "possibleDebit": "30",
+          "status": "UNRESOLVED",
+          "reason": "Pending exposure or unmet acquisition goal",
+          "confirmedDebit": "15"
+        }
+      ]
+    },
+    {
+      "id": "guard",
+      "label": "Guard only",
+      "summary": "The exposure guard refuses the second purchase. Spend is contained, but the goal remains unconfirmed.",
+      "conditions": "The same lost reply and stale balance, with aggregate exposure admission enabled.",
+      "plan": {
+        "version": "statebound-1",
+        "id": "vulnerable-fixture",
+        "mandateHash": "ae6e137fff522475d00ee5887e6b7ee23d63f4307e24e0398cad2040df1c619d",
+        "snapshot": "synthetic-initial-v1",
+        "adapter": "simulator-ioc-v1",
+        "maxSteps": 32,
+        "maxDurationMs": 30000,
+        "start": "buy",
+        "nodes": [
+          {
+            "id": "buy",
+            "op": "submit",
+            "operation": "acquire",
+            "quantity": "0.025",
+            "next": "goal"
+          },
+          {
+            "id": "goal",
+            "op": "branch",
+            "guard": {
+              "field": "goalMet",
+              "equals": true
+            },
+            "yes": "done",
+            "no": "balance"
+          },
+          {
+            "id": "balance",
+            "op": "balance",
+            "next": "retry"
+          },
+          {
+            "id": "retry",
+            "op": "submit",
+            "operation": "retry",
+            "quantity": "0.025",
+            "next": "done"
+          },
+          {
+            "id": "done",
+            "op": "complete"
+          }
+        ]
+      },
+      "mode": "guarded",
+      "terminal": "REFUSED",
+      "traceHash": "6f29f12fe07299fbbd60a930ee3613a7c0eea02c1631ea0d990fe5597132ef47",
+      "events": [
+        {
+          "step": 1,
+          "node": "buy",
+          "effect": {
+            "kind": "submit",
+            "id": "acquire-1",
+            "quantity": "0.025",
+            "max": "15"
+          },
+          "choice": {
+            "fill": "full",
+            "reply": "lost"
+          },
+          "observation": {
+            "kind": "timeout",
+            "id": "acquire-1",
+            "account": "synthetic-account",
+            "symbol": "BNBUSDT",
+            "environment": "simulator"
+          },
+          "hiddenEvents": [
+            {
+              "id": "acquire-1",
+              "quantity": "0.025",
+              "principal": "15",
+              "fee": "0",
+              "feeAsset": "USDT",
+              "debit": "15",
+              "net": "0.025",
+              "accepted": true,
+              "status": "FILLED"
+            }
+          ],
+          "before": {
+            "orders": [],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "15",
+          "possibleDebit": "15",
+          "status": "RUNNING",
+          "reason": "",
+          "confirmedDebit": "0"
+        },
+        {
+          "step": 2,
+          "node": "goal",
+          "effect": {
+            "kind": "none"
+          },
+          "choice": {
+            "tick": true
+          },
+          "observation": null,
+          "hiddenEvents": [],
+          "before": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "15",
+          "possibleDebit": "15",
+          "status": "RUNNING",
+          "reason": "",
+          "confirmedDebit": "0"
+        },
+        {
+          "step": 3,
+          "node": "balance",
+          "effect": {
+            "kind": "balance"
+          },
+          "choice": {
+            "tick": true
+          },
+          "observation": {
+            "kind": "balance",
+            "snapshot": "synthetic-initial-v1",
+            "account": "synthetic-account",
+            "symbol": "BNBUSDT",
+            "environment": "simulator"
+          },
+          "hiddenEvents": [],
+          "before": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "15",
+          "possibleDebit": "15",
+          "status": "RUNNING",
+          "reason": "",
+          "confirmedDebit": "0"
+        },
+        {
+          "step": 4,
+          "node": "retry",
+          "effect": {
+            "kind": "none"
+          },
+          "choice": {
+            "tick": true
+          },
+          "observation": null,
+          "hiddenEvents": [],
+          "before": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "15",
+          "possibleDebit": "15",
+          "status": "REFUSED",
+          "reason": "Aggregate possible debit, reserve floor or order bound blocks this write",
+          "confirmedDebit": "0"
+        }
+      ]
+    },
+    {
+      "id": "repair",
+      "label": "Reconciled",
+      "summary": "The repair queries the original attempt. Terminal evidence confirms the goal without another purchase.",
+      "conditions": "First order fills; reply is lost; the order query returns terminal evidence.",
+      "plan": {
+        "version": "statebound-1",
+        "id": "codex-reconcile-v1",
+        "mandateHash": "ae6e137fff522475d00ee5887e6b7ee23d63f4307e24e0398cad2040df1c619d",
+        "snapshot": "synthetic-initial-v1",
+        "adapter": "simulator-ioc-v1",
+        "maxSteps": 32,
+        "maxDurationMs": 30000,
+        "start": "acquire",
+        "nodes": [
+          {
+            "id": "acquire",
+            "op": "submit",
+            "operation": "acquire",
+            "quantity": "remaining",
+            "next": "terminal"
+          },
+          {
+            "id": "terminal",
+            "op": "branch",
+            "guard": {
+              "field": "lastTerminal",
+              "equals": true
+            },
+            "yes": "goal",
+            "no": "reconcile"
+          },
+          {
+            "id": "reconcile",
+            "op": "query",
+            "next": "terminal"
+          },
+          {
+            "id": "goal",
+            "op": "branch",
+            "guard": {
+              "field": "goalMet",
+              "equals": true
+            },
+            "yes": "complete",
+            "no": "acquire"
+          },
+          {
+            "id": "complete",
+            "op": "complete"
+          }
+        ]
+      },
+      "mode": "guarded",
+      "terminal": "COMPLETE",
+      "traceHash": "c4ec770b026accb0dbc5520ff381ab0e32425b92e7d085bf77f0f5ef34fd1d22",
+      "events": [
+        {
+          "step": 1,
+          "node": "acquire",
+          "effect": {
+            "kind": "submit",
+            "id": "acquire-1",
+            "quantity": "0.025",
+            "max": "15"
+          },
+          "choice": {
+            "fill": "full",
+            "reply": "lost"
+          },
+          "observation": {
+            "kind": "timeout",
+            "id": "acquire-1",
+            "account": "synthetic-account",
+            "symbol": "BNBUSDT",
+            "environment": "simulator"
+          },
+          "hiddenEvents": [
+            {
+              "id": "acquire-1",
+              "quantity": "0.025",
+              "principal": "15",
+              "fee": "0",
+              "feeAsset": "USDT",
+              "debit": "15",
+              "net": "0.025",
+              "accepted": true,
+              "status": "FILLED"
+            }
+          ],
+          "before": {
+            "orders": [],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "15",
+          "possibleDebit": "15",
+          "status": "RUNNING",
+          "reason": "",
+          "confirmedDebit": "0"
+        },
+        {
+          "step": 2,
+          "node": "terminal",
+          "effect": {
+            "kind": "none"
+          },
+          "choice": {
+            "tick": true
+          },
+          "observation": null,
+          "hiddenEvents": [],
+          "before": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "15",
+          "possibleDebit": "15",
+          "status": "RUNNING",
+          "reason": "",
+          "confirmedDebit": "0"
+        },
+        {
+          "step": 3,
+          "node": "reconcile",
+          "effect": {
+            "kind": "query",
+            "id": "acquire-1"
+          },
+          "choice": {
+            "read": "fresh"
+          },
+          "observation": {
+            "kind": "order",
+            "id": "acquire-1",
+            "debit": "15",
+            "net": "0.025",
+            "terminal": true,
+            "seq": 2,
+            "status": "FILLED",
+            "account": "synthetic-account",
+            "symbol": "BNBUSDT",
+            "environment": "simulator"
+          },
+          "hiddenEvents": [],
+          "before": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "15",
+                "net": "0.025",
+                "terminal": true,
+                "seq": 2,
+                "states": [
+                  "FILLED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "15",
+          "possibleDebit": "15",
+          "status": "RUNNING",
+          "reason": "",
+          "confirmedDebit": "15"
+        },
+        {
+          "step": 4,
+          "node": "terminal",
+          "effect": {
+            "kind": "none"
+          },
+          "choice": {
+            "tick": true
+          },
+          "observation": null,
+          "hiddenEvents": [],
+          "before": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "15",
+                "net": "0.025",
+                "terminal": true,
+                "seq": 2,
+                "states": [
+                  "FILLED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "15",
+                "net": "0.025",
+                "terminal": true,
+                "seq": 2,
+                "states": [
+                  "FILLED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "15",
+          "possibleDebit": "15",
+          "status": "RUNNING",
+          "reason": "",
+          "confirmedDebit": "15"
+        },
+        {
+          "step": 5,
+          "node": "goal",
+          "effect": {
+            "kind": "none"
+          },
+          "choice": {
+            "tick": true
+          },
+          "observation": null,
+          "hiddenEvents": [],
+          "before": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "15",
+                "net": "0.025",
+                "terminal": true,
+                "seq": 2,
+                "states": [
+                  "FILLED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "15",
+                "net": "0.025",
+                "terminal": true,
+                "seq": 2,
+                "states": [
+                  "FILLED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "15",
+          "possibleDebit": "15",
+          "status": "RUNNING",
+          "reason": "",
+          "confirmedDebit": "15"
+        },
+        {
+          "step": 6,
+          "node": "complete",
+          "effect": {
+            "kind": "none"
+          },
+          "choice": {
+            "tick": true
+          },
+          "observation": null,
+          "hiddenEvents": [],
+          "before": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "15",
+                "net": "0.025",
+                "terminal": true,
+                "seq": 2,
+                "states": [
+                  "FILLED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "15",
+                "net": "0.025",
+                "terminal": true,
+                "seq": 2,
+                "states": [
+                  "FILLED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "15",
+          "possibleDebit": "15",
+          "status": "COMPLETE",
+          "reason": "Acquisition goal confirmed",
+          "confirmedDebit": "15"
+        }
+      ]
+    },
+    {
+      "id": "unknown",
+      "label": "Still unknown",
+      "summary": "Inconclusive lookups exhaust the read bound. Possible exposure stays reserved and progress remains unresolved.",
+      "conditions": "First order fills; reply is lost; subsequent order lookups remain inconclusive.",
+      "plan": {
+        "version": "statebound-1",
+        "id": "codex-reconcile-v1",
+        "mandateHash": "ae6e137fff522475d00ee5887e6b7ee23d63f4307e24e0398cad2040df1c619d",
+        "snapshot": "synthetic-initial-v1",
+        "adapter": "simulator-ioc-v1",
+        "maxSteps": 32,
+        "maxDurationMs": 30000,
+        "start": "acquire",
+        "nodes": [
+          {
+            "id": "acquire",
+            "op": "submit",
+            "operation": "acquire",
+            "quantity": "remaining",
+            "next": "terminal"
+          },
+          {
+            "id": "terminal",
+            "op": "branch",
+            "guard": {
+              "field": "lastTerminal",
+              "equals": true
+            },
+            "yes": "goal",
+            "no": "reconcile"
+          },
+          {
+            "id": "reconcile",
+            "op": "query",
+            "next": "terminal"
+          },
+          {
+            "id": "goal",
+            "op": "branch",
+            "guard": {
+              "field": "goalMet",
+              "equals": true
+            },
+            "yes": "complete",
+            "no": "acquire"
+          },
+          {
+            "id": "complete",
+            "op": "complete"
+          }
+        ]
+      },
+      "mode": "guarded",
+      "terminal": "UNRESOLVED",
+      "traceHash": "3f2ca39348dfd61ed2d4e724a23dd177205facbc01d439465af8982beaf5d2f6",
+      "events": [
+        {
+          "step": 1,
+          "node": "acquire",
+          "effect": {
+            "kind": "submit",
+            "id": "acquire-1",
+            "quantity": "0.025",
+            "max": "15"
+          },
+          "choice": {
+            "fill": "full",
+            "reply": "lost"
+          },
+          "observation": {
+            "kind": "timeout",
+            "id": "acquire-1",
+            "account": "synthetic-account",
+            "symbol": "BNBUSDT",
+            "environment": "simulator"
+          },
+          "hiddenEvents": [
+            {
+              "id": "acquire-1",
+              "quantity": "0.025",
+              "principal": "15",
+              "fee": "0",
+              "feeAsset": "USDT",
+              "debit": "15",
+              "net": "0.025",
+              "accepted": true,
+              "status": "FILLED"
+            }
+          ],
+          "before": {
+            "orders": [],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "15",
+          "possibleDebit": "15",
+          "status": "RUNNING",
+          "reason": "",
+          "confirmedDebit": "0"
+        },
+        {
+          "step": 2,
+          "node": "terminal",
+          "effect": {
+            "kind": "none"
+          },
+          "choice": {
+            "tick": true
+          },
+          "observation": null,
+          "hiddenEvents": [],
+          "before": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "15",
+          "possibleDebit": "15",
+          "status": "RUNNING",
+          "reason": "",
+          "confirmedDebit": "0"
+        },
+        {
+          "step": 3,
+          "node": "reconcile",
+          "effect": {
+            "kind": "query",
+            "id": "acquire-1"
+          },
+          "choice": {
+            "read": "notFound"
+          },
+          "observation": {
+            "kind": "notFound",
+            "id": "acquire-1",
+            "definitive": false,
+            "account": "synthetic-account",
+            "symbol": "BNBUSDT",
+            "environment": "simulator"
+          },
+          "hiddenEvents": [],
+          "before": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "15",
+          "possibleDebit": "15",
+          "status": "RUNNING",
+          "reason": "",
+          "confirmedDebit": "0"
+        },
+        {
+          "step": 4,
+          "node": "terminal",
+          "effect": {
+            "kind": "none"
+          },
+          "choice": {
+            "tick": true
+          },
+          "observation": null,
+          "hiddenEvents": [],
+          "before": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "15",
+          "possibleDebit": "15",
+          "status": "RUNNING",
+          "reason": "",
+          "confirmedDebit": "0"
+        },
+        {
+          "step": 5,
+          "node": "reconcile",
+          "effect": {
+            "kind": "query",
+            "id": "acquire-1"
+          },
+          "choice": {
+            "read": "notFound"
+          },
+          "observation": {
+            "kind": "notFound",
+            "id": "acquire-1",
+            "definitive": false,
+            "account": "synthetic-account",
+            "symbol": "BNBUSDT",
+            "environment": "simulator"
+          },
+          "hiddenEvents": [],
+          "before": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "15",
+          "possibleDebit": "15",
+          "status": "RUNNING",
+          "reason": "",
+          "confirmedDebit": "0"
+        },
+        {
+          "step": 6,
+          "node": "terminal",
+          "effect": {
+            "kind": "none"
+          },
+          "choice": {
+            "tick": true
+          },
+          "observation": null,
+          "hiddenEvents": [],
+          "before": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "15",
+          "possibleDebit": "15",
+          "status": "RUNNING",
+          "reason": "",
+          "confirmedDebit": "0"
+        },
+        {
+          "step": 7,
+          "node": "reconcile",
+          "effect": {
+            "kind": "query",
+            "id": "acquire-1"
+          },
+          "choice": {
+            "read": "notFound"
+          },
+          "observation": {
+            "kind": "notFound",
+            "id": "acquire-1",
+            "definitive": false,
+            "account": "synthetic-account",
+            "symbol": "BNBUSDT",
+            "environment": "simulator"
+          },
+          "hiddenEvents": [],
+          "before": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "15",
+          "possibleDebit": "15",
+          "status": "RUNNING",
+          "reason": "",
+          "confirmedDebit": "0"
+        },
+        {
+          "step": 8,
+          "node": "terminal",
+          "effect": {
+            "kind": "none"
+          },
+          "choice": {
+            "tick": true
+          },
+          "observation": null,
+          "hiddenEvents": [],
+          "before": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "15",
+          "possibleDebit": "15",
+          "status": "RUNNING",
+          "reason": "",
+          "confirmedDebit": "0"
+        },
+        {
+          "step": 9,
+          "node": "reconcile",
+          "effect": {
+            "kind": "none"
+          },
+          "choice": {
+            "tick": true
+          },
+          "observation": null,
+          "hiddenEvents": [],
+          "before": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "after": {
+            "orders": [
+              {
+                "id": "acquire-1",
+                "max": "15",
+                "debit": "0",
+                "net": "0",
+                "terminal": false,
+                "seq": -1,
+                "states": [
+                  "NOT_ACCEPTED",
+                  "NEW",
+                  "PARTIALLY_FILLED",
+                  "FILLED",
+                  "EXPIRED"
+                ]
+              }
+            ],
+            "invalid": false
+          },
+          "actualDebit": "15",
+          "possibleDebit": "15",
+          "status": "UNRESOLVED",
+          "reason": "Reconciliation bound reached",
+          "confirmedDebit": "0"
+        }
+      ]
+    }
+  ],
+  "manifest": "d143ae8ee5a9be0305f7be36506f2f7ae3b409e5bc1af8966ccc3d28d04b2e11"
+}

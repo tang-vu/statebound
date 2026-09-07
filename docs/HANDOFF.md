@@ -31,7 +31,7 @@ The generated demo evidence includes an unresolved durable replay and its pendin
 | Mainnet | Disabled, outside this release | No enabled path |
 | Continuous market range / unrelated activity | Outside the finite fixture model | A new conservative abstraction and adapter mapping, then recheck |
 | Independent blinded evaluation | Not demonstrated | Freeze candidate, obtain an independently managed corpus unavailable to repair generation |
-| Submission/publication | Drafts only | Operator reviews eligibility and materials, then explicitly authorizes any publication/submission |
+| Submission/publication | Public demo and GitHub published; entry not submitted | Account owner completes the official social and Binance survey steps in `submission/READY_TO_SUBMIT.md` |
 
 The native Windows Binance CLI build is blocked by unavailable MinGW OpenSSL development libraries, but the official Linux release successfully supplies the required public reads through existing WSL. This is not an outstanding blocker for the demonstrated integration.
 
@@ -48,3 +48,5 @@ SQLite is Node 24's built-in experimental API and is intentionally single-proces
 The workbench and recorded preview share an ivory, charcoal and signal-orange design. The workbench introduction is compact enough to expose the mandate action on desktop. Phones use Define / Check & repair / Inspect navigation, with selected trace state preserved across views. Shared browser/server schemas reject incomplete plan JSON before rendering; connection retry and history navigation are covered by `scripts/ui.ts`.
 
 The refreshed recording, screenshots, ambiguity evidence view and seekable chapter metadata come from actual simulator runs. Re-record with `npm run demo:record`, decode-check with `npx tsx scripts/verify-video.ts`, and validate the preview with `npm run test:preview`. The preview server allowlist includes `chapters.json` and `ambiguity.png`; restart its scoped PM2 process after changing routes. No live exchange execution is enabled.
+
+The public Evidence Lab exposes four precomputed traces with separate knowledge/reality ledgers, manual step controls, deep links and provenance. Its generator checks every trace against the shared interpreter. Use `npm run gallery:check` and `npm run test:gallery`; see `docs/RESEARCH_BRIEF.md` for the source-backed rationale and limitations. Browser checks cover every step at 390/1440px, keyboard controls, link restoration, clipboard fallback and failed loading.
