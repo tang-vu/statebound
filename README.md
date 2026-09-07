@@ -19,7 +19,9 @@ npm run dev
 
 Open **http://127.0.0.1:4381**. The server binds only to the local interface. Runtime databases live in ignored `.runtime/`. `npm run dev` serves a built UI when `dist/` exists, or Vite middleware when it does not. Rebuild after changing the UI if serving `dist/`.
 
-For PM2, run `npm run ops:start` after building. It starts the full workbench on port 4381 and a separate recorded demo on **http://127.0.0.1:4382**. The latter includes playable video, evidence views and downloads, with no operator API. See [operations and prepared Cloudflare publication](docs/OPERATIONS.md). `statebound.tangvu.dev` is a prepared target, not a live URL yet.
+**Public recorded demo: [statebound.tangvu.dev](https://statebound.tangvu.dev)** · [97-second video](https://statebound.tangvu.dev/demo.mp4) · [replay evidence](https://statebound.tangvu.dev/evidence.json).
+
+For PM2, run `npm run ops:start` after building. It starts the full workbench on port 4381 and a separate recorded demo on **http://127.0.0.1:4382**. The latter includes playable video, evidence views and downloads, with no operator API. The public Cloudflare tunnel targets only this recorded preview. See [operations](docs/OPERATIONS.md).
 
 1. Review and confirm the budget, net quantity and synthetic fee assumption.
 2. Click **Find a failure**. Select the first trace event to compare agent knowledge with reviewer-only exchange reality.
@@ -69,4 +71,4 @@ SQLite attempts are prepared transactionally before dispatch; a crash does not f
 
 Hashes establish local integrity relative to a trusted reference. They do not authenticate Binance, establish financial safety or prove that a saved model output was generated live. A locally consistent forged bundle is not an exchange attestation.
 
-Read [SPEC](docs/SPEC.md), [model assumptions](docs/MODEL_ASSUMPTIONS.md), [evaluation](docs/EVALUATION.md), [related work](docs/RELATED_WORK.md) and [handoff](docs/HANDOFF.md). Submission drafts are in `submission/`; no public deployment, social post or entry submission is part of this build.
+Read [SPEC](docs/SPEC.md), [model assumptions](docs/MODEL_ASSUMPTIONS.md), [evaluation](docs/EVALUATION.md), [related work](docs/RELATED_WORK.md) and [handoff](docs/HANDOFF.md). The recorded preview was published with explicit follow-up authorization on 2026-09-07. Submission drafts remain in `submission/`; no social post or entry submission has been performed.

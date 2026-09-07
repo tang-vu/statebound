@@ -8,21 +8,21 @@ Agent OS integration: the documented Binance Skills Hub route uses official Bina
 
 Repository: https://github.com/tang-vu/statebound
 
-Demo video: [VIDEO_URL_AFTER_REVIEW]
+Demo video: https://statebound.tangvu.dev/demo.mp4
 
-Public app: [OPTIONAL_PREVIEW_URL_AFTER_AUTHORIZATION]
+Public recorded preview: https://statebound.tangvu.dev (recorded artifacts only; run the repository for the interactive workbench)
 
 ## Entry requirements reviewed
 
 The [official Binance announcement](https://www.binance.com/en/square/post/362885563835358), accessed 2026-09-05, gives the deadline as **2026-09-08 23:59 UTC**, or **2026-09-09 06:59 Vietnam time**. Track A requests an agent built using Agent OS and a video/demo plus GitHub where applicable. Entry steps include following/reposting, a reply or quote repost and the survey. Jurisdiction restrictions apply, including the US, UK, EEA, Hong Kong and Singapore. The operator must personally review current eligibility and the linked survey before submitting.
 
-These materials are prepared for review only. No follow, repost, reply, survey login, survey submission, public deployment or publication was performed. No specific video duration limit was established from that announcement; approximately 90 seconds is a presentation target, not an event rule.
+The recorded preview was publicly deployed with explicit user authorization on 2026-09-07 and passed public browser/API-boundary checks. These submission materials remain drafts: no follow, repost, reply, survey login or survey submission was performed. No specific video duration limit was established from that announcement; approximately 90 seconds is a presentation target, not an event rule.
 
 ## Draft post
 
 Built Statebound for the Binance Agent OS Mini Hackathon: a workbench for uncertain trading execution. It computes a lost-reply counterexample, checks a reconciliation repair and replays it with persistent budget reservations. Includes genuine official Binance CLI public testnet reads and independently replayable evidence. Synthetic order demo; exchange execution disabled.
 
-Demo: [VIDEO_URL_AFTER_REVIEW]
+Demo: https://statebound.tangvu.dev
 Code: https://github.com/tang-vu/statebound
 
 ## Recording reproduction

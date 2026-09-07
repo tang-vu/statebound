@@ -1,0 +1,20 @@
+{
+  "at": "2026-09-07T03:59:11.398Z",
+  "base": "https://statebound.tangvu.dev",
+  "passed": true,
+  "evidenceSha256": "84ba8c002ead98c6dac66428eec35ba41ebf0e27330e404573bc7e29ff65e24a",
+  "checks": [
+    "allowlisted files only",
+    "no operator API",
+    "write methods denied",
+    "public HTTPS",
+    "video byte range, actual playback and seeking",
+    "downloaded evidence matches local artifact",
+    "evidence tabs",
+    "desktop and mobile no overflow"
+  ],
+  "viewports": [
+    1440,
+    390
+  ]
+}

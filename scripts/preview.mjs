@@ -6,6 +6,8 @@ if(!Number.isInteger(port)||port<1024||port>65535)throw Error('Invalid port');
 const allowed=new Set([`127.0.0.1:${port}`,`localhost:${port}`,'statebound.tangvu.dev']);
 app.use((req,res,next)=>{
   if(!allowed.has(req.headers.host))return void res.sendStatus(403);
+  // Preserve the reviewed artifacts; also prevents automatic edge analytics injection.
+  res.setHeader('Cache-Control','public, max-age=0, must-revalidate, no-transform');
   res.set({'X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','X-Frame-Options':'DENY','Content-Security-Policy':"default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; media-src 'self'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'"});
   if(req.method!=='GET'&&req.method!=='HEAD')return void res.status(405).set('Allow','GET, HEAD').end();
   next();

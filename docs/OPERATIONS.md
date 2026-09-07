@@ -17,22 +17,24 @@ npm run test:http
 
 PM2 save persists the current process list for `pm2 resurrect`. It does not itself install Windows boot startup. Machine reboot recovery has not been tested. No global shell, Codex, credential or existing tunnel configuration is modified. The machine must remain awake and connected for a tunnel hosted here to remain reachable.
 
-## Prepared Cloudflare publication
+## Cloudflare publication
 
-Target: **https://statebound.tangvu.dev**. Publication is pending explicit authorization because the original build brief prohibited public deployment. Cloudflare authentication was checked read-only using the configured `cert-tangvu.pem`; no Statebound tunnel existed at preparation time. The existing shared tunnel is for other domains and is not modified.
+Live recorded preview: **https://statebound.tangvu.dev**. The user explicitly authorized publication on 2026-09-07. A dedicated `statebound-demo` tunnel and DNS route were created using the configured `cert-tangvu.pem`. `statebound-tunnel` runs under PM2 and the process list was saved. Existing tunnels and other applications were not modified.
 
 The preview serves an explicit allowlist: landing page, local CSS/JS, recorded video/screenshots and public synthetic evidence JSON. It has no operator API, jobs, database access, cookies or write methods. Video supports byte ranges. All other paths return 404; unsupported hosts return 403. UI states clearly that the evidence views are recorded and that a new experiment requires the local workbench. The tunnel must target **4382**, never the operator port 4381.
 
-After authorization:
+Authorized deployment command (already executed on the build machine):
 
 ```powershell
 powershell -NoProfile -File scripts/publish-preview.ps1 -Publish
 Invoke-RestMethod https://statebound.tangvu.dev/healthz
 ```
 
-The script checks the simulator preview health, creates a dedicated `statebound-demo` tunnel, stores its credential/config only in ignored `.runtime/`, validates ingress, routes the requested hostname without DNS overwrite, starts only `statebound-tunnel` under PM2 and saves the process list. An existing tunnel without its matching repository-scoped credential stops the script. It does not print secrets. The script has been parsed and its ingress template validated; actual creation, DNS routing and external playback remain untested until authorized.
+The script checks the simulator preview health, creates a dedicated `statebound-demo` tunnel, stores its credential/config only in ignored `.runtime/`, validates ingress, routes the requested hostname without DNS overwrite, starts only `statebound-tunnel` under PM2 and saves the process list. An existing tunnel without its matching repository-scoped credential stops the script. It does not print secrets. Creation, DNS routing and public HTTPS/browser playback were verified on 2026-09-07.
 
-Then verify public HTTPS, video seeking, evidence downloads, `/api/session` returning 404, and POST returning 405. Only after these checks should submission drafts identify the URL as live.
+Repeat verification with `node scripts/preview-test.mjs https://statebound.tangvu.dev`. Public HTTPS, video playback and seeking, exact downloaded evidence hash, mobile/desktop tabs and layout, `/api/session` returning 404, and POST returning 405 passed. The downloaded evidence also passed standalone replay and bounded-search recomputation. Reports are `submission/public-validation.json` and `submission/public-verifier.json`.
+
+Cloudflare initially injected its analytics beacon, which the strict self-only CSP blocked. The preview now sends `Cache-Control: public, max-age=0, must-revalidate, no-transform`, preserving reviewed content without changing zone-wide settings or weakening CSP. The repeated public browser run passed without script/CSP errors. See [Cloudflare's documented no-transform behavior](https://developers.cloudflare.com/web-analytics/faq/).
 
 To stop public access without changing another app: `pm2 stop statebound-tunnel`. To restart the local processes, use the scoped restart above. Do not use `pm2 restart all`.
 

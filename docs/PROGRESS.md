@@ -1,5 +1,13 @@
 # Progress
 
+## 2026-09-07 — Authorized public deployment completed
+
+- Explicit follow-up authorization received. Published the recorded preview at https://statebound.tangvu.dev through dedicated `statebound-demo` Cloudflare Tunnel. Created the hostname route without overwrite; no existing tunnel/application reconfiguration.
+- PM2 `statebound-tunnel`, `statebound-preview` and `statebound-workbench` are online; process list saved. Public ingress targets 4382 only. Credential/config files remain ignored in `.runtime/`.
+- Actual public checks passed: HTTPS, video byte ranges/playback/seeking, evidence hash matching the reviewed local bundle, mobile 390px and desktop 1440px, evidence tabs, API/private paths returning 404 and writes returning 405. Standalone verifier of the downloaded evidence returned verified=true and NO_VIOLATION_WITHIN_BOUND. Reports: `submission/public-validation.json`, `submission/public-verifier.json` and public screenshots.
+- Fixed an observed edge integration issue: Cloudflare analytics injection violated self-only CSP. Added documented no-transform cache control at this origin; public browser checks now pass without CSP/script errors. No zone-wide change and no CSP relaxation.
+- README, handoff, operations and submission draft now contain actual live URLs. Social posting and entry submission remain unperformed. Testnet writes, hosted Binance MCP and live hosted model remain unavailable. Host must remain online; reboot recovery is not tested.
+
 ## 2026-09-07 — PM2 operation and prepared shareable preview
 
 - Running: `statebound-workbench` on loopback 4381 and `statebound-preview` on loopback 4382, under a separate Statebound PM2 namespace. Replaced only the previously identified Statebound manual server. Scoped restart succeeded and the process list was saved. Existing applications/tunnels were not restarted or reconfigured.
