@@ -1,10 +1,10 @@
-# Statebound: a three-minute review
+# Statebound: a four-minute review
 
 **Pitch:** an agent should reconcile an uncertain order before spending its budget again. Statebound makes that rule executable and independently inspectable.
 
 1. **0:00–0:45 — [Evidence Lab](https://statebound.tangvu.dev/#lab).** Start with Blind retry. The agent sees a timeout while the hidden exchange state already contains a fill. Jump to outcome: 30 USDT spent against 20. Compare Guard only, Reconciled, and Still unknown. A refused retry is not confirmed progress.
 2. **0:45–1:20 — [Binance workflow](https://statebound.tangvu.dev/#binance).** Inspect the actual timestamped public testnet read, derived price/lot grids and changed debit amounts. This is a separate model driven by recorded Binance inputs, not the flagship's synthetic 600 USDT price. Open the data-boundary disclosure.
-3. **1:20–3:00 — [Recorded workbench](https://statebound.tangvu.dev/#watch).** Watch the actual check, recorded AI candidate validation, bounded recheck and durable simulator replay. The 101.4-second walkthrough includes narration and captions.
+3. **1:20–4:00 — [Recorded workbench](https://statebound.tangvu.dev/#watch).** Watch the actual check, recorded AI candidate validation, bounded recheck and durable simulator replay. The 151.7-second walkthrough includes MiMo narration, captions and the Binance workflow.
 
 ## Independently reproduce
 

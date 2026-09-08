@@ -1,103 +1,147 @@
 1
-00:00:00,000 --> 00:01:41,400
-{\an8}AI narration | Actual app | Recorded Codex repair | 1.35x playback
+00:00:00,823 --> 00:00:01,941
+An order fills.
 
 2
-00:00:00,388 --> 00:00:03,361
-Statebound checks trading workflows before execution.
+00:00:01,941 --> 00:00:03,505
+Its reply disappears.
 
 3
-00:00:03,361 --> 00:00:07,848
-This is a synthetic fixture, with a twenty USDT spending mandate and zero fees.
+00:00:03,505 --> 00:00:05,665
+Should an AI agent buy again?
 
 4
-00:00:07,848 --> 00:00:10,372
-The example plan is deliberately vulnerable.
+00:00:05,665 --> 00:00:08,869
+Statebound makes that decision inspectable.
 
 5
-00:00:10,372 --> 00:00:11,886
-No real orders are placed.
+00:00:08,869 --> 00:00:12,668
+This experiment starts with a twenty dollar budget.
 
 6
-00:00:13,788 --> 00:00:16,071
-Find a failure runs a fresh bounded search.
+00:00:12,668 --> 00:00:14,903
+Every order here is simulated.
 
 7
-00:00:16,071 --> 00:00:20,423
-The checker finds a path that spends thirty USDT against the twenty USDT mandate.
+00:00:17,103 --> 00:00:21,707
+We run a fresh search over the plan and its fault model.
 
 8
-00:00:20,423 --> 00:00:23,023
-These events come from the plan and fault model.
+00:00:21,707 --> 00:00:25,077
+One missing reply leads to a blind retry.
 
 9
-00:00:23,575 --> 00:00:26,414
-The first order filled, but its reply was lost.
+00:00:25,077 --> 00:00:28,859
+Thirty dollars leaves a twenty dollar mandate.
 
 10
-00:00:26,414 --> 00:00:27,985
-The agent sees a timeout.
+00:00:28,859 --> 00:00:31,983
+The checker computes the path you see.
 
 11
-00:00:27,985 --> 00:00:30,281
-A stale balance cannot prove failure.
+00:00:32,707 --> 00:00:34,350
+Look at the two sides.
 
 12
-00:00:30,281 --> 00:00:34,510
-Fifteen USDT remains exposed, so a fresh purchase is not free budget.
+00:00:34,350 --> 00:00:40,398
+The exchange has filled the order, but the agent only knows it might have filled.
 
 13
-00:00:37,630 --> 00:00:40,981
-This is a recorded repair authored by the development Codex session.
+00:00:40,398 --> 00:00:43,758
+An old balance cannot erase that uncertainty.
 
 14
-00:00:40,981 --> 00:00:44,234
-It queries the original attempt before buying the remaining goal.
+00:00:43,758 --> 00:00:46,147
+Fifteen dollars remains exposed.
 
 15
-00:00:44,234 --> 00:00:46,550
-We validate that candidate and recheck it now.
+00:00:48,347 --> 00:00:53,443
+Now we load the repair written in our development Codex session.
 
 16
-00:00:46,550 --> 00:00:47,979
-The mandate stays unchanged.
+00:00:53,443 --> 00:00:57,584
+It queries the original attempt before buying again.
 
 17
-00:00:58,236 --> 00:01:02,653
-The recoverable replay runs through the shared interpreter and a persistent SQLite ledger.
+00:00:57,584 --> 00:01:02,919
+We validate and recheck that candidate here, with the same mandate.
 
 18
-00:01:02,653 --> 00:01:06,186
-When the order query confirms the fill, the acquisition goal completes.
+00:01:02,919 --> 00:01:05,467
+Loading it is not a new AI call.
 
 19
-00:01:06,186 --> 00:01:08,737
-The original ambiguous attempt is never sent again.
+00:01:07,667 --> 00:01:11,666
+When the lookup confirms the fill, the goal completes.
 
 20
-00:01:14,983 --> 00:01:16,704
-Now the lookup stays inconclusive.
+00:01:11,666 --> 00:01:15,887
+Replay uses the same interpreter and a persistent ledger.
 
 21
-00:01:16,704 --> 00:01:19,841
-Statebound finishes unresolved and preserves the reservation.
+00:01:15,887 --> 00:01:20,627
+The original uncertain attempt is never submitted a second time.
 
 22
-00:01:19,841 --> 00:01:24,648
-No violation within a finite bound does not mean the environment must let every task complete.
+00:01:22,827 --> 00:01:25,438
+But a lookup may stay inconclusive.
 
 23
-00:01:27,103 --> 00:01:32,378
-The integration panel shows a genuine recorded public testnet read through the official Binance CLI.
+00:01:25,438 --> 00:01:29,766
+Here, the run ends unresolved and the reservation remains.
 
 24
-00:01:32,378 --> 00:01:33,907
-Trading remains unavailable.
+00:01:29,766 --> 00:01:33,496
+Statebound reports that limit honestly: containing
 
 25
-00:01:33,907 --> 00:01:37,600
-Exported evidence includes the plan, bounds, observations and replay.
+00:01:33,496 --> 00:01:37,227
+risk and finishing the task are separate outcomes.
 
 26
-00:01:37,600 --> 00:01:40,659
-A separate verifier recomputes the result without an LLM.
+00:01:39,427 --> 00:01:42,092
+Export the evidence, then verify it.
+
+27
+00:01:42,092 --> 00:01:46,681
+A separate verifier recomputes the transitions and the bounded
+
+28
+00:01:46,681 --> 00:01:51,418
+search, without asking a language model to judge its own answer.
+
+29
+00:01:51,418 --> 00:01:55,267
+The plan, observations and results stay inspectable.
+
+30
+00:01:56,265 --> 00:01:59,555
+Binance data also drives a separate experiment.
+
+31
+00:01:59,555 --> 00:02:05,085
+The official command line tool supplies a recorded testnet price and lot sizes.
+
+32
+00:02:05,085 --> 00:02:08,725
+Those inputs change the model and its debit amounts.
+
+33
+00:02:08,725 --> 00:02:11,595
+We recheck the saved repair against them.
+
+34
+00:02:11,595 --> 00:02:14,115
+Fees and execution remain simulated.
+
+35
+00:02:15,005 --> 00:02:22,388
+Try the four cases yourself in the public Evidence Lab, or reproduce the checks from GitHub.
+
+36
+00:02:22,388 --> 00:02:27,605
+Hosted Binance MCP is not connected, and no real trade is placed.
+
+37
+00:02:27,605 --> 00:02:30,655
+Statebound: evidence before execution.

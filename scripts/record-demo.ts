@@ -22,10 +22,12 @@ try {
     if(scene.id==='evidence'){
       await page.locator('.integration').scrollIntoViewIfNeeded();const pending=page.waitForEvent('download');await page.getByRole('link',{name:'Export evidence'}).click();const download=await pending;await download.saveAs('submission/demo-evidence.json');const result=verify(JSON.parse(readFileSync('submission/demo-evidence.json','utf8')));writeFileSync('submission/verifier-output.json',JSON.stringify(result,null,2));await page.getByRole('button',{name:'Verify this export'}).click();await page.getByText('Verified: replay and bounded search recomputed.',{exact:true}).waitFor({timeout:30000});
     }
-    const audio=`.runtime/narration/${scene.id}.wav`;
+    if(scene.id==='binance') {await page.goto('http://127.0.0.1:4382/#binance');await page.locator('#binance').scrollIntoViewIfNeeded();}
+    if(scene.id==='closing') {await page.goto('http://127.0.0.1:4382/?case=repair&step=6#lab');await page.locator('.lab-body').waitFor({state:'visible'});await page.locator('[data-case="repair"]').click();await page.getByRole('button',{name:'Jump to outcome'}).click();await page.locator('.lab-stage').scrollIntoViewIfNeeded();}
+    const audio=`.runtime/mimo/${scene.id}.wav`;
     const duration=Number(execFileSync('ffprobe',['-v','error','-show_entries','format=duration','-of','default=noprint_wrappers=1:nokey=1',audio],{encoding:'utf8',windowsHide:true}).trim());
     const start=(performance.now()-begin)/1000;console.log(`Recording ${scene.id}: ${duration.toFixed(1)}s`);
     await page.waitForTimeout(duration*1000+500);timings.push({id:scene.id,start,end:start+duration,text:scene.text,audio});
   }
 }finally{const video=page.video()!;await context.close();mkdirSync('submission',{recursive:true});await video.saveAs('submission/demo-raw.webm');await browser.close();writeFileSync('submission/recording-timing.json',JSON.stringify(timings,null,2));}
-await import('./mux-demo.js');
+await import('./mux-mimo.js');

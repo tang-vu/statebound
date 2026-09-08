@@ -20,6 +20,7 @@ const files={
   '/':'preview/index.html','/style.css':'preview/style.css','/demo.js':'preview/demo.js','/chapters.json':'preview/chapters.json',
   '/lab.js':'preview/lab.js','/replay-gallery.json':'preview/replay-gallery.json',
   '/binance-read.json':'examples/binance-read.json','/binance-workflow.json':'submission/binance-workflow.json',
+  '/captions.srt':'submission/captions.srt','/voice-validation.json':'submission/voice-validation.json',
   '/demo.mp4':'submission/demo.mp4','/counterexample.png':'submission/counterexample.png',
   '/repaired.png':'submission/repaired.png','/ambiguity.png':'submission/ambiguity.png','/evidence.json':'submission/demo-evidence.json',
   '/counterexample.json':'examples/counterexample.json','/evaluation.json':'examples/evaluation.json',

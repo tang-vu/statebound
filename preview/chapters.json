@@ -1,33 +1,41 @@
 {
-  "duration": 101.39971414814815,
+  "duration": 151.65479620000002,
   "chapters": [
     {
-      "time": 0.38835562962962955,
-      "label": "The mandate"
+      "time": 0.8230801000000001,
+      "label": "The question"
     },
     {
-      "time": 13.788460740740739,
+      "time": 17.1030801,
       "label": "Find the failure"
     },
     {
-      "time": 23.57494548148148,
+      "time": 32.706887699999996,
       "label": "Inspect exposure"
     },
     {
-      "time": 37.62992296296296,
-      "label": "Check the repair"
+      "time": 48.3468877,
+      "label": "Check the AI repair"
     },
     {
-      "time": 58.23629362962963,
-      "label": "Recoverable replay"
+      "time": 67.6668877,
+      "label": "Confirm the goal"
     },
     {
-      "time": 74.98327444444443,
-      "label": "Unresolved exposure"
+      "time": 82.82688770000001,
+      "label": "Preserve uncertainty"
     },
     {
-      "time": 87.10271266666666,
-      "label": "Verify the evidence"
+      "time": 99.42688770000002,
+      "label": "Verify independently"
+    },
+    {
+      "time": 116.26470580000002,
+      "label": "Binance inputs to verdict"
+    },
+    {
+      "time": 135.0047962,
+      "label": "Explore the evidence"
     }
   ]
 }

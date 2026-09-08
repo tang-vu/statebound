@@ -28,7 +28,7 @@ const digest=bytes=>createHash('sha256').update(bytes).digest('hex');
 const downloaded=Buffer.from(await fetch(`${base}/evidence.json`).then(r=>r.arrayBuffer()));
 assert.equal(digest(downloaded),digest(readFileSync('submission/demo-evidence.json')));
 const chapters=await fetch(`${base}/chapters.json`).then(r=>r.json());
-assert.equal(chapters.chapters.length,7);
+assert.equal(chapters.chapters.length,9);
 assert.ok(chapters.chapters.every((chapter,i)=>chapter.time>=0&&chapter.time<chapters.duration&&(i===0||chapter.time>chapters.chapters[i-1].time)));
 if(publicCheck){mkdirSync('.runtime',{recursive:true});writeFileSync('.runtime/public-evidence.json',downloaded);}
 const browser=await chromium.launch();const errors=[];

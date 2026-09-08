@@ -1,0 +1,91 @@
+{
+  "method": "Original speed; remove only middle sections of long unvoiced waits, preserving click and result. No spoken content removed.",
+  "removedRawIntervals": [
+    {
+      "start": 16.1030801,
+      "end": 18.0116852
+    },
+    {
+      "start": 49.2554928,
+      "end": 50.827802600000005
+    },
+    {
+      "start": 70.1478026,
+      "end": 76.68360630000001
+    },
+    {
+      "start": 91.84360630000002,
+      "end": 97.63256330000002
+    },
+    {
+      "start": 114.23256330000002,
+      "end": 115.72806320000001
+    }
+  ],
+  "rawTimings": "recording-timing.json",
+  "editedTimings": [
+    {
+      "id": "intro",
+      "start": 0.8230801000000001,
+      "end": 14.9030801,
+      "text": "An order fills. Its reply disappears. Should an AI agent buy again? Statebound makes that decision inspectable. This experiment starts with a twenty dollar budget. Every order here is simulated.",
+      "audio": ".runtime/mimo/intro.wav"
+    },
+    {
+      "id": "failure",
+      "start": 17.1030801,
+      "end": 31.9830801,
+      "text": "We run a fresh search over the plan and its fault model. One missing reply leads to a blind retry. Thirty dollars leaves a twenty dollar mandate. The checker computes the path you see.",
+      "audio": ".runtime/mimo/failure.wav"
+    },
+    {
+      "id": "knowledge",
+      "start": 32.706887699999996,
+      "end": 46.14688769999999,
+      "text": "Look at the two sides. The exchange has filled the order, but the agent only knows it might have filled. An old balance cannot erase that uncertainty. Fifteen dollars remains exposed.",
+      "audio": ".runtime/mimo/knowledge.wav"
+    },
+    {
+      "id": "repair",
+      "start": 48.3468877,
+      "end": 65.4668877,
+      "text": "Now we load the repair written in our development Codex session. It queries the original attempt before buying again. We validate and recheck that candidate here, with the same mandate. Loading it is not a new AI call.",
+      "audio": ".runtime/mimo/repair.wav"
+    },
+    {
+      "id": "recover",
+      "start": 67.6668877,
+      "end": 80.62688770000001,
+      "text": "When the lookup confirms the fill, the goal completes. Replay uses the same interpreter and a persistent ledger. The original uncertain attempt is never submitted a second time.",
+      "audio": ".runtime/mimo/recover.wav"
+    },
+    {
+      "id": "ambiguity",
+      "start": 82.82688770000001,
+      "end": 97.22688770000002,
+      "text": "But a lookup may stay inconclusive. Here, the run ends unresolved and the reservation remains. Statebound reports that limit honestly: containing risk and finishing the task are separate outcomes.",
+      "audio": ".runtime/mimo/ambiguity.wav"
+    },
+    {
+      "id": "evidence",
+      "start": 99.42688770000002,
+      "end": 115.26688770000003,
+      "text": "Export the evidence, then verify it. A separate verifier recomputes the transitions and the bounded search, without asking a language model to judge its own answer. The plan, observations and results stay inspectable.",
+      "audio": ".runtime/mimo/evidence.wav"
+    },
+    {
+      "id": "binance",
+      "start": 116.26470580000002,
+      "end": 134.11470580000002,
+      "text": "Binance data also drives a separate experiment. The official command line tool supplies a recorded testnet price and lot sizes. Those inputs change the model and its debit amounts. We recheck the saved repair against them. Fees and execution remain simulated.",
+      "audio": ".runtime/mimo/binance.wav"
+    },
+    {
+      "id": "closing",
+      "start": 135.0047962,
+      "end": 150.65479620000002,
+      "text": "Try the four cases yourself in the public Evidence Lab, or reproduce the checks from GitHub. Hosted Binance MCP is not connected, and no real trade is placed. Statebound: evidence before execution.",
+      "audio": ".runtime/mimo/closing.wav"
+    }
+  ]
+}

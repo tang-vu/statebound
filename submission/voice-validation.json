@@ -1,0 +1,110 @@
+{
+  "provider": "Xiaomi MiMo",
+  "ttsModel": "mimo-v2.5-tts",
+  "voice": "Dean",
+  "asrModel": "mimo-v2.5-asr",
+  "passed": true,
+  "method": "ASR text comparison, manual transcript review, duration and pace checks. ASR may introduce punctuation and token errors; it is not a human listening test.",
+  "rejectedTakes": "Initial ambiguity and Binance takes contained extra transcript content and were discarded. Final Binance and closing tails were trimmed at measured pauses and retranscribed.",
+  "scenes": [
+    {
+      "id": "intro",
+      "expected": "An order fills. Its reply disappears. Should an AI agent buy again? Statebound makes that decision inspectable. This experiment starts with a twenty dollar budget. Every order here is simulated.",
+      "asrTranscript": "1. An order fills, its reply disappears. Should an AI agent buy again? State bound makes that decision inspectable. This experiment starts with a twenty dollar budget. Every order here is simulated.",
+      "wordEdits": 0,
+      "wordErrorRatio": 0,
+      "duration": 14.08,
+      "wordsPerMinute": 127.8409090909091,
+      "audioSha256": "fbb27f974979092fc7283e92b4ffdb3cba5114b72d170ce2e64f0288a422c3d4",
+      "tailEdit": "none"
+    },
+    {
+      "id": "failure",
+      "expected": "We run a fresh search over the plan and its fault model. One missing reply leads to a blind retry. Thirty dollars leaves a twenty dollar mandate. The checker computes the path you see.",
+      "asrTranscript": "1. We run a fresh search over the plan and its fault model. One missing reply leads to a blind retry. Thirty dollars leaves a twenty dollar mandate. The checker computes the path you see.",
+      "wordEdits": 0,
+      "wordErrorRatio": 0,
+      "duration": 14.88,
+      "wordsPerMinute": 137.09677419354838,
+      "audioSha256": "40ce97a57a5c56499ae2447fe48be16618bd1d212b9cf12822896ab6f5f83a1a",
+      "tailEdit": "none"
+    },
+    {
+      "id": "knowledge",
+      "expected": "Look at the two sides. The exchange has filled the order, but the agent only knows it might have filled. An old balance cannot erase that uncertainty. Fifteen dollars remains exposed.",
+      "asrTranscript": "<chinese> Look at the two sides. The exchange has filled the order, but the agent only knows it might have filled. An old balance cannot erase that uncertainty. Fifteen dollars remains exposed.",
+      "wordEdits": 0,
+      "wordErrorRatio": 0,
+      "duration": 13.44,
+      "wordsPerMinute": 138.39285714285714,
+      "audioSha256": "e445289f587b9ba05cf2433e20479d159322e6f015418e42a00518130d3f22df",
+      "tailEdit": "none"
+    },
+    {
+      "id": "repair",
+      "expected": "Now we load the repair written in our development Codex session. It queries the original attempt before buying again. We validate and recheck that candidate here, with the same mandate. Loading it is not a new AI call.",
+      "asrTranscript": "think>\n<chinese> Now we load the repair written in our development codex session. It queries the original attempt before buying again. We validate and recheck that candidate here with the same mandate, loading it. It's not a new AI call.",
+      "wordEdits": 2,
+      "wordErrorRatio": 0.05263157894736842,
+      "duration": 17.12,
+      "wordsPerMinute": 133.17757009345792,
+      "audioSha256": "c3083bc5825d9bef136e0a942fd917674d7f336bcc8e7e5cd0d2b3f7bffd0bc7",
+      "tailEdit": "none"
+    },
+    {
+      "id": "recover",
+      "expected": "When the lookup confirms the fill, the goal completes. Replay uses the same interpreter and a persistent ledger. The original uncertain attempt is never submitted a second time.",
+      "asrTranscript": "<chinese> When the lookup confirms the fill, the goal completes. Replay uses the same interpreter and a persistent ledger. The original uncertain attempt is never submitted a second time.",
+      "wordEdits": 0,
+      "wordErrorRatio": 0,
+      "duration": 12.96,
+      "wordsPerMinute": 129.62962962962962,
+      "audioSha256": "d27cd3c46b51628fddc92d48d653207d304de01bb8afa1e7ae078ba15a51740b",
+      "tailEdit": "none"
+    },
+    {
+      "id": "ambiguity",
+      "expected": "But a lookup may stay inconclusive. Here, the run ends unresolved and the reservation remains. Statebound reports that limit honestly: containing risk and finishing the task are separate outcomes.",
+      "asrTranscript": "think>\n<chinese> But a lookup may stay inconclusive. Here, the run ends unresolved, and the reservation remains. State bound reports that limit honestly. Containing risk and finishing the task are separate outcomes.",
+      "wordEdits": 0,
+      "wordErrorRatio": 0,
+      "duration": 14.4,
+      "wordsPerMinute": 120.83333333333333,
+      "audioSha256": "1e6e3ef8139f1b6d6b0fc8e8869199c2bf380e00a42b80c8f4531ac030cb221f",
+      "tailEdit": "none"
+    },
+    {
+      "id": "evidence",
+      "expected": "Export the evidence, then verify it. A separate verifier recomputes the transitions and the bounded search, without asking a language model to judge its own answer. The plan, observations and results stay inspectable.",
+      "asrTranscript": "3. Export the evidence, then verify it. A separate verifier recomputes the transitions and the bounded search without asking a language model to judge its own answer. The plan, observations, and results stay inspectable.",
+      "wordEdits": 0,
+      "wordErrorRatio": 0,
+      "duration": 15.84,
+      "wordsPerMinute": 125.00000000000001,
+      "audioSha256": "d19727545f5df4b0a98ba96e72a5636305d176a47ea4ed88ef02d1f60ba75eb1",
+      "tailEdit": "none"
+    },
+    {
+      "id": "binance",
+      "expected": "Binance data also drives a separate experiment. The official command line tool supplies a recorded testnet price and lot sizes. Those inputs change the model and its debit amounts. We recheck the saved repair against them. Fees and execution remain simulated.",
+      "asrTranscript": "think>\n<chinese> Binance data also drives a separate experiment. The official command line tool supplies a recorded testnet price and lot sizes. Those inputs change the model and its debit amounts. We recheck the saved repair against them. Fees and execution remain simulated.",
+      "wordEdits": 0,
+      "wordErrorRatio": 0,
+      "duration": 17.85,
+      "wordsPerMinute": 137.81512605042016,
+      "audioSha256": "a27699ca4a11861030497ae8fd0a1986a879885fd6aec0a543944c213b652ba5",
+      "tailEdit": "Trimmed at 17.85s after complete script and before unwanted speech"
+    },
+    {
+      "id": "closing",
+      "expected": "Try the four cases yourself in the public Evidence Lab, or reproduce the checks from GitHub. Hosted Binance MCP is not connected, and no real trade is placed. Statebound: evidence before execution.",
+      "asrTranscript": "3. Try the four cases yourself in the public evidence lab or reproduce the checks from GitHub. Hosted Binance MCP is not connected, and no real trade is placed. State-bound evidence before execution.",
+      "wordEdits": 0,
+      "wordErrorRatio": 0,
+      "duration": 15.65,
+      "wordsPerMinute": 122.68370607028754,
+      "audioSha256": "85ffd65293b1aacb4d71480865946d89178f3fb214feae0c4dc4be24ccfc28b6",
+      "tailEdit": "Trimmed at 15.65s after complete script and before unwanted speech"
+    }
+  ]
+}

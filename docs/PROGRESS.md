@@ -1,5 +1,9 @@
 # Progress
 
+## 2026-09-08 - MiMo narration and complete submission video
+
+Re-recorded the actual workbench, Binance-derived workflow and Evidence Lab as nine chapters with MiMo V2.5 TTS Dean voice. Each accepted audio clip was checked with MiMo V2.5 ASR; unwanted tails were removed and retranscribed. Narration remains at original speed; only the middle of long unvoiced waits is cut, with an edit-decision record and on-screen disclosure. The new edit replaces the older Windows-voice videos described below. Audio review scope and reproduction are in `docs/MIMO_NARRATION.md`.
+
 ## 2026-09-07 - Submission build prepared
 
 - Completed the responsive workbench and preview redesign, shared schema validation, history/connection recovery, mobile task navigation, content-versioned assets, video chapters and full-size evidence access.

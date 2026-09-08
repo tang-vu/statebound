@@ -37,7 +37,7 @@ The native Windows Binance CLI build is blocked by unavailable MinGW OpenSSL dev
 
 ## Recording
 
-`submission/demo.mp4` contains actual app actions with Microsoft Zira Desktop synthetic narration and timed captions. `submission/demo-raw.webm` preserves the source recording. Speedup and recorded AI provenance are disclosed. Reproduction is in `submission/SUBMISSION_DRAFT.md`. No paid voice service or cloned voice is involved. Review `submission/video-validation.json` for actual probe/decode evidence.
+`submission/demo.mp4` contains actual app actions with MiMo V2.5 TTS Dean narration, reviewed with MiMo ASR, at original speed. Nine chapters now include the Binance-derived model and Evidence Lab. `submission/demo-raw.webm` preserves the source recording. Reproduction and audio edits are documented in `docs/MIMO_NARRATION.md`. No person's voice is cloned. Review `submission/video-validation.json` and `submission/voice-validation.json` for verification and its limits.
 
 ## Operational cautions from actual implementation
 

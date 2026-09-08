@@ -1,9 +1,47 @@
 [
-  {"id":"intro","text":"Statebound checks trading workflows before execution. This is a synthetic fixture, with a twenty USDT spending mandate and zero fees. The example plan is deliberately vulnerable. No real orders are placed."},
-  {"id":"failure","text":"Find a failure runs a fresh bounded search. The checker finds a path that spends thirty USDT against the twenty USDT mandate. These events come from the plan and fault model."},
-  {"id":"knowledge","text":"The first order filled, but its reply was lost. The agent sees a timeout. A stale balance cannot prove failure. Fifteen USDT remains exposed, so a fresh purchase is not free budget."},
-  {"id":"repair","text":"This is a recorded repair authored by the development Codex session. It queries the original attempt before buying the remaining goal. We validate that candidate and recheck it now. The mandate stays unchanged."},
-  {"id":"recover","text":"The recoverable replay runs through the shared interpreter and a persistent SQLite ledger. When the order query confirms the fill, the acquisition goal completes. The original ambiguous attempt is never sent again."},
-  {"id":"ambiguity","text":"Now the lookup stays inconclusive. Statebound finishes unresolved and preserves the reservation. No violation within a finite bound does not mean the environment must let every task complete."},
-  {"id":"evidence","text":"The integration panel shows a genuine recorded public testnet read through the official Binance CLI. Trading remains unavailable. Exported evidence includes the plan, bounds, observations and replay. A separate verifier recomputes the result without an LLM."}
+  {
+    "id": "intro",
+    "text": "An order fills. Its reply disappears. Should an AI agent buy again? Statebound makes that decision inspectable. This experiment starts with a twenty dollar budget. Every order here is simulated.",
+    "speech": "An order fills. Its reply disappears. Should an AI agent buy again? Statebound makes that decision inspectable. This experiment starts with a twenty dollar budget. Every order here is simulated."
+  },
+  {
+    "id": "failure",
+    "text": "We run a fresh search over the plan and its fault model. One missing reply leads to a blind retry. Thirty dollars leaves a twenty dollar mandate. The checker computes the path you see.",
+    "speech": "We run a fresh search over the plan and its fault model. One missing reply leads to a blind retry. Thirty dollars leaves a twenty dollar mandate. The checker computes the path you see."
+  },
+  {
+    "id": "knowledge",
+    "text": "Look at the two sides. The exchange has filled the order, but the agent only knows it might have filled. An old balance cannot erase that uncertainty. Fifteen dollars remains exposed.",
+    "speech": "Look at the two sides. The exchange has filled the order, but the agent only knows it might have filled. An old balance cannot erase that uncertainty. Fifteen dollars remains exposed."
+  },
+  {
+    "id": "repair",
+    "text": "Now we load the repair written in our development Codex session. It queries the original attempt before buying again. We validate and recheck that candidate here, with the same mandate. Loading it is not a new AI call.",
+    "speech": "Now we load the repair written in our development Codex session. It queries the original attempt before buying again. We validate and recheck that candidate here, with the same mandate. Loading it is not a new AI call."
+  },
+  {
+    "id": "recover",
+    "text": "When the lookup confirms the fill, the goal completes. Replay uses the same interpreter and a persistent ledger. The original uncertain attempt is never submitted a second time.",
+    "speech": "When the lookup confirms the fill, the goal completes. Replay uses the same interpreter and a persistent ledger. The original uncertain attempt is never submitted a second time."
+  },
+  {
+    "id": "ambiguity",
+    "text": "But a lookup may stay inconclusive. Here, the run ends unresolved and the reservation remains. Statebound reports that limit honestly: containing risk and finishing the task are separate outcomes.",
+    "speech": "But a lookup may stay inconclusive. Here, the run ends unresolved and the reservation remains. Statebound reports that limit honestly: containing risk and finishing the task are separate outcomes."
+  },
+  {
+    "id": "evidence",
+    "text": "Export the evidence, then verify it. A separate verifier recomputes the transitions and the bounded search, without asking a language model to judge its own answer. The plan, observations and results stay inspectable.",
+    "speech": "Export the evidence, then verify it. A separate verifier recomputes the transitions and the bounded search, without asking a language model to judge its own answer. The plan, observations and results stay inspectable."
+  },
+  {
+    "id": "binance",
+    "text": "Binance data also drives a separate experiment. The official command line tool supplies a recorded testnet price and lot sizes. Those inputs change the model and its debit amounts. We recheck the saved repair against them. Fees and execution remain simulated.",
+    "speech": "Binance data also drives a separate experiment. The official command line tool supplies a recorded testnet price and lot sizes. Those inputs change the model and its debit amounts. We recheck the saved repair against them. Fees and execution remain simulated."
+  },
+  {
+    "id": "closing",
+    "text": "Try the four cases yourself in the public Evidence Lab, or reproduce the checks from GitHub. Hosted Binance MCP is not connected, and no real trade is placed. Statebound: evidence before execution.",
+    "speech": "Try the four cases yourself in the public Evidence Lab, or reproduce the checks from GitHub. Hosted Binance M C P is not connected, and no real trade is placed. Statebound: evidence before execution."
+  }
 ]

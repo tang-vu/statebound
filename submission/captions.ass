@@ -6,34 +6,56 @@ WrapStyle: 0
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Caption,Arial,24,&H00FFFFFF,&H00FFFFFF,&H00101010,&H99000000,0,0,0,0,100,100,0,0,3,2,0,2,80,80,26,1
-Style: Disclosure,Arial,14,&H00E8E8E8,&H00FFFFFF,&H00101010,&H99000000,0,0,0,0,100,100,0,0,3,1,0,8,20,20,48,1
+Style: Caption,Segoe UI,25,&H00FFFFFF,&H00FFFFFF,&H00232D29,&H00232D29,0,0,0,0,100,100,0,0,3,9,0,2,160,160,28,1
+Style: Chapter,Consolas,17,&H0077A9FF,&H00FFFFFF,&H00232D29,&H00232D29,0,0,0,0,100,100,0,0,1,0,0,7,28,28,16,1
+Style: Disclosure,Consolas,12,&H00E9F3F5,&H00FFFFFF,&H00232D29,&H00232D29,0,0,0,0,100,100,0,0,1,0,0,9,28,28,19,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-Dialogue: 0,0:00:00.00,0:01:41.40,Disclosure,,0,0,0,,AI narration | Actual app | Recorded Codex repair | 1.35x playback
-Dialogue: 0,0:00:00.38,0:00:03.36,Caption,,0,0,0,,Statebound checks trading workflows before execution.
-Dialogue: 0,0:00:03.36,0:00:07.84,Caption,,0,0,0,,This is a synthetic fixture, with a twenty USDT spending mandate and zero fees.
-Dialogue: 0,0:00:07.84,0:00:10.37,Caption,,0,0,0,,The example plan is deliberately vulnerable.
-Dialogue: 0,0:00:10.37,0:00:11.88,Caption,,0,0,0,,No real orders are placed.
-Dialogue: 0,0:00:13.78,0:00:16.07,Caption,,0,0,0,,Find a failure runs a fresh bounded search.
-Dialogue: 0,0:00:16.07,0:00:20.42,Caption,,0,0,0,,The checker finds a path that spends thirty USDT against the twenty USDT mandate.
-Dialogue: 0,0:00:20.42,0:00:23.02,Caption,,0,0,0,,These events come from the plan and fault model.
-Dialogue: 0,0:00:23.57,0:00:26.41,Caption,,0,0,0,,The first order filled, but its reply was lost.
-Dialogue: 0,0:00:26.41,0:00:27.98,Caption,,0,0,0,,The agent sees a timeout.
-Dialogue: 0,0:00:27.98,0:00:30.28,Caption,,0,0,0,,A stale balance cannot prove failure.
-Dialogue: 0,0:00:30.28,0:00:34.51,Caption,,0,0,0,,Fifteen USDT remains exposed, so a fresh purchase is not free budget.
-Dialogue: 0,0:00:37.63,0:00:40.98,Caption,,0,0,0,,This is a recorded repair authored by the development Codex session.
-Dialogue: 0,0:00:40.98,0:00:44.23,Caption,,0,0,0,,It queries the original attempt before buying the remaining goal.
-Dialogue: 0,0:00:44.23,0:00:46.55,Caption,,0,0,0,,We validate that candidate and recheck it now.
-Dialogue: 0,0:00:46.55,0:00:47.97,Caption,,0,0,0,,The mandate stays unchanged.
-Dialogue: 0,0:00:58.23,0:01:02.65,Caption,,0,0,0,,The recoverable replay runs through the shared interpreter and a persistent SQLite ledger.
-Dialogue: 0,0:01:02.65,0:01:06.18,Caption,,0,0,0,,When the order query confirms the fill, the acquisition goal completes.
-Dialogue: 0,0:01:06.18,0:01:08.73,Caption,,0,0,0,,The original ambiguous attempt is never sent again.
-Dialogue: 0,0:01:14.98,0:01:16.70,Caption,,0,0,0,,Now the lookup stays inconclusive.
-Dialogue: 0,0:01:16.70,0:01:19.84,Caption,,0,0,0,,Statebound finishes unresolved and preserves the reservation.
-Dialogue: 0,0:01:19.84,0:01:24.64,Caption,,0,0,0,,No violation within a finite bound does not mean the environment must let every task complete.
-Dialogue: 0,0:01:27.10,0:01:32.37,Caption,,0,0,0,,The integration panel shows a genuine recorded public testnet read through the official Binance CLI.
-Dialogue: 0,0:01:32.37,0:01:33.90,Caption,,0,0,0,,Trading remains unavailable.
-Dialogue: 0,0:01:33.90,0:01:37.60,Caption,,0,0,0,,Exported evidence includes the plan, bounds, observations and replay.
-Dialogue: 0,0:01:37.60,0:01:40.65,Caption,,0,0,0,,A separate verifier recomputes the result without an LLM.
+Dialogue: 1,0:00:00.00,0:02:31.65,Disclosure,,0,0,0,,SIMULATOR / AI VOICE / RECORDED REPAIR / WAITS SHORTENED
+Dialogue: 0,0:00:00.82,0:00:01.94,Caption,,0,0,0,,An order fills.
+Dialogue: 0,0:00:01.94,0:00:03.50,Caption,,0,0,0,,Its reply disappears.
+Dialogue: 0,0:00:03.50,0:00:05.66,Caption,,0,0,0,,Should an AI agent buy again?
+Dialogue: 0,0:00:05.66,0:00:08.86,Caption,,0,0,0,,Statebound makes that decision inspectable.
+Dialogue: 0,0:00:08.86,0:00:12.66,Caption,,0,0,0,,This experiment starts with a twenty dollar budget.
+Dialogue: 0,0:00:12.66,0:00:14.90,Caption,,0,0,0,,Every order here is simulated.
+Dialogue: 1,0:00:00.82,0:00:17.10,Chapter,,0,0,0,,STATEBOUND  /  01  /  THE QUESTION
+Dialogue: 0,0:00:17.10,0:00:21.70,Caption,,0,0,0,,We run a fresh search over the plan and its fault model.
+Dialogue: 0,0:00:21.70,0:00:25.07,Caption,,0,0,0,,One missing reply leads to a blind retry.
+Dialogue: 0,0:00:25.07,0:00:28.85,Caption,,0,0,0,,Thirty dollars leaves a twenty dollar mandate.
+Dialogue: 0,0:00:28.85,0:00:31.98,Caption,,0,0,0,,The checker computes the path you see.
+Dialogue: 1,0:00:17.10,0:00:32.70,Chapter,,0,0,0,,STATEBOUND  /  02  /  FIND THE FAILURE
+Dialogue: 0,0:00:32.70,0:00:34.35,Caption,,0,0,0,,Look at the two sides.
+Dialogue: 0,0:00:34.35,0:00:40.39,Caption,,0,0,0,,The exchange has filled the order, but the agent only knows it might have filled.
+Dialogue: 0,0:00:40.39,0:00:43.75,Caption,,0,0,0,,An old balance cannot erase that uncertainty.
+Dialogue: 0,0:00:43.75,0:00:46.14,Caption,,0,0,0,,Fifteen dollars remains exposed.
+Dialogue: 1,0:00:32.70,0:00:48.34,Chapter,,0,0,0,,STATEBOUND  /  03  /  INSPECT EXPOSURE
+Dialogue: 0,0:00:48.34,0:00:53.44,Caption,,0,0,0,,Now we load the repair written in our development Codex session.
+Dialogue: 0,0:00:53.44,0:00:57.58,Caption,,0,0,0,,It queries the original attempt before buying again.
+Dialogue: 0,0:00:57.58,0:01:02.91,Caption,,0,0,0,,We validate and recheck that candidate here, with the same mandate.
+Dialogue: 0,0:01:02.91,0:01:05.46,Caption,,0,0,0,,Loading it is not a new AI call.
+Dialogue: 1,0:00:48.34,0:01:07.66,Chapter,,0,0,0,,STATEBOUND  /  04  /  CHECK THE AI REPAIR
+Dialogue: 0,0:01:07.66,0:01:11.66,Caption,,0,0,0,,When the lookup confirms the fill, the goal completes.
+Dialogue: 0,0:01:11.66,0:01:15.88,Caption,,0,0,0,,Replay uses the same interpreter and a persistent ledger.
+Dialogue: 0,0:01:15.88,0:01:20.62,Caption,,0,0,0,,The original uncertain attempt is never submitted a second time.
+Dialogue: 1,0:01:07.66,0:01:22.82,Chapter,,0,0,0,,STATEBOUND  /  05  /  CONFIRM THE GOAL
+Dialogue: 0,0:01:22.82,0:01:25.43,Caption,,0,0,0,,But a lookup may stay inconclusive.
+Dialogue: 0,0:01:25.43,0:01:29.76,Caption,,0,0,0,,Here, the run ends unresolved and the reservation remains.
+Dialogue: 0,0:01:29.76,0:01:33.49,Caption,,0,0,0,,Statebound reports that limit honestly: containing
+Dialogue: 0,0:01:33.49,0:01:37.22,Caption,,0,0,0,,risk and finishing the task are separate outcomes.
+Dialogue: 1,0:01:22.82,0:01:39.42,Chapter,,0,0,0,,STATEBOUND  /  06  /  PRESERVE UNCERTAINTY
+Dialogue: 0,0:01:39.42,0:01:42.09,Caption,,0,0,0,,Export the evidence, then verify it.
+Dialogue: 0,0:01:42.09,0:01:46.68,Caption,,0,0,0,,A separate verifier recomputes the transitions and the bounded
+Dialogue: 0,0:01:46.68,0:01:51.41,Caption,,0,0,0,,search, without asking a language model to judge its own answer.
+Dialogue: 0,0:01:51.41,0:01:55.26,Caption,,0,0,0,,The plan, observations and results stay inspectable.
+Dialogue: 1,0:01:39.42,0:01:56.26,Chapter,,0,0,0,,STATEBOUND  /  07  /  VERIFY INDEPENDENTLY
+Dialogue: 0,0:01:56.26,0:01:59.55,Caption,,0,0,0,,Binance data also drives a separate experiment.
+Dialogue: 0,0:01:59.55,0:02:05.08,Caption,,0,0,0,,The official command line tool supplies a recorded testnet price and lot sizes.
+Dialogue: 0,0:02:05.08,0:02:08.72,Caption,,0,0,0,,Those inputs change the model and its debit amounts.
+Dialogue: 0,0:02:08.72,0:02:11.59,Caption,,0,0,0,,We recheck the saved repair against them.
+Dialogue: 0,0:02:11.59,0:02:14.11,Caption,,0,0,0,,Fees and execution remain simulated.
+Dialogue: 1,0:01:56.26,0:02:15.00,Chapter,,0,0,0,,STATEBOUND  /  08  /  BINANCE INPUTS TO VERDICT
+Dialogue: 0,0:02:15.00,0:02:22.38,Caption,,0,0,0,,Try the four cases yourself in the public Evidence Lab, or reproduce the checks from GitHub.
+Dialogue: 0,0:02:22.38,0:02:27.60,Caption,,0,0,0,,Hosted Binance MCP is not connected, and no real trade is placed.
+Dialogue: 0,0:02:27.60,0:02:30.65,Caption,,0,0,0,,Statebound: evidence before execution.
+Dialogue: 1,0:02:15.00,0:02:31.65,Chapter,,0,0,0,,STATEBOUND  /  09  /  EXPLORE THE EVIDENCE

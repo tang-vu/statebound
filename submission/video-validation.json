@@ -15,17 +15,36 @@
       }
     ],
     "format": {
-      "duration": "101.400000",
-      "size": "3938414"
+      "duration": "151.680000",
+      "size": "8807912"
     }
   },
-  "speed": 1.35,
-  "disclosure": "1.35x playback, standard Windows synthetic voice, actual browser recording, recorded Codex candidate. Final frame extended briefly for narration tail.",
+  "speed": 1,
+  "narration": {
+    "provider": "Xiaomi MiMo",
+    "model": "mimo-v2.5-tts",
+    "voice": "Dean",
+    "asr": "mimo-v2.5-asr"
+  },
+  "disclosure": "Actual browser recording, simulated orders, recorded Codex candidate, original narration speed, chapter labels and captions. Binance scene uses saved public testnet inputs.",
   "verifiedDecode": true,
   "checks": [
     "Full audio/video decode exits 0",
-    "AAC audio stream present",
-    "1440x900 H264 video stream present",
-    "Caption file and actual frames inspected separately"
-  ]
+    "Nine narrated scenes including Binance workflow",
+    "Caption timing proportional within each scene; not word-aligned ASR timestamps",
+    "Voice loudness target -16 LUFS / -1.5 dBTP; final measurement stored separately",
+    "Final loudness measured: -16.32 LUFS, -1.43 dBTP; no clipping"
+  ],
+  "loudness": {
+    "integratedLUFS": -16.32,
+    "truePeakDbTP": -1.43,
+    "rangeLU": 4.5
+  },
+  "editing": "Original-speed footage and narration; middle sections of long silent waits shortened. Exact cuts in edit-decisions.json.",
+  "publicVideo": {
+    "url": "https://statebound.tangvu.dev/demo.mp4",
+    "sha256": "9665efb7dfce14915d5787500624415c89def1be4bc75f637337191982a531c2",
+    "bytes": 8807912,
+    "matchesLocal": true
+  }
 }

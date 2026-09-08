@@ -1,51 +1,65 @@
 [
   {
     "id": "intro",
-    "start": 0.5242800999999999,
-    "end": 16.046139099999998,
-    "text": "Statebound checks trading workflows before execution. This is a synthetic fixture, with a twenty USDT spending mandate and zero fees. The example plan is deliberately vulnerable. No real orders are placed.",
-    "audio": ".runtime/narration/intro.wav"
+    "start": 0.8230801000000001,
+    "end": 14.9030801,
+    "text": "An order fills. Its reply disappears. Should an AI agent buy again? Statebound makes that decision inspectable. This experiment starts with a twenty dollar budget. Every order here is simulated.",
+    "audio": ".runtime/mimo/intro.wav"
   },
   {
     "id": "failure",
-    "start": 18.614421999999998,
-    "end": 31.081632999999997,
-    "text": "Find a failure runs a fresh bounded search. The checker finds a path that spends thirty USDT against the twenty USDT mandate. These events come from the plan and fault model.",
-    "audio": ".runtime/narration/failure.wav"
+    "start": 19.0116852,
+    "end": 33.8916852,
+    "text": "We run a fresh search over the plan and its fault model. One missing reply leads to a blind retry. Thirty dollars leaves a twenty dollar mandate. The checker computes the path you see.",
+    "audio": ".runtime/mimo/failure.wav"
   },
   {
     "id": "knowledge",
-    "start": 31.826176399999998,
-    "end": 46.5881714,
-    "text": "The first order filled, but its reply was lost. The agent sees a timeout. A stale balance cannot prove failure. Fifteen USDT remains exposed, so a fresh purchase is not free budget.",
-    "audio": ".runtime/narration/knowledge.wav"
+    "start": 34.6154928,
+    "end": 48.055492799999996,
+    "text": "Look at the two sides. The exchange has filled the order, but the agent only knows it might have filled. An old balance cannot erase that uncertainty. Fifteen dollars remains exposed.",
+    "audio": ".runtime/mimo/knowledge.wav"
   },
   {
     "id": "repair",
-    "start": 50.800396,
-    "end": 64.772051,
-    "text": "This is a recorded repair authored by the development Codex session. It queries the original attempt before buying the remaining goal. We validate that candidate and recheck it now. The mandate stays unchanged.",
-    "audio": ".runtime/narration/repair.wav"
+    "start": 51.827802600000005,
+    "end": 68.9478026,
+    "text": "Now we load the repair written in our development Codex session. It queries the original attempt before buying again. We validate and recheck that candidate here, with the same mandate. Loading it is not a new AI call.",
+    "audio": ".runtime/mimo/repair.wav"
   },
   {
     "id": "recover",
-    "start": 78.6189964,
-    "end": 92.7955044,
-    "text": "The recoverable replay runs through the shared interpreter and a persistent SQLite ledger. When the order query confirms the fill, the acquisition goal completes. The original ambiguous attempt is never sent again.",
-    "audio": ".runtime/narration/recover.wav"
+    "start": 77.68360630000001,
+    "end": 90.64360630000002,
+    "text": "When the lookup confirms the fill, the goal completes. Replay uses the same interpreter and a persistent ledger. The original uncertain attempt is never submitted a second time.",
+    "audio": ".runtime/mimo/recover.wav"
   },
   {
     "id": "ambiguity",
-    "start": 101.2274205,
-    "end": 114.2745865,
-    "text": "Now the lookup stays inconclusive. Statebound finishes unresolved and preserves the reservation. No violation within a finite bound does not mean the environment must let every task complete.",
-    "audio": ".runtime/narration/ambiguity.wav"
+    "start": 98.63256330000002,
+    "end": 113.03256330000002,
+    "text": "But a lookup may stay inconclusive. Here, the run ends unresolved and the reservation remains. Statebound reports that limit honestly: containing risk and finishing the task are separate outcomes.",
+    "audio": ".runtime/mimo/ambiguity.wav"
   },
   {
     "id": "evidence",
-    "start": 117.58866210000001,
-    "end": 135.88961410000002,
-    "text": "The integration panel shows a genuine recorded public testnet read through the official Binance CLI. Trading remains unavailable. Exported evidence includes the plan, bounds, observations and replay. A separate verifier recomputes the result without an LLM.",
-    "audio": ".runtime/narration/evidence.wav"
+    "start": 116.72806320000001,
+    "end": 132.5680632,
+    "text": "Export the evidence, then verify it. A separate verifier recomputes the transitions and the bounded search, without asking a language model to judge its own answer. The plan, observations and results stay inspectable.",
+    "audio": ".runtime/mimo/evidence.wav"
+  },
+  {
+    "id": "binance",
+    "start": 133.5658813,
+    "end": 151.4158813,
+    "text": "Binance data also drives a separate experiment. The official command line tool supplies a recorded testnet price and lot sizes. Those inputs change the model and its debit amounts. We recheck the saved repair against them. Fees and execution remain simulated.",
+    "audio": ".runtime/mimo/binance.wav"
+  },
+  {
+    "id": "closing",
+    "start": 152.3059717,
+    "end": 167.9559717,
+    "text": "Try the four cases yourself in the public Evidence Lab, or reproduce the checks from GitHub. Hosted Binance MCP is not connected, and no real trade is placed. Statebound: evidence before execution.",
+    "audio": ".runtime/mimo/closing.wav"
   }
 ]

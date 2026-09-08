@@ -27,7 +27,7 @@ Form đã được mở kiểm tra: Binance yêu cầu đăng nhập trước kh
 | Bằng chứng replay | https://statebound.tangvu.dev/evidence.json |
 | Chi tiết tích hợp | https://github.com/tang-vu/statebound/blob/main/docs/BINANCE_INTEGRATION.md |
 
-Video dài 101.4 giây, có thuyết minh tổng hợp, phụ đề và nhãn tốc độ 1.35×. Trang public có video và Evidence Lab tương tác để xem từng bước trong bốn trace mô phỏng đã tính sẵn; chạy thí nghiệm mới bằng workbench từ repository. Không cần nạp tiền hoặc giao dịch thật cho phần demo này. Không đăng ký Track B chỉ để nộp dự án Track A.
+Video dài khoảng 2 phút 32 giây, dùng MiMo V2.5 TTS giọng Dean, đối chiếu lời đọc bằng MiMo ASR. Chín chương bao gồm luồng Binance mới và Evidence Lab, có phụ đề và giữ nguyên tốc độ voice; các khoảng chờ dài đã được rút gọn và công bố trong video. Trang public có video và Evidence Lab tương tác để xem từng bước trong bốn trace mô phỏng đã tính sẵn; chạy thí nghiệm mới bằng workbench từ repository. Không cần nạp tiền hoặc giao dịch thật cho phần demo này. Không đăng ký Track B chỉ để nộp dự án Track A.
 
 ## Nội dung tiếng Anh dùng trong form
 
