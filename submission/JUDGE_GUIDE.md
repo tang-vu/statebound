@@ -17,7 +17,7 @@ npm run evidence:verify -- submission/demo-evidence.json
 
 Requires Node 24.14+; no account funding or model credentials. For the operator UI, run `npm run build` then `npm run dev` and open http://127.0.0.1:4381.
 
-## Claims to evaluate
+## What the walkthrough demonstrates
 
 - Counterexamples are computed from the plan and a declared finite fault model.
 - Possible execution exposure survives missing replies and inconclusive lookup.
@@ -25,4 +25,4 @@ Requires Node 24.14+; no account funding or model credentials. For the operator 
 - Evidence includes exact transitions and supports replay plus bounded-search recomputation.
 - Official CLI public data drives a separate model; execution remains simulated, and complete exchange admission is not claimed.
 
-The hosted Binance MCP is not connected. There is no mainnet execution, live hosted AI repair, independently blinded benchmark or universal safety certification. The entry uses the Skills Hub/official CLI integration route; organizer eligibility and acceptance remain their decision.
+The integration uses the Skills Hub/official CLI route. The public demo serves recorded artifacts; hosted Binance MCP and exchange writes are not connected. Results cover the declared finite simulator model and regression corpus. The recorded AI candidate, model assumptions and evaluation scope are linked from the repository.

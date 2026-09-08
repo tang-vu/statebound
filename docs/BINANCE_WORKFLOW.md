@@ -40,4 +40,4 @@ The three saved replays demonstrate a blind duplicate purchase, recovered comple
 
 ## Agent OS positioning
 
-The demonstrated route is [Binance Skills Hub](https://developers.binance.com/en/docs/sdks-tools/integrations/skills-hub) through the [official Binance CLI](https://github.com/binance/binance-cli/tree/v2.1.1). The separate [hosted MCP](https://developers.binance.com/en/docs/agent-native/mcp-server/agentic) connection is not established. This strengthens evidence of useful Binance data integration; it does not establish organizer acceptance of this route for Track A. Sources checked 2026-09-08.
+The demonstrated route is [Binance Skills Hub](https://developers.binance.com/en/docs/sdks-tools/integrations/skills-hub) through the [official Binance CLI](https://github.com/binance/binance-cli/tree/v2.1.1). Its recorded market data drives the derived model described above. The separate [hosted MCP](https://developers.binance.com/en/docs/agent-native/mcp-server/agentic) connection is not established. Sources checked 2026-09-08.

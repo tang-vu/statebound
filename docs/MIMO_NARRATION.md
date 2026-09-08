@@ -1,6 +1,6 @@
 # MiMo narration and review
 
-The final demo uses **mimo-v2.5-tts**, preset **Dean**, at its original speed. **mimo-v2.5-asr** transcribes each accepted audio clip for comparison with the script. No person's voice is cloned. The user requested these calls from the interactive coding-agent session using their Token Plan; this is not a hosted speech backend or unattended generation service.
+The demo uses **mimo-v2.5-tts**, preset **Dean**, at its original speed. **mimo-v2.5-asr** transcribes each accepted audio clip for comparison with the script. Narration was produced during development with interactive agent tools; it is separate from the trading-workflow application. No person's voice is cloned.
 
 Sources checked September 8, 2026: [Xiaomi's official TTS skill](https://github.com/XiaomiMiMo/MiMo-Skills/tree/main/skills/mimo-v2-5-tts), [speech synthesis guide](https://mimo.mi.com/docs/en-US/quick-start/usage-guide/audio/speech-synthesis-v2.5), [ASR guide](https://mimo.mi.com/docs/en-US/quick-start/usage-guide/audio/Speech-Recognition).
 

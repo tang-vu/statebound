@@ -15,15 +15,15 @@ node scripts/preview-test.mjs
 npm run test:http
 ```
 
-PM2 save persists the current process list for `pm2 resurrect`. It does not itself install Windows boot startup. Machine reboot recovery has not been tested. No global shell, Codex, credential or existing tunnel configuration is modified. The machine must remain awake and connected for a tunnel hosted here to remain reachable.
+PM2 save persists the current process list for `pm2 resurrect`. It does not itself install Windows boot startup. Machine reboot recovery has not been tested. The machine must remain awake and connected for a tunnel hosted here to remain reachable.
 
 ## Cloudflare publication
 
-Live recorded preview: **https://statebound.tangvu.dev**. The user explicitly authorized publication on 2026-09-07. A dedicated `statebound-demo` tunnel and DNS route were created using the configured `cert-tangvu.pem`. `statebound-tunnel` runs under PM2 and the process list was saved. Existing tunnels and other applications were not modified.
+Live recorded preview: **https://statebound.tangvu.dev**, published September 7, 2026 through the dedicated `statebound-demo` tunnel. `statebound-tunnel` runs under PM2. Tunnel credentials and configuration stay in ignored local runtime storage.
 
 The preview serves an explicit allowlist: landing page, local CSS/JS, recorded video/screenshots and public synthetic evidence JSON. It has no operator API, jobs, database access, cookies or write methods. Video supports byte ranges. All other paths return 404; unsupported hosts return 403. UI states clearly that the evidence views are recorded and that a new experiment requires the local workbench. The tunnel must target **4382**, never the operator port 4381.
 
-Authorized deployment command (already executed on the build machine):
+Deployment command for the configured hostname:
 
 ```powershell
 powershell -NoProfile -File scripts/publish-preview.ps1 -Publish

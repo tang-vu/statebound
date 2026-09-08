@@ -4,18 +4,20 @@
   "typecheck": "passed",
   "productionBuild": "passed",
   "lint": "passed",
-  "tests": {"passed": 18, "failed": 0},
+  "tests": {
+    "passed": 18,
+    "failed": 0
+  },
   "binanceWorkflow": "input derivation, repair acceptance, both evidence bundles, exact scenario replay and saved artifact equality passed",
   "gallery": "four original cases reproduce exactly",
   "preview": "local and public HTTP/browser checks passed at 390 and 1440 pixels",
   "visualReview": "Binance workflow screenshots inspected at 390 and 1440 pixels",
   "publicGallery": "all steps, monetary values, keyboard controls, deep links and fallback checks passed",
-  "operations": "workbench, managed preview and tunnel online; stale preview process cleaned up",
+  "operations": "Workbench and read-only preview run as separate managed processes; public browser checks passed",
   "limitations": [
     "Fresh official CLI reads timed out on September 8; successful September 5 public testnet snapshot retained with its timestamp",
     "Hosted Binance MCP is not connected",
     "Fees, account and order execution are synthetic assumptions",
-    "Unmapped venue filters are disclosed; exchange admission is not certified",
-    "Social post and Binance survey have not been submitted"
+    "Unmapped venue filters are disclosed; exchange admission is not certified"
   ]
 }

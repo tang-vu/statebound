@@ -6,11 +6,11 @@ An execution workbench that computes how an uncertain order can break a trading 
 
 The flagship is deliberately vulnerable: a synthetic 15 USDT IOC order fills, its reply is lost, a stale balance arrives, and a blind retry spends another 15 USDT against a 20 USDT mandate. The checker finds that path from the input graph. A repaired graph queries the original attempt before buying the remaining goal.
 
-Submission materials: [ready-to-submit packet](submission/READY_TO_SUBMIT.md), [short post](submission/POST.txt). Entry submission has not been performed.
+Start with the [four-minute walkthrough](submission/JUDGE_GUIDE.md), [project overview](submission/READY_TO_SUBMIT.md), or [demo video](https://statebound.tangvu.dev/demo.mp4).
 
 **[Explore the Evidence Lab](https://statebound.tangvu.dev/#lab)**: step through four precomputed simulator traces and compare agent knowledge with actual debit. Blind retry, guard refusal, reconciled completion and unresolved ambiguity each have inspectable conditions, downloadable traces and shareable step links. Regenerate with `npm run gallery:generate`; check exact replay with `npm run gallery:check`; test the viewer with `npm run test:gallery` while the preview is running. No orders or new searches run on the public site.
 
-The [research brief](docs/RESEARCH_BRIEF.md) explains the design and technical positioning against primary sources; [download the PDF](submission/research-brief.pdf). Rebuild it with `npm run research:pdf`.
+The [design rationale](docs/RESEARCH_BRIEF.md) explains the model and interface choices with source references; [download the PDF](submission/research-brief.pdf). Rebuild it with `npm run research:pdf`.
 
 **[Binance input-to-verdict workflow](https://statebound.tangvu.dev/#binance)** imports the recorded official testnet ticker and symbol grids into a separate synthetic model, then rechecks and replays the saved AI repair. Run `npm run integration:verify` offline to reproduce it. See [the data boundary and reproduction guide](docs/BINANCE_WORKFLOW.md). The hosted MCP is not connected; simulated execution is not exchange admission.
 
@@ -80,6 +80,6 @@ Money uses 8-decimal scaled integers, not floating point. Fees are bounded fixtu
 
 SQLite attempts are prepared transactionally before dispatch; a crash does not free the reservation. Attempts retain permanent tombstones. A local approval binds the normalized action, plan, mandate, adapter, model and account. Simulator rehearsals automatically approve their fake actions; this is never an exchange host approval.
 
-Hashes establish local integrity relative to a trusted reference. They do not authenticate Binance, establish financial safety or prove that a saved model output was generated live. A locally consistent forged bundle is not an exchange attestation.
+Hashes establish artifact consistency relative to a trusted reference. Exchange provenance and the conditions of the finite safety check are documented separately; a hash alone does not authenticate an exchange response or a model invocation.
 
-Read [SPEC](docs/SPEC.md), [model assumptions](docs/MODEL_ASSUMPTIONS.md), [evaluation](docs/EVALUATION.md), [related work](docs/RELATED_WORK.md) and [handoff](docs/HANDOFF.md). The recorded preview was published with explicit follow-up authorization on 2026-09-07. Submission drafts remain in `submission/`; no social post or entry submission has been performed.
+Technical references: [specification](docs/SPEC.md), [model assumptions](docs/MODEL_ASSUMPTIONS.md), [evaluation](docs/EVALUATION.md), [related work](docs/RELATED_WORK.md), and [maintainer guide](docs/HANDOFF.md).

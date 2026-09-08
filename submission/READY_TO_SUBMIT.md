@@ -1,56 +1,43 @@
-# Statebound — gói nộp Binance Agent OS Mini Hackathon
+# Statebound project overview
 
-Chuẩn bị ngày 07/09/2026. Mã nguồn, demo và bằng chứng đã sẵn sàng. **Chưa có bài đăng dự thi hoặc xác nhận nộp form.**
+Statebound is an execution-verification workflow for AI trading agents, presented in Track A of the Binance Agent OS Mini Hackathon.
 
-## Những việc còn cần tài khoản của bạn
+## Project links
 
-1. Kiểm tra điều kiện tham gia trong [thông báo chính thức](https://www.binance.com/en/square/post/362885563835358). Không suy ra điều kiện hợp lệ chỉ từ múi giờ hoặc nơi đang truy cập.
-2. Trên X, follow **@Binance** và repost thông báo hackathon từ tài khoản chính thức. Sau đó reply hoặc quote-repost thông báo đó bằng nội dung trong [POST.txt](POST.txt). Có thể đính kèm [demo.mp4](demo.mp4).
-3. Sao chép URL bài vừa đăng. Đăng nhập Binance và hoàn tất [survey chính thức](https://www.binance.com/en/survey/2913aa200aac462c89a737779393f3d4).
-4. Lưu xác nhận nộp thành công, URL bài đăng và thời điểm nộp. Chưa coi là đã dự thi chỉ vì website đã online.
-
-**Hạn nộp: 08/09/2026 23:59 UTC = 09/09/2026 06:59 giờ Việt Nam.** Nên nộp trước tối 08/09 theo giờ Việt Nam.
-
-Form đã được mở kiểm tra: Binance yêu cầu đăng nhập trước khi hiển thị các câu hỏi. Các đoạn bên dưới là nội dung chuẩn bị sẵn để dùng theo câu hỏi thực tế, không phải bản sao cấu trúc form. Phiên làm việc hiện tại không có kết nối tài khoản X/Binance để thực hiện đăng bài hoặc gửi survey.
-
-## Đường dẫn dùng khi nộp
-
-| Mục | Giá trị |
+| Resource | Link |
 | --- | --- |
-| Track dự kiến | Track A — Build an AI agent with Agent OS |
-| Tên dự án | Statebound |
-| Demo | https://statebound.tangvu.dev |
+| Demo and video | https://statebound.tangvu.dev |
 | Evidence Lab | https://statebound.tangvu.dev/#lab |
-| Binance input-to-verdict | https://statebound.tangvu.dev/#binance |
-| Video | https://statebound.tangvu.dev/demo.mp4 |
-| GitHub | https://github.com/tang-vu/statebound |
-| Bằng chứng replay | https://statebound.tangvu.dev/evidence.json |
-| Chi tiết tích hợp | https://github.com/tang-vu/statebound/blob/main/docs/BINANCE_INTEGRATION.md |
+| Binance workflow | https://statebound.tangvu.dev/#binance |
+| Source | https://github.com/tang-vu/statebound |
+| Public post | https://x.com/tangvu_dev/status/2097251859597795543 |
+| Quick walkthrough | [Four-minute guide](JUDGE_GUIDE.md) |
 
-Video dài khoảng 2 phút 32 giây, dùng MiMo V2.5 TTS giọng Dean, đối chiếu lời đọc bằng MiMo ASR. Chín chương bao gồm luồng Binance mới và Evidence Lab, có phụ đề và giữ nguyên tốc độ voice; các khoảng chờ dài đã được rút gọn và công bố trong video. Trang public có video và Evidence Lab tương tác để xem từng bước trong bốn trace mô phỏng đã tính sẵn; chạy thí nghiệm mới bằng workbench từ repository. Không cần nạp tiền hoặc giao dịch thật cho phần demo này. Không đăng ký Track B chỉ để nộp dự án Track A.
+## The workflow
 
-## Nội dung tiếng Anh dùng trong form
+An order fills, its reply is lost, and a blind retry spends 30 USDT against a 20 USDT mandate. Statebound computes this counterexample from a typed plan and a finite fault model. It then checks a reconciliation repair authored during a Codex development session and replays that plan through an executor with persistent budget reservations.
 
-**One-line pitch**
+When terminal evidence confirms the fill, the acquisition goal can complete. When lookup remains inconclusive, the workflow reports unresolved progress and preserves the pending exposure. The checker and executor share transition semantics; exported evidence can be independently replayed and rechecked without an LLM.
 
-Statebound finds how uncertain order execution can break an AI trading budget, checks a reconciliation repair, and exports independently replayable evidence.
+## Binance integration
 
-**Project description**
+The demonstrated integration uses the documented Skills Hub route and official Binance CLI 2.1.1. Recorded public Spot testnet prices and symbol filters parameterize a separate synthetic model, against which the saved AI repair is checked again. The original 600 USDT flagship remains a separate fixture.
 
-An order fills, but its reply is lost. A blind retry spends 30 USDT against a 20 USDT mandate. Statebound computes this counterexample from a typed execution plan and a finite fault model, validates a reconciliation repair authored in a development Codex session, and replays it through an executor with durable budget reservations. The checker and executor share transition semantics. Recoverable ambiguity can complete; inconclusive lookup stays unresolved without releasing the pending exposure. Exported evidence can be independently replayed and rechecked without an LLM. The responsive workbench exposes agent knowledge separately from hidden exchange reality, with an interactive four-case trace viewer, a recorded walkthrough and downloadable evidence.
+The response timestamp, imported fields, unmapped filters and assumptions are preserved. Hosted Binance MCP is not connected. Account state, fees and order execution are simulated. Loading the recorded Codex candidate is not a fresh model call.
 
-**How it uses Binance Agent OS**
+## Reproduce
 
-Statebound uses the documented Binance Skills Hub route and official Binance CLI 2.1.1 for genuine public Spot testnet quote and exchange-info reads. The captured ticker and symbol grids now parameterize a separate synthetic execution model: the workflow derives a lot-aligned quantity, finds the blind-retry counterexample, rechecks the saved Codex repair and replays recovered and unresolved outcomes. Both evidence bundles can be independently verified offline with `npm run integration:verify`. The original 600 USDT flagship remains separate. Account state, fees and execution are synthetic assumptions; unmapped venue filters are disclosed. Hosted Binance MCP is not connected. The saved Codex candidate is an actual development-session repair, not a live hosted-model call. Organizers determine whether the demonstrated Skills Hub/CLI route meets Track A requirements.
+Install Node 24.14 or newer and Git, then clone the repository and run:
 
-**What makes it different**
+npm ci
+npm run integration:verify
+npm run gallery:check
+npm run evidence:verify -- submission/demo-evidence.json
 
-Statebound tracks confirmed debit separately from possible execution exposure. A timeout or stale balance does not erase a potentially filled order. A structural repair queries the original attempt before spending the remaining budget. The result includes the exact plan, mandate, search bounds, observations and replay evidence, rather than a free-form safety claim. Persistent reservations survive ambiguous outcomes, and the UI reports safety and progress separately.
+For the interactive workbench, run npm run build followed by npm run dev, then open http://127.0.0.1:4381. See [Binance workflow reproduction](../docs/BINANCE_WORKFLOW.md) for the data import and verification process.
 
-**Validation and limits**
+## Validation and scope
 
-The 18-test core and integration suite passed. Production build, lint, HTTP gates and browser workflows were checked. Responsive and recovery checks cover 360, 390, 768 and 1440 pixel widths across the workbench and public preview. The Binance-derived workflow independently reruns both evidence bundles and three exact scenario replays. A separate regression corpus has 48 scenarios per variant: the repaired variant has 0 budget violations, 36 completions and 12 unresolved outcomes. These results cover declared finite synthetic IOC models, not all market conditions. No real order is placed and no mainnet or testnet write adapter is enabled. Binance's organizers determine eligibility and judging; this packet does not claim acceptance.
+The core and integration suite has 18 passing tests. The separate regression corpus has 48 scenarios per variant; the repaired variant records zero budget violations, 36 completions and 12 unresolved outcomes. These are results within the declared finite synthetic IOC model, not a general guarantee across market conditions.
 
-## Duy trì demo online
-
-Trang public được phục vụ từ máy build qua Cloudflare Tunnel. Giữ máy bật, có mạng và các tiến trình Statebound hoạt động trong thời gian chấm bài. Khả năng tự phục hồi sau reboot chưa được kiểm chứng. Xem [OPERATIONS.md](../docs/OPERATIONS.md) để kiểm tra hoặc khởi động lại đúng các tiến trình của dự án.
+The demo video is approximately 2 minutes 32 seconds, with MiMo Dean narration, ASR content checks, captions and nine chapters. Footage and voice remain at original speed; long unvoiced waits are shortened with an edit-decision record. Public artifacts and the local workbench have browser and HTTP validation reports.
