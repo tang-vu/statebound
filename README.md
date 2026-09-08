@@ -12,6 +12,8 @@ Submission materials: [ready-to-submit packet](submission/READY_TO_SUBMIT.md), [
 
 The [research brief](docs/RESEARCH_BRIEF.md) explains the design and technical positioning against primary sources; [download the PDF](submission/research-brief.pdf). Rebuild it with `npm run research:pdf`.
 
+**[Binance input-to-verdict workflow](https://statebound.tangvu.dev/#binance)** imports the recorded official testnet ticker and symbol grids into a separate synthetic model, then rechecks and replays the saved AI repair. Run `npm run integration:verify` offline to reproduce it. See [the data boundary and reproduction guide](docs/BINANCE_WORKFLOW.md). The hosted MCP is not connected; simulated execution is not exchange admission.
+
 ## Run locally
 
 Requires Node **24.14 or newer** and npm. No financial or model credentials are needed for the offline workflow.

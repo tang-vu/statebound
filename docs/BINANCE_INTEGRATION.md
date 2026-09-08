@@ -1,5 +1,7 @@
 # Binance integration evidence
 
+Release update, 2026-09-08: the saved response now feeds a [reproducible input-to-verdict workflow](BINANCE_WORKFLOW.md), rather than only appearing as a separate data panel. Imported prices and filters parameterize a new synthetic model; account state, fees and execution remain assumptions. A refresh attempted on September 8 timed out in the local CLI/WSL route, including a version probe. The successful September 5 snapshot is retained with its original timestamp. No fresh read is claimed for that attempt.
+
 Access date: 2026-09-05. Actual adapter: official Binance CLI 2.1.1, invoked by argument array with `shell: false`. Route: [Binance Skills Hub](https://developers.binance.com/en/docs/sdks-tools/integrations/skills-hub), its [Spot skill and references at commit 257d287](https://github.com/binance/binance-skills-hub/tree/257d287079cfac7d9a173078fc574e8fd7bbf212/skills/binance/binance), then the [official CLI](https://github.com/binance/binance-cli/tree/v2.1.1). No Binance MCP tool was exposed to this Codex session. No OAuth configuration was changed.
 
 `npm run integration:inspect` successfully called `spot ticker-price --symbol BNBUSDT` and `spot exchange-info --symbol BNBUSDT` on `https://testnet.binance.vision`. The recorded response is [binance-read.json](../examples/binance-read.json). These are genuine public testnet reads, not production prices or authenticated account evidence. The app displays the record and its timestamp separately from the synthetic fixture used by the checker.

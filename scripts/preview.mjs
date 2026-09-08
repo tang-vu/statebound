@@ -2,6 +2,7 @@ import express from 'express';
 import { fileURLToPath } from 'node:url';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
+import {binancePreview} from './binance-preview.mjs';
 const app=express();app.disable('x-powered-by');
 const port=Number(process.env.PORT??4382);
 if(!Number.isInteger(port)||port<1024||port>65535)throw Error('Invalid port');
@@ -18,6 +19,7 @@ app.use((req,res,next)=>{
 const files={
   '/':'preview/index.html','/style.css':'preview/style.css','/demo.js':'preview/demo.js','/chapters.json':'preview/chapters.json',
   '/lab.js':'preview/lab.js','/replay-gallery.json':'preview/replay-gallery.json',
+  '/binance-read.json':'examples/binance-read.json','/binance-workflow.json':'submission/binance-workflow.json',
   '/demo.mp4':'submission/demo.mp4','/counterexample.png':'submission/counterexample.png',
   '/repaired.png':'submission/repaired.png','/ambiguity.png':'submission/ambiguity.png','/evidence.json':'submission/demo-evidence.json',
   '/counterexample.json':'examples/counterexample.json','/evaluation.json':'examples/evaluation.json',
@@ -30,9 +32,11 @@ const absolute=file=>fileURLToPath(new URL(`../${file}`,import.meta.url));
 const digest=createHash('sha256');
 for(const file of Object.values(files))digest.update(file).update(readFileSync(absolute(file)));
 const lab=readFileSync(absolute('preview/lab.html'),'utf8');digest.update(lab);
+const bridge=binancePreview(JSON.parse(readFileSync(absolute('submission/binance-workflow.json'),'utf8')));digest.update(bridge);
 const revision=digest.digest('hex').slice(0,16);
 const html=readFileSync(absolute(files['/']),'utf8')
   .replace('<!-- EVIDENCE_LAB -->',lab)
+  .replace('<!-- BINANCE_WORKFLOW -->',bridge)
   .replace('<html ',`<html data-asset-version="${revision}" `)
   .replace(/(href|src|poster)="(\/[^"?#]+)"/g,(match,attribute,path)=>files[path]?`${attribute}="${path}?v=${revision}"`:match);
 app.get('/',(_req,res)=>res.set('Cache-Control','no-store, no-transform').type('html').send(html));

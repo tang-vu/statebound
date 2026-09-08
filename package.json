@@ -31,7 +31,10 @@
     "gallery:generate": "tsx scripts/replay-gallery.ts",
     "gallery:check": "tsx scripts/replay-gallery.ts --check",
     "test:gallery": "node scripts/gallery-browser.mjs",
-    "research:pdf": "node scripts/research-report.mjs"
+    "research:pdf": "node scripts/research-report.mjs",
+    "integration:workflow": "tsx scripts/binance-bridge.ts",
+    "integration:verify": "tsx scripts/binance-bridge.ts --check",
+    "integration:refresh": "npm run integration:inspect && npm run integration:workflow && npm run integration:verify"
   },
   "dependencies": {
     "express": "5.2.1",

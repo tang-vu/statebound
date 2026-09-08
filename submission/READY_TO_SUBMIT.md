@@ -21,6 +21,7 @@ Form đã được mở kiểm tra: Binance yêu cầu đăng nhập trước kh
 | Tên dự án | Statebound |
 | Demo | https://statebound.tangvu.dev |
 | Evidence Lab | https://statebound.tangvu.dev/#lab |
+| Binance input-to-verdict | https://statebound.tangvu.dev/#binance |
 | Video | https://statebound.tangvu.dev/demo.mp4 |
 | GitHub | https://github.com/tang-vu/statebound |
 | Bằng chứng replay | https://statebound.tangvu.dev/evidence.json |
@@ -40,7 +41,7 @@ An order fills, but its reply is lost. A blind retry spends 30 USDT against a 20
 
 **How it uses Binance Agent OS**
 
-Statebound uses the documented Binance Skills Hub route and official Binance CLI 2.1.1 for genuine public Spot testnet quote and exchange-info reads. The repository preserves the captured responses and integration route. These recorded official reads are displayed separately from the synthetic order fixture. The project focuses on inspectable execution and reconciliation for AI trading workflows. Hosted Binance MCP is not connected; order execution is simulated. The saved Codex candidate is an actual development-session repair, not a live hosted-model call.
+Statebound uses the documented Binance Skills Hub route and official Binance CLI 2.1.1 for genuine public Spot testnet quote and exchange-info reads. The captured ticker and symbol grids now parameterize a separate synthetic execution model: the workflow derives a lot-aligned quantity, finds the blind-retry counterexample, rechecks the saved Codex repair and replays recovered and unresolved outcomes. Both evidence bundles can be independently verified offline with `npm run integration:verify`. The original 600 USDT flagship remains separate. Account state, fees and execution are synthetic assumptions; unmapped venue filters are disclosed. Hosted Binance MCP is not connected. The saved Codex candidate is an actual development-session repair, not a live hosted-model call. Organizers determine whether the demonstrated Skills Hub/CLI route meets Track A requirements.
 
 **What makes it different**
 
@@ -48,7 +49,7 @@ Statebound tracks confirmed debit separately from possible execution exposure. A
 
 **Validation and limits**
 
-The 16-test core suite, production build, lint, HTTP gates and browser workflows passed. Responsive and recovery checks cover 360, 390, 768 and 1440 pixel widths. A separate regression corpus has 48 scenarios per variant: the repaired variant has 0 budget violations, 36 completions and 12 unresolved outcomes. These results cover the declared finite synthetic IOC model, not all market conditions. No real order is placed and no mainnet or testnet write adapter is enabled. Binance's organizers determine eligibility and judging; this packet does not claim acceptance.
+The 18-test core and integration suite passed. Production build, lint, HTTP gates and browser workflows were checked. Responsive and recovery checks cover 360, 390, 768 and 1440 pixel widths across the workbench and public preview. The Binance-derived workflow independently reruns both evidence bundles and three exact scenario replays. A separate regression corpus has 48 scenarios per variant: the repaired variant has 0 budget violations, 36 completions and 12 unresolved outcomes. These results cover declared finite synthetic IOC models, not all market conditions. No real order is placed and no mainnet or testnet write adapter is enabled. Binance's organizers determine eligibility and judging; this packet does not claim acceptance.
 
 ## Duy trì demo online
 
