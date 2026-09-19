@@ -8,3 +8,9 @@ dist/
 test-results/
 *.db*
 .demo-output.txt
+
+# AI assistant artifacts
+.devin/
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
+NUL
